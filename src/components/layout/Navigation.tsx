@@ -1,17 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShoppingCart, Menu, X, Hexagon, User, LogOut, LayoutDashboard } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
-import { useCartStore } from "@/store/cartStore";
-import { useAuthStore } from "@/store/authStore";
-import { useSettingsStore } from "@/store/settingsStore";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
     const { items: cartItems, setCartOpen } = useCartStore();
-    const { user, status, logout } = useAuthStore();
+    const { data: session, status: sessionStatus } = useSession();
+    const user = session?.user as any;
     const storeName = useSettingsStore(state => state.storeName);
 
     const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
@@ -50,7 +46,7 @@ export function Navigation() {
                     <div className="flex items-center gap-4">
                         {/* Auth Status */}
                         <div className="hidden md:flex items-center gap-4">
-                            {status === "authenticated" ? (
+                            {sessionStatus === "authenticated" ? (
                                 <div className="flex items-center gap-4">
                                     <Link
                                         href={user?.role === "admin" ? "/admin" : "/profile"}
@@ -60,10 +56,10 @@ export function Navigation() {
                                             {user?.name?.[0]?.toUpperCase()}
                                         </div>
                                         <span className="text-sm font-bold text-surface-950 group-hover:text-brand-600 transition-colors uppercase tracking-tight">{user?.name}</span>
-                                        {user?.role === "admin" && <LayoutDashboard size={14} className="text-brand-600" />}
+                                        {user?.role === "ADMIN" && <LayoutDashboard size={14} className="text-brand-600" />}
                                     </Link>
                                     <button
-                                        onClick={logout}
+                                        onClick={() => signOut()}
                                         className="p-2 text-surface-400 hover:text-red-600 transition-colors"
                                         title="Log Out"
                                     >
@@ -117,8 +113,7 @@ export function Navigation() {
                 initial={false}
                 animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : "-100%" }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="fixed inset-0 z-40 bg-surface-50/98 backdrop-blur-xl pt-24 px-4 md:hidden pointer-events-none data-[open=true]:pointer-events-auto"
-                data-open={isOpen}
+                className={`fixed inset-0 z-40 bg-surface-50/98 backdrop-blur-xl pt-24 px-4 md:hidden ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
             >
                 <nav className="flex flex-col gap-6 text-2xl font-outfit font-bold">
                     <Link href="/products" onClick={() => setIsOpen(false)} className="text-surface-900 hover:text-brand-600 hover:translate-x-4 transition-all duration-300">

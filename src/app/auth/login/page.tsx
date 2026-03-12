@@ -2,29 +2,38 @@
 
 import { motion } from "framer-motion";
 import { Mail, Lock, ArrowRight, UserPlus, LogIn, AlertCircle } from "lucide-react";
-import { useAuthStore } from "@/store/authStore";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { toast } from "sonner";
 
 export default function CustomerLogin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { login, status } = useAuthStore();
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await login(email, password);
-    };
+        setLoading(true);
+        try {
+            const result = await signIn("credentials", {
+                email,
+                password,
+                redirect: false,
+            });
 
-    const { error } = useAuthStore();
-
-    useEffect(() => {
-        if (status === "authenticated") {
-            router.push("/");
+            if (result?.error) {
+                toast.error("Invalid credentials. Please try again.");
+            } else {
+                toast.success("Welcome back to Apex Auto!");
+                router.push("/");
+                router.refresh();
+            }
+        } catch (err) {
+            toast.error("An unexpected error occurred.");
+        } finally {
+            setLoading(false);
         }
-    }, [status, router]);
+    };
 
     return (
         <div className="min-h-screen bg-surface-50 flex items-center justify-center p-4 font-outfit pt-24">
@@ -40,17 +49,6 @@ export default function CustomerLogin() {
                         </div>
                         <h1 className="text-4xl font-black text-surface-950 uppercase tracking-tighter mb-2">Welcome <span className="text-brand-600">Back</span></h1>
                         <p className="text-surface-500 font-medium">Access your orders and member-only pricing.</p>
-
-                        {error && (
-                            <motion.div
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className="mt-6 p-4 bg-red-50 border border-red-100 rounded-2xl text-red-600 text-sm font-bold flex items-center gap-2 justify-center"
-                            >
-                                <AlertCircle size={16} />
-                                {error}
-                            </motion.div>
-                        )}
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -82,10 +80,10 @@ export default function CustomerLogin() {
                         </div>
 
                         <button
-                            disabled={status === "loading"}
+                            disabled={loading}
                             className="w-full py-5 bg-brand-600 hover:bg-brand-700 disabled:bg-surface-300 text-white font-black rounded-2xl transition-all active:scale-[0.98] shadow-lg shadow-brand-600/20 uppercase tracking-widest flex items-center justify-center gap-3 text-lg"
                         >
-                            {status === "loading" ? "Signing In..." : "Log In"}
+                            {loading ? "Signing In..." : "Log In"}
                         </button>
                     </form>
 

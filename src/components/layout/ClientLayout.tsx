@@ -7,6 +7,9 @@ import { usePathname } from 'next/navigation';
 import { useEffect } from "react";
 import { useSettingsStore } from "@/store/settingsStore";
 
+import { AuthProvider } from "./AuthProvider";
+import { Toaster } from "sonner";
+
 export function ClientLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const isAdmin = pathname.startsWith('/admin');
@@ -16,18 +19,21 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
         syncSettings();
     }, [syncSettings]);
 
-    if (isAdmin) {
-        return <>{children}</>;
-    }
-
     return (
-        <>
-            <Navigation />
-            <CartDrawer />
-            <main className="pt-20 min-h-screen">
-                {children}
-            </main>
-            <Footer />
-        </>
+        <AuthProvider>
+            <Toaster position="top-right" richColors />
+            {isAdmin ? (
+                <>{children}</>
+            ) : (
+                <>
+                    <Navigation />
+                    <CartDrawer />
+                    <main className="pt-20 min-h-screen">
+                        {children}
+                    </main>
+                    <Footer />
+                </>
+            )}
+        </AuthProvider>
     );
 }
