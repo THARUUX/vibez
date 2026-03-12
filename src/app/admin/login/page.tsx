@@ -2,27 +2,36 @@
 
 import { motion } from "framer-motion";
 import { Lock, Mail, ArrowRight, Hexagon, ShieldAlert } from "lucide-react";
-import { useAuthStore } from "@/store/authStore";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { toast } from "sonner";
 
 export default function AdminLogin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { login, status } = useAuthStore();
     const router = useRouter();
-    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setError("");
+        setLoading(true);
 
-        try {
-            await login(email, "admin");
-            router.push("/admin");
-        } catch (err) {
-            setError("Authentication failed. ACCESS DENIED.");
+        const result = await signIn("credentials", {
+            email,
+            password,
+            redirect: false,
+        });
+
+        if (result?.error) {
+            toast.error("Access Denied", {
+                description: "The credentials provided do not have administrative clearance."
+            });
+            setLoading(false);
+        } else {
+            toast.success("Security Clearance Verified");
+            router.push("/admin/dashboard");
         }
     };
 
@@ -47,12 +56,6 @@ export default function AdminLogin() {
                         <p className="text-surface-500 font-bold text-xs tracking-widest uppercase mt-2">Authorization Required</p>
                     </div>
 
-                    {error && (
-                        <div className="mb-6 p-4 bg-red-50 border border-red-100 rounded-xl flex items-center gap-3 text-red-600 text-sm font-bold animate-shake">
-                            <ShieldAlert size={18} />
-                            {error}
-                        </div>
-                    )}
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="space-y-2">
@@ -86,10 +89,10 @@ export default function AdminLogin() {
                         </div>
 
                         <button
-                            disabled={status === "loading"}
+                            disabled={loading}
                             className="w-full py-5 bg-brand-600 hover:bg-brand-700 disabled:bg-surface-300 text-white font-black rounded-2xl transition-all active:scale-[0.98] shadow-lg shadow-brand-600/20 uppercase tracking-widest flex items-center justify-center gap-3 group"
                         >
-                            {status === "loading" ? (
+                            {loading ? (
                                 "Initializing..."
                             ) : (
                                 <>

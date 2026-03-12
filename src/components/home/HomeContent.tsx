@@ -38,8 +38,8 @@ export function Hero() {
         <div className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-surface-50">
             {/* Clean Background Elements */}
             <div className="absolute inset-0 z-0">
-                <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[800px] h-[800px] bg-brand-50 rounded-full blur-[100px] opacity-70" />
-                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-surface-100 rounded-full blur-[80px]" />
+                <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[800px] h-[800px] bg-brand-50 rounded-full blur-[120px] opacity-40" />
+                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-surface-100 rounded-full blur-[100px]" />
             </div>
 
             <div className="container mx-auto px-4 relative z-10 flex flex-col items-center text-center">
@@ -47,20 +47,20 @@ export function Hero() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-surface-200 text-surface-600 font-bold text-sm mb-8 shadow-sm"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-surface-200 text-surface-600 font-bold text-xs mb-8 shadow-sm uppercase tracking-widest"
                 >
-                    <Target size={16} className="text-brand-600" />
-                    <span className="tracking-wide">PREMIUM AUTO SPARES</span>
+                    <Target size={14} className="text-brand-600" />
+                    <span>PREMIUM AUTO SPARES</span>
                 </motion.div>
 
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-6xl md:text-8xl font-outfit font-black tracking-tighter mb-6 leading-tight text-surface-950"
+                    className="text-6xl md:text-9xl font-outfit font-black tracking-tighter mb-6 leading-[0.85] text-surface-950 uppercase"
                 >
                     POWER YOUR<br />
-                    <span className="text-brand-600">
+                    <span className="text-brand-600 neon-text">
                         PERFORMANCE
                     </span>
                 </motion.h1>
@@ -69,9 +69,9 @@ export function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="text-xl text-surface-600 max-w-2xl mb-12 font-medium"
+                    className="text-xl md:text-2xl text-surface-500 max-w-3xl mb-12 font-medium leading-relaxed"
                 >
-                    Discover high-quality motor spare parts, OEM replacements, and performance components engineered for durability and reliability.
+                    Engineered for durability. Designed for speed. Discover our curated catalog of precision automotive components.
                 </motion.p>
 
                 <motion.div
@@ -80,12 +80,10 @@ export function Hero() {
                     transition={{ duration: 0.8, delay: 0.6 }}
                     className="flex flex-col sm:flex-row gap-6"
                 >
-                    <Link href="/products" className="group relative px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-brand-600/20 active:scale-95 flex items-center justify-center gap-2 overflow-hidden">
-                        <span className="relative z-10 flex items-center gap-2">
-                            SHOP CATALOG <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                        </span>
+                    <Link href="/products" className="apex-button min-w-[240px]">
+                        SHOP CATALOG <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                     </Link>
-                    <Link href="/about" className="group px-8 py-4 bg-white border border-surface-200 hover:border-brand-600 text-surface-900 font-bold rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 shadow-sm focus:ring-2 focus:ring-brand-600 focus:outline-none">
+                    <Link href="/categories" className="px-8 py-4 bg-white border border-surface-200 hover:border-brand-600 text-surface-950 font-black rounded-2xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 shadow-sm uppercase tracking-widest text-sm min-w-[240px]">
                         VIEW CATEGORIES
                     </Link>
                 </motion.div>
@@ -95,19 +93,19 @@ export function Hero() {
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.8 }}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-24 w-full max-w-4xl"
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-32 w-full max-w-5xl"
                 >
                     {[
-                        { icon: Zap, title: "Fast Shipping", desc: "Same-day dispatch" },
+                        { icon: Zap, title: "Fast Shipping", desc: "Same-day dispatch nationwide" },
                         { icon: Target, title: "Exact Fitment", desc: "Guaranteed compatibility" },
-                        { icon: Box, title: "Quality Assured", desc: "OEM standards" },
+                        { icon: Box, title: "Quality Assured", desc: "Exceeding OEM standards" },
                     ].map((feature, idx) => (
-                        <div key={idx} className="bg-white p-6 rounded-2xl border border-surface-200 shadow-sm hover:border-brand-300 transition-colors group">
-                            <div className="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                <feature.icon size={24} className="text-brand-600" />
+                        <div key={idx} className="bg-white/50 backdrop-blur-sm p-8 rounded-[2rem] border border-surface-200 hover:border-brand-300 transition-all group hover:bg-white hover:shadow-xl">
+                            <div className="w-14 h-14 rounded-2xl bg-brand-50 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white transition-all duration-300">
+                                <feature.icon size={28} className="text-brand-600 group-hover:text-white" />
                             </div>
-                            <h3 className="text-xl font-bold font-outfit text-surface-900 mb-2">{feature.title}</h3>
-                            <p className="text-surface-600 font-medium">{feature.desc}</p>
+                            <h3 className="text-2xl font-black font-outfit text-surface-950 mb-3 uppercase tracking-tight">{feature.title}</h3>
+                            <p className="text-surface-500 font-medium leading-relaxed">{feature.desc}</p>
                         </div>
                     ))}
                 </motion.div>
@@ -118,21 +116,21 @@ export function Hero() {
 
 export function FeaturedProducts() {
     return (
-        <section className="py-24 relative z-10 bg-surface-100">
+        <section className="py-32 relative z-10 bg-white">
             <div className="container mx-auto px-4">
-                <div className="flex justify-between items-end mb-12 border-b border-surface-200 pb-6">
-                    <div>
-                        <h2 className="text-4xl md:text-5xl font-outfit font-black tracking-tight text-surface-900 mb-2">
+                <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-6">
+                    <div className="text-center md:text-left">
+                        <h2 className="text-5xl md:text-7xl font-outfit font-black tracking-tighter text-surface-950 mb-4 uppercase">
                             NEW <span className="text-brand-600">ARRIVALS</span>
                         </h2>
-                        <p className="text-surface-600 font-medium text-lg">The latest additions to our extensive catalog.</p>
+                        <p className="text-surface-500 font-medium text-xl max-w-xl">Precision-engineered additions to our high-performance catalog.</p>
                     </div>
-                    <Link href="/products" className="hidden md:flex items-center gap-2 text-brand-600 hover:text-brand-700 transition-colors uppercase tracking-widest text-sm font-bold group">
-                        View All Parts <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
+                    <Link href="/products" className="apex-button px-6 py-3 bg-surface-950 hover:bg-black">
+                        View All Parts <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
                     </Link>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     {products.map((product, idx) => (
                         <motion.div
                             key={product.id}
@@ -140,32 +138,32 @@ export function FeaturedProducts() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ duration: 0.6, delay: idx * 0.1 }}
-                            className="bg-white rounded-2xl overflow-hidden group border border-surface-200 hover:border-brand-300 transition-all duration-300 shadow-sm hover:shadow-md"
+                            className="apex-card group"
                         >
-                            <div className="relative h-64 overflow-hidden bg-surface-100">
+                            <div className="relative h-80 overflow-hidden bg-surface-100">
                                 <Image
                                     src={product.image}
                                     alt={product.name}
                                     fill
-                                    className="object-cover scale-100 group-hover:scale-105 transition-transform duration-500 ease-out"
+                                    className="object-cover scale-100 group-hover:scale-110 transition-transform duration-700 ease-out"
                                 />
-                                <div className="absolute top-4 right-4 z-20 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-surface-900 shadow-sm border border-surface-200 uppercase">
+                                <div className="absolute top-6 right-6 z-20 bg-surface-950 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg">
                                     {product.category}
                                 </div>
                             </div>
 
-                            <div className="p-6 relative">
-                                <h3 className="text-xl font-black font-outfit text-surface-900 mb-2 leading-tight group-hover:text-brand-600 transition-colors">
+                            <div className="p-10 relative">
+                                <h3 className="text-2xl font-black font-outfit text-surface-950 mb-4 leading-tight group-hover:text-brand-600 transition-colors uppercase tracking-tight">
                                     {product.name}
                                 </h3>
-                                <p className="text-surface-600 text-sm mb-6 line-clamp-2 font-medium">
+                                <p className="text-surface-500 text-base mb-10 line-clamp-2 font-medium leading-relaxed">
                                     {product.description}
                                 </p>
 
-                                <div className="flex items-center justify-between">
-                                    <PriceDisplay amount={product.price} className="font-outfit text-3xl font-black text-surface-900" />
-                                    <Link href={`/products/${product.id}`} className="px-5 py-2.5 bg-brand-50 text-brand-700 hover:bg-brand-600 hover:text-white font-bold rounded-lg transition-colors text-sm flex items-center gap-2">
-                                        Details
+                                <div className="flex items-center justify-between border-t border-surface-100 pt-8">
+                                    <PriceDisplay amount={product.price} className="font-outfit text-4xl font-black text-surface-950" />
+                                    <Link href={`/products/${product.id}`} className="w-14 h-14 bg-brand-600 hover:bg-brand-700 text-white rounded-2xl flex items-center justify-center transition-all duration-300 shadow-lg shadow-brand-600/20 active:scale-90">
+                                        <ShoppingCart size={24} />
                                     </Link>
                                 </div>
                             </div>
