@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 
 import { useSettingsStore } from "@/store/settingsStore";

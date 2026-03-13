@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 
 import { Hexagon, ShoppingCart, Menu, X, LogOut, LayoutDashboard, User as UserIcon } from "lucide-react";

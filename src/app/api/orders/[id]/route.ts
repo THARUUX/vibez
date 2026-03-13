@@ -3,14 +3,15 @@ import prisma from '@/lib/prisma';
 
 export async function PATCH(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params;
         const body = await request.json();
         const { status } = body;
 
         const updatedOrder = await prisma.order.update({
-            where: { id: params.id },
+            where: { id },
             data: { status },
         });
 
@@ -23,11 +24,12 @@ export async function PATCH(
 
 export async function GET(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params;
         const order = await prisma.order.findUnique({
-            where: { id: params.id },
+            where: { id },
             include: {
                 orderItems: {
                     include: {
