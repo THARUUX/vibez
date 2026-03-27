@@ -59,7 +59,7 @@ export function Navigation() {
                             {sessionStatus === "authenticated" ? (
                                 <div className="flex items-center gap-6">
                                     <Link
-                                        href={user?.role === "admin" ? "/admin/dashboard" : "/profile"}
+                                        href={user?.role === "ADMIN" ? "/admin" : "/profile"}
                                         className="flex items-center gap-3 px-2 py-2 pr-6 bg-white hover:bg-surface-50 rounded-full transition-all border border-surface-200 group shadow-sm hover:shadow-xl active:scale-95"
                                     >
                                         <div className="w-10 h-10 bg-surface-950 rounded-full flex items-center justify-center text-white font-black text-sm shadow-lg group-hover:bg-brand-600 transition-colors">

@@ -31,6 +31,13 @@ export default auth((req) => {
   }
 
   if (!isLoggedIn && !isPublicRoute) {
+    // Return JSON error for API routes instead of redirecting to the login page
+    if (nextUrl.pathname.startsWith("/api/")) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { "Content-Type": "application/json" },
+      })
+    }
     return Response.redirect(new URL("/auth/login", nextUrl))
   }
 
