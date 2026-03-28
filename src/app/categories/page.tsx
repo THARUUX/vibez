@@ -99,7 +99,7 @@ export default function CategoriesPage() {
                                     transition={{ delay: i * 0.05 }}
                                 >
                                     <Link
-                                        href={`/products?category=${cat.id}`}
+                                        href={`/products?category=${cat.slug}`}
                                         className="group block bg-white border border-surface-200 p-8 rounded-2xl hover:border-brand-600 hover:shadow-xl hover:shadow-brand-600/5 transition-all duration-300 h-full relative overflow-hidden"
                                     >
                                         <div className={`w-16 h-16 ${colorClass} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500`}>

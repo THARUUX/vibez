@@ -7,8 +7,13 @@ export async function GET(
 ) {
     try {
         const { id } = await params;
-        const category = await prisma.category.findUnique({
-            where: { id },
+        const category = await prisma.category.findFirst({
+            where: {
+                OR: [
+                    { id: id },
+                    { slug: id }
+                ]
+            },
             include: {
                 _count: {
                     select: { products: true }

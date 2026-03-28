@@ -20,7 +20,7 @@ function ProductsContent() {
     
     const searchParams = useSearchParams();
     const router = useRouter();
-    const categoryId = searchParams.get('category');
+    const categorySlug = searchParams.get('category');
     
     const addItem = useCartStore((state) => state.addItem);
 
@@ -51,16 +51,18 @@ function ProductsContent() {
     }, []);
 
     const activeCategory = useMemo(() => {
-        if (!categoryId) return null;
-        return categories.find(c => c.id === categoryId);
-    }, [categories, categoryId]);
+        if (!categorySlug) return null;
+        return categories.find(c => c.slug === categorySlug || c.id === categorySlug);
+    }, [categories, categorySlug]);
 
     const filteredProducts = useMemo(() => {
         let filtered = products;
 
-        // Filter by Category
-        if (categoryId) {
-            filtered = filtered.filter(p => p.categoryId === categoryId);
+        // Filter by Category (using slug or ID for fallback)
+        if (categorySlug) {
+            filtered = filtered.filter(p => 
+                p.category?.slug === categorySlug || p.categoryId === categorySlug
+            );
         }
 
         // Filter by Search Query
@@ -74,7 +76,7 @@ function ProductsContent() {
         }
 
         return filtered;
-    }, [products, searchQuery, categoryId]);
+    }, [products, searchQuery, categorySlug]);
 
     const clearFilters = () => {
         setSearchQuery("");
@@ -180,7 +182,7 @@ function ProductsContent() {
                             transition={{ duration: 0.6, delay: idx * 0.05 }}
                             className="apex-card group overflow-hidden bg-white border border-surface-200 rounded-[2.5rem] hover:border-brand-600 hover:shadow-2xl hover:shadow-brand-600/10 transition-all duration-500"
                         >
-                            <Link href={`/products/${product.id}`} className="block relative h-80 overflow-hidden shrink-0 bg-surface-100">
+                            <Link href={`/products/${product.slug}`} className="block relative h-80 overflow-hidden shrink-0 bg-surface-100">
                                 <Image
                                     src={product.image}
                                     alt={product.name}
@@ -193,7 +195,7 @@ function ProductsContent() {
                             </Link>
 
                             <div className="p-10 flex flex-col flex-1">
-                                <Link href={`/products/${product.id}`}>
+                                <Link href={`/products/${product.slug}`}>
                                     <h2 className="text-2xl font-black text-surface-950 mb-4 line-clamp-2 group-hover:text-brand-600 transition-colors uppercase tracking-tight">
                                         {product.name}
                                     </h2>
