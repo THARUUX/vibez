@@ -41,13 +41,19 @@ export function Navigation() {
 
                     {/* Desktop Nav */}
                     <nav className="hidden lg:flex items-center gap-12">
-                        {['Catalog', 'Categories', 'About', 'Contact'].map((item) => (
+                        {['Catalog', 'Categories', 'About', 'Contact'].map((item, index) => (
                             <Link 
                                 key={item} 
                                 href={`/${item.toLowerCase()}`} 
                                 className="text-[10px] font-black uppercase tracking-[0.3em] text-surface-400 hover:text-brand-600 transition-all relative group/link"
                             >
-                                {item}
+                                <m.span
+                                    initial={{ opacity: 0, y: -4 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.1 + index * 0.05 }}
+                                >
+                                    {item}
+                                </m.span>
                                 <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-brand-600 group-hover/link:w-full transition-all duration-300" />
                             </Link>
                         ))}
@@ -57,28 +63,33 @@ export function Navigation() {
                         {/* Auth Status */}
                         <div className="hidden md:flex items-center gap-6">
                             {sessionStatus === "authenticated" ? (
-                                <div className="flex items-center gap-6">
-                                    <Link
-                                        href={user?.role === "ADMIN" ? "/admin" : "/profile"}
-                                        className="flex items-center gap-3 px-2 py-2 pr-6 bg-white hover:bg-surface-50 rounded-full transition-all border border-surface-200 group shadow-sm hover:shadow-xl active:scale-95"
+                                    <m.div 
+                                        whileHover={{ y: -1 }} 
+                                        className="flex items-center gap-6"
                                     >
-                                        <div className="w-10 h-10 bg-surface-950 rounded-full flex items-center justify-center text-white font-black text-sm shadow-lg group-hover:bg-brand-600 transition-colors">
-                                            {user?.name?.[0]?.toUpperCase()}
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <span className="text-[10px] font-black text-surface-950 uppercase tracking-tight group-hover:text-brand-600 transition-colors">{user?.name}</span>
-                                            <span className="text-[8px] font-black text-surface-400 uppercase tracking-widest leading-none">Authorized Client</span>
-                                        </div>
-                                    </Link>
-                                    <button
-                                        onClick={() => signOut()}
-                                        className="flex items-center gap-2 px-3 py-2 text-surface-400 hover:text-red-600 transition-all hover:bg-red-50 rounded-lg group"
-                                        title="Log Out"
-                                    >
-                                        <LogOut size={18} className="group-hover:-translate-x-0.5 transition-transform" />
-                                        <span className="text-[10px] font-black uppercase tracking-widest leading-none mt-0.5">Logout</span>
-                                    </button>
-                                </div>
+                                        <Link
+                                            href={user?.role === "ADMIN" ? "/admin" : "/profile"}
+                                            className="flex items-center gap-3 px-2 py-2 pr-6 bg-white hover:bg-surface-50 rounded-full transition-all border border-surface-200 group shadow-sm hover:shadow-xl active:scale-95"
+                                        >
+                                            <div className="w-10 h-10 bg-surface-950 rounded-full flex items-center justify-center text-white font-black text-sm shadow-lg group-hover:bg-brand-600 transition-colors">
+                                                {user?.name?.[0]?.toUpperCase()}
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <span className="text-[10px] font-black text-surface-950 uppercase tracking-tight group-hover:text-brand-600 transition-colors">{user?.name}</span>
+                                                <span className="text-[8px] font-black text-surface-400 uppercase tracking-widest leading-none">Authorized Client</span>
+                                            </div>
+                                        </Link>
+                                        <m.button
+                                            whileHover={{ x: 2 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            onClick={() => signOut()}
+                                            className="flex items-center gap-2 px-3 py-2 text-surface-400 hover:text-red-600 transition-all hover:bg-red-50 rounded-lg group"
+                                            title="Log Out"
+                                        >
+                                            <LogOut size={18} className="group-hover:-translate-x-0.5 transition-transform" />
+                                            <span className="text-[10px] font-black uppercase tracking-widest leading-none mt-0.5">Logout</span>
+                                        </m.button>
+                                    </m.div>
                             ) : (
                                 <div className="flex items-center gap-4">
                                     <Link

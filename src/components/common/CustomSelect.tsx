@@ -26,6 +26,7 @@ interface CustomSelectProps {
     getOptionStyle?: (value: string) => string;
     placeholder?: string;
     disabled?: boolean;
+    children?: React.ReactNode;
 }
 
 export function CustomSelect({
@@ -38,7 +39,8 @@ export function CustomSelect({
     getOptionStyle,
     placeholder = "Select…",
     disabled = false,
-}: CustomSelectProps) {
+    children,
+}: CustomSelectProps & { children?: React.ReactNode }) {
     const [open, setOpen] = useState(false);
     const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
     const [mounted, setMounted] = useState(false);
@@ -126,19 +128,28 @@ export function CustomSelect({
                     initial={{ opacity: 0, y: -4, scale: 0.97 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -4, scale: 0.97 }}
-                    transition={{ duration: 0.14, ease: "easeOut" }}
+                    transition={{ 
+                        type: "spring",
+                        damping: 20,
+                        stiffness: 300,
+                        mass: 0.8
+                    }}
                     style={dropdownStyle}
                     className={`rounded-xl border border-surface-200 bg-white shadow-2xl shadow-surface-950/10 overflow-hidden overflow-y-auto max-h-[300px] ${listClassName}`}
                 >
-                    {options.map((opt) => {
+                    {options.map((opt, index) => {
                         const isActive = opt.value === value;
                         const optStyle = getOptionStyle?.(opt.value) ?? "";
                         return (
-                            <li
+                            <m.li
                                 key={opt.value}
                                 role="option"
                                 aria-selected={isActive}
-                                onMouseDown={(e) => {
+                                initial={{ opacity: 0, x: -8 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.03, duration: 0.2 }}
+                                whileHover={{ x: 4, backgroundColor: "var(--surface-50)" }}
+                                onMouseDown={(e: React.MouseEvent) => {
                                     e.preventDefault(); // prevent blur before onChange
                                     onChange(opt.value);
                                     setOpen(false);
@@ -146,10 +157,10 @@ export function CustomSelect({
                                 className={`
                                     flex items-center justify-between gap-3 px-4 py-3
                                     text-sm font-bold cursor-pointer select-none
-                                    transition-colors duration-100
+                                    transition-colors duration-200
                                     ${isActive
                                         ? "bg-brand-50 text-brand-700"
-                                        : "text-surface-800 hover:bg-surface-50"
+                                        : "text-surface-800"
                                     }
                                 `}
                             >
@@ -157,7 +168,7 @@ export function CustomSelect({
                                     {opt.label}
                                 </span>
                                 {isActive && <Check size={14} className="text-brand-600 shrink-0" />}
-                            </li>
+                            </m.li>
                         );
                     })}
                 </m.ul>
@@ -168,23 +179,31 @@ export function CustomSelect({
     return (
         <div className={`relative ${className}`}>
             {/* Trigger */}
-            <button
+            <m.button
                 ref={triggerRef}
                 id={id}
                 type="button"
                 disabled={disabled}
+                whileHover={{ y: -1, backgroundColor: "var(--surface-50)" }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setOpen((p) => !p)}
-                className={`w-full flex items-center justify-between gap-2 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none ${triggerClassName}`}
+                className={`w-full flex items-center justify-between gap-2 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none ring-offset-2 focus:ring-2 focus:ring-brand-500/20 ${triggerClassName}`}
                 aria-haspopup="listbox"
                 aria-expanded={open}
             >
-                <span className="truncate">
-                    {selected ? selected.label : <span className="text-surface-400">{placeholder}</span>}
-                </span>
-                <m.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
-                    <ChevronDown size={16} className="shrink-0 text-surface-400" />
-                </m.span>
-            </button>
+                {children ? (
+                    children
+                ) : (
+                    <>
+                        <span className="truncate">
+                            {selected ? selected.label : <span className="text-surface-400">{placeholder}</span>}
+                        </span>
+                        <m.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                            <ChevronDown size={16} className="shrink-0 text-surface-400" />
+                        </m.span>
+                    </>
+                )}
+            </m.button>
 
             {/* Portal: renders outside all overflow-hidden parents */}
             {mounted && createPortal(dropdownEl, document.body)}
