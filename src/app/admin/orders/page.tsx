@@ -1,10 +1,11 @@
 /* eslint-disable */
 "use client";
 
-import { motion } from "framer-motion";
-import { Search, Eye, MoreHorizontal, CheckCircle2, Clock, XCircle, Truck, AlertCircle, Loader2 } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Search, Eye, MoreHorizontal, CheckCircle2, Clock, XCircle, Truck, AlertCircle, Loader2, X, MapPin, User as UserIcon, Package, DollarSign } from "lucide-react";
 import { useState, useEffect } from "react";
 import { CustomSelect, SelectOption } from "@/components/common/CustomSelect";
+import { PriceDisplay } from "@/components/common/PriceDisplay";
 
 const STATUS_OPTIONS: SelectOption[] = [
     { value: "all", label: "Every Status" },
@@ -29,6 +30,7 @@ export default function AdminOrders() {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
     const [filterStatus, setFilterStatus] = useState("all");
+    const [selectedOrder, setSelectedOrder] = useState<any>(null);
 
     const fetchOrders = async () => {
         try {
@@ -55,9 +57,39 @@ export default function AdminOrders() {
             });
             if (res.ok) {
                 setOrders(prev => prev.map(o => o.id === orderId ? { ...o, status: newStatus } : o));
+                alerts.success("Status Updated", "The transaction workflow has been updated.");
             }
         } catch (error) {
             console.error("Failed to update status:", error);
+        }
+    };
+
+    const handleAction = async (order: any, action: string) => {
+        if (action === 'export') {
+            setSelectedOrder(order);
+            setTimeout(() => window.print(), 500);
+        } else if (action === 'email') {
+            const subject = encodeURIComponent(`Order Update: ${order.id.substring(0, 8).toUpperCase()}`);
+            const body = encodeURIComponent(`Hello ${order.shippingFirstName},\n\nYour order ${order.id} is currently ${order.status}.\n\nBest regards,\nSupport Team`);
+            window.location.href = `mailto:${order.user?.email || ''}?subject=${subject}&body=${body}`;
+        } else if (action === 'delete') {
+            const confirmed = await alerts.confirm(
+                "Archive Transaction?",
+                "This will permanently erase this record from the digital ledger. Proceed with decommissioning?"
+            );
+            if (!confirmed) return;
+
+            try {
+                const res = await fetch(`/api/orders/${order.id}`, { method: 'DELETE' });
+                if (res.ok) {
+                    setOrders(prev => prev.filter(o => o.id !== order.id));
+                    alerts.success("Archived", "The transaction has been purged.");
+                } else {
+                    alerts.error("Failure", "Could not decommission the record.");
+                }
+            } catch (error) {
+                console.error("Delete error:", error);
+            }
         }
     };
 
@@ -84,7 +116,8 @@ export default function AdminOrders() {
     });
 
     return (
-        <div className="max-w-7xl mx-auto space-y-8 font-outfit">
+        <>
+            <div className="max-w-7xl mx-auto space-y-8 font-outfit">
             {/* Header */}
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
                 <div>
@@ -182,12 +215,26 @@ export default function AdminOrders() {
                                         </td>
                                         <td className="py-5 px-8">
                                             <div className="flex justify-end gap-2">
-                                                <button className="p-2.5 text-surface-400 hover:text-brand-600 hover:bg-brand-50 rounded-xl transition-all border border-transparent hover:border-brand-100 shadow-sm">
+                                                <button 
+                                                    onClick={() => setSelectedOrder(order)}
+                                                    className="p-2.5 text-surface-400 hover:text-brand-600 hover:bg-brand-50 rounded-xl transition-all border border-transparent hover:border-brand-100 shadow-sm active:scale-90"
+                                                >
                                                     <Eye size={18} />
                                                 </button>
-                                                <button className="p-2.5 text-surface-400 hover:text-surface-900 hover:bg-surface-50 rounded-xl transition-all border border-transparent hover:border-surface-200">
+                                                <CustomSelect
+                                                    options={[
+                                                        { value: "export", label: "Export as PDF" },
+                                                        { value: "email", label: "Email Customer" },
+                                                        { value: "delete", label: "Archive Transaction" },
+                                                    ]}
+                                                    value=""
+                                                    onChange={(val) => handleAction(order, val)}
+                                                    triggerClassName="p-2.5 text-surface-400 hover:text-surface-900 hover:bg-surface-50 rounded-xl transition-all border border-transparent hover:border-surface-200"
+                                                    placeholder=""
+                                                    className="w-auto"
+                                                >
                                                     <MoreHorizontal size={18} />
-                                                </button>
+                                                </CustomSelect>
                                             </div>
                                         </td>
                                     </motion.tr>
@@ -197,6 +244,144 @@ export default function AdminOrders() {
                     )}
                 </div>
             </div>
-        </div>
+            </div>
+
+            <AnimatePresence>
+                {selectedOrder && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8 print:p-0 print:static print:z-auto">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="absolute inset-0 bg-surface-950/60 backdrop-blur-xl print:hidden"
+                            onClick={() => setSelectedOrder(null)}
+                        />
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            className="relative w-full max-w-4xl bg-white rounded-[2.5rem] shadow-2xl border border-surface-200 overflow-hidden flex flex-col max-h-[90vh] print:max-h-none print:shadow-none print:border-none print:rounded-none"
+                        >
+                            {/* Modal Header */}
+                            <div className="p-8 border-b border-surface-100 flex items-center justify-between bg-surface-50/50 print:bg-white">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-14 h-14 bg-brand-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-brand-500/20">
+                                        <Package size={28} />
+                                    </div>
+                                    <div>
+                                        <h2 className="text-2xl font-black uppercase tracking-tighter text-surface-950">Transaction Inspect</h2>
+                                        <div className="flex items-center gap-2 mt-1">
+                                            <span className="text-xs font-black text-surface-400 uppercase tracking-widest">ID: {selectedOrder.id.toUpperCase()}</span>
+                                            <div className={`px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest border ${getStatusStyle(selectedOrder.status)}`}>
+                                                {selectedOrder.status}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={() => setSelectedOrder(null)}
+                                    className="p-3 text-surface-400 hover:text-red-500 hover:bg-red-50 rounded-2xl transition-all active:scale-95"
+                                >
+                                    <X size={24} />
+                                </button>
+                            </div>
+
+                            {/* Modal Body */}
+                            <div className="p-8 overflow-y-auto flex-1 space-y-10 custom-scrollbar">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                    {/* Left Column: Logistics */}
+                                    <div className="space-y-8">
+                                        <div>
+                                            <h3 className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-surface-400 mb-4">
+                                                <UserIcon size={14} className="text-brand-600" /> Customer Credentials
+                                            </h3>
+                                            <div className="p-6 bg-surface-50 rounded-2xl border border-surface-100">
+                                                <p className="font-black text-surface-950 text-lg">{selectedOrder.shippingFirstName} {selectedOrder.shippingLastName}</p>
+                                                <p className="text-sm font-bold text-surface-400 mt-1">{selectedOrder.user?.email || 'Guest Session'}</p>
+                                                <div className="mt-4 pt-4 border-t border-surface-100 flex items-center gap-4 text-xs font-bold text-surface-600">
+                                                    <span className="flex items-center gap-1.5"><Clock size={12} /> {new Date(selectedOrder.createdAt).toLocaleDateString()}</span>
+                                                    <span className="flex items-center gap-1.5"><Truck size={12} /> Priority Logistics</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <h3 className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-surface-400 mb-4">
+                                                <MapPin size={14} className="text-brand-600" /> Shipping Destination
+                                            </h3>
+                                            <div className="p-6 bg-surface-50 rounded-2xl border border-surface-100">
+                                                <p className="font-black text-surface-950">{selectedOrder.shippingAddress}</p>
+                                                <p className="text-sm font-bold text-surface-600 mt-1">{selectedOrder.shippingCity}, {selectedOrder.shippingZip}</p>
+                                                <div className="mt-4 p-3 bg-white border border-surface-200 rounded-xl text-[10px] font-black uppercase tracking-widest text-surface-400 text-center">
+                                                    Carrier Routing Assigned
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Right Column: Financials & Items */}
+                                    <div className="space-y-8">
+                                        <div>
+                                            <h3 className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-surface-400 mb-4">
+                                                <DollarSign size={14} className="text-brand-600" /> Revenue Manifest
+                                            </h3>
+                                            <div className="space-y-3">
+                                                {selectedOrder.orderItems.map((item: any) => (
+                                                    <div key={item.id} className="flex items-center gap-4 p-4 bg-white border border-surface-100 rounded-2xl group hover:border-brand-200 transition-colors">
+                                                        <div className="w-14 h-14 bg-surface-50 rounded-xl border border-surface-200 overflow-hidden flex-shrink-0 flex items-center justify-center p-1">
+                                                            <img src={item.product?.image} alt="" className="w-full h-full object-contain rounded-lg shadow-sm" />
+                                                        </div>
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="font-black text-surface-950 truncate text-sm leading-tight">{item.product?.name}</p>
+                                                            <p className="font-bold text-surface-400 text-[9px] uppercase tracking-[0.15em] mt-1">{item.quantity} UNIT(S) @ <PriceDisplay amount={Number(item.price)} /></p>
+                                                        </div>
+                                                        <div className="text-right">
+                                                            <PriceDisplay amount={Number(item.price) * item.quantity} className="font-black text-surface-950 text-sm" />
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Modal Footer */}
+                            <div className="p-8 border-t border-surface-100 bg-surface-50/50">
+                                <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+                                    <div className="flex items-center gap-6">
+                                        <div>
+                                            <p className="text-[10px] font-black uppercase tracking-widest text-surface-400">Net Revenue</p>
+                                            <PriceDisplay amount={Number(selectedOrder.total)} className="text-3xl font-black text-brand-600 tracking-tighter" />
+                                        </div>
+                                        <div className="h-10 w-px bg-surface-200 hidden sm:block" />
+                                        <div className="hidden sm:block">
+                                            <p className="text-[10px] font-black uppercase tracking-widest text-surface-400">Payment Verified</p>
+                                            <div className="flex items-center gap-2 mt-1 text-emerald-600 font-bold text-sm">
+                                                <CheckCircle2 size={16} /> Secure Transaction
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-3 w-full sm:w-auto">
+                                        <button 
+                                            onClick={() => window.print()}
+                                            className="flex-1 sm:flex-none px-6 py-3 bg-white hover:bg-surface-950 hover:text-white text-surface-950 font-black rounded-xl border border-surface-200 transition-all uppercase text-[10px] tracking-widest active:scale-95 shadow-sm"
+                                        >
+                                            Download Invoice
+                                        </button>
+                                        <button 
+                                            onClick={() => setSelectedOrder(null)}
+                                            className="flex-1 sm:flex-none px-8 py-3 bg-brand-600 hover:bg-brand-700 text-white font-black rounded-xl transition-all uppercase text-[10px] tracking-widest active:scale-95 shadow-lg shadow-brand-500/20"
+                                        >
+                                            Confirm Audit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
+        </>
     );
 }
