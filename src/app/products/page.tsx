@@ -156,7 +156,7 @@ function ProductsContent() {
                             placeholder="Search part ID or name..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full bg-white border border-surface-200 rounded-xl pl-16 pr-8 py-5 focus:outline-none focus:border-brand-600 focus:ring-4 focus:ring-brand-600/5 transition-all font-bold text-surface-950 shadow-sm"
+                            className="w-full bg-white border border-surface-200 rounded-2xl pl-16 pr-8 py-5 focus:outline-none focus:border-brand-600 focus:ring-4 focus:ring-brand-600/5 transition-all font-bold text-surface-950 shadow-sm"
                         />
                     </div>
                 </div>
@@ -166,7 +166,7 @@ function ProductsContent() {
                 <m.div 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="text-center py-32 rounded-3xl border-2 border-dashed border-surface-200 bg-white/50"
+                    className="text-center py-32 rounded-[2.5rem] border-2 border-dashed border-surface-200 bg-white/50"
                 >
                     <Box className="w-20 h-20 text-surface-200 mx-auto mb-6" />
                     <p className="text-surface-400 font-black text-2xl uppercase tracking-widest">No matching components found</p>

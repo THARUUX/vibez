@@ -6,6 +6,7 @@ import { Search, Eye, MoreHorizontal, CheckCircle2, Clock, XCircle, Truck, Alert
 import { useState, useEffect } from "react";
 import { CustomSelect, SelectOption } from "@/components/common/CustomSelect";
 import { PriceDisplay } from "@/components/common/PriceDisplay";
+import { alerts } from "@/lib/alerts";
 
 const STATUS_OPTIONS: SelectOption[] = [
     { value: "all", label: "Every Status" },
@@ -129,7 +130,7 @@ export default function AdminOrders() {
             </div>
 
             {/* Toolbar */}
-            <div className="bg-white p-6 rounded-2xl border border-surface-200 shadow-sm flex flex-col sm:flex-row gap-4 items-center justify-between">
+            <div className="bg-white p-6 rounded-[2.5rem] border border-surface-200 shadow-sm flex flex-col sm:flex-row gap-4 items-center justify-between">
                 <div className="relative w-full sm:w-96">
                     <Search size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-surface-400" />
                     <input
@@ -151,7 +152,7 @@ export default function AdminOrders() {
             </div>
 
             {/* Table */}
-            <div className="bg-white rounded-2xl border border-surface-200 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-[2.5rem] border border-surface-200 shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
                     {loading ? (
                         <div className="flex items-center justify-center py-24">
@@ -260,7 +261,7 @@ export default function AdminOrders() {
                             initial={{ opacity: 0, scale: 0.9, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                            className="relative w-full max-w-4xl bg-white rounded-[2.5rem] shadow-2xl border border-surface-200 overflow-hidden flex flex-col max-h-[90vh] print:max-h-none print:shadow-none print:border-none print:rounded-none"
+                            className="relative w-full max-w-4xl bg-white rounded-[3rem] shadow-2xl border border-surface-200 overflow-hidden flex flex-col max-h-[90vh] print:max-h-none print:shadow-none print:border-none print:rounded-none"
                         >
                             {/* Modal Header */}
                             <div className="p-8 border-b border-surface-100 flex items-center justify-between bg-surface-50/50 print:bg-white">
