@@ -99,9 +99,28 @@ export default function AdminProducts() {
         setIsModalOpen(true);
     };
 
+    useEffect(() => {
+        // Auto-generate slug from name if it's a new product or slug is empty
+        if (!editingProduct && formData.name) {
+            const generatedSlug = formData.name
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '');
+            setFormData(prev => ({ ...prev, slug: generatedSlug }));
+        }
+    }, [formData.name, editingProduct]);
+
     const handleSave = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsIdling(true);
+        
+        // Final SEO Sanity Check
+        const finalData = {
+            ...formData,
+            metaTitle: formData.metaTitle || `${formData.name} | Apex Auto Parts`,
+            metaDescription: formData.metaDescription || formData.description.substring(0, 155).replace(/\n/g, ' ')
+        };
+
         const method = editingProduct ? 'PUT' : 'POST';
         const url = editingProduct ? `/api/products/${editingProduct.id}` : '/api/products';
 
@@ -109,7 +128,7 @@ export default function AdminProducts() {
             const res = await fetch(url, {
                 method,
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(finalData),
             });
             
             if (res.ok) {
