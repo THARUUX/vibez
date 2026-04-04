@@ -28,8 +28,8 @@ export function ProductCard({ product, index }: ProductCardProps) {
             {/* Header / Badges */}
             <div className="absolute top-6 left-6 right-6 z-20 flex justify-between items-start pointer-events-none">
                 <div className="flex flex-col gap-2">
-                    <span className="bg-brand-600 text-white px-4 py-1.5 rounded-xl text-[8px] font-black uppercase tracking-[0.2em] shadow-xl border border-white/10 flex items-center gap-2">
-                        {product.category?.name || "Premium Collection"}
+                    <span className="bg-brand-600 text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] shadow-xl border border-white/10 flex items-center gap-2">
+                        {product.category?.name || "Official VibeZ"}
                     </span>
                     {product.stock > 0 && product.stock <= 5 && (
                         <span className="bg-orange-500 text-white px-3 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest shadow-lg">

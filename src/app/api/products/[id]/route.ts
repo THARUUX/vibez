@@ -67,6 +67,9 @@ export async function PUT(
                 returns: body.returns,
                 terms: body.terms,
             } as any,
+            include: {
+                category: true,
+            },
         });
         return NextResponse.json(product);
     } catch (error: any) {

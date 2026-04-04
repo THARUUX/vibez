@@ -6,9 +6,12 @@ export default auth((req) => {
   const { nextUrl } = req
   
   const isApiAuthRoute = nextUrl.pathname.startsWith("/api/auth")
-  const isPublicRoute = ["/", "/products", "/categories", "/about"].includes(nextUrl.pathname) || nextUrl.pathname.startsWith("/products/")
+  const isPublicRoute = ["/", "/catalog", "/categories", "/about"].some(path => 
+    nextUrl.pathname === path || nextUrl.pathname.startsWith(path + "/")
+  )
   const isAuthRoute = nextUrl.pathname.startsWith("/auth")
   const isAdminRoute = nextUrl.pathname.startsWith("/admin")
+  const isPublicApi = (nextUrl.pathname.startsWith("/api/products") || nextUrl.pathname.startsWith("/api/categories")) && req.method === "GET"
 
   if (isApiAuthRoute) return undefined
 
@@ -30,7 +33,7 @@ export default auth((req) => {
     return undefined
   }
 
-  if (!isLoggedIn && !isPublicRoute) {
+  if (!isLoggedIn && !isPublicRoute && !isPublicApi) {
     // Return JSON error for API routes instead of redirecting to the login page
     if (nextUrl.pathname.startsWith("/api/")) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {

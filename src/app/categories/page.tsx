@@ -47,9 +47,14 @@ export default function CategoriesPage() {
             try {
                 const res = await fetch('/api/categories');
                 const data = await res.json();
-                setCategories(data);
+                if (Array.isArray(data)) {
+                    setCategories(data);
+                } else {
+                    setCategories([]);
+                }
             } catch (error) {
                 console.error("Failed to fetch categories:", error);
+                setCategories([]);
             } finally {
                 setLoading(false);
             }
@@ -73,7 +78,7 @@ export default function CategoriesPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-surface-600 max-w-2xl text-lg font-medium"
+                        className="text-surface-600 max-w-2xl text-lg font-light"
                     >
                         Explore our comprehensive catalog organized by vehicle system to find exactly what you need.
                     </motion.p>

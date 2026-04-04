@@ -57,6 +57,9 @@ export async function POST(request: Request) {
                 returns: body.returns,
                 terms: body.terms,
             } as any,
+            include: {
+                category: true,
+            },
         });
         return NextResponse.json(product, { status: 201 });
     } catch (error: any) {

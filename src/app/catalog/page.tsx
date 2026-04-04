@@ -129,7 +129,7 @@ function CatalogContent() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="text-surface-500 max-w-2xl text-xl font-medium leading-relaxed tracking-tight"
+                            className="text-surface-500 max-w-2xl text-xl font-light leading-relaxed tracking-tight"
                         >
                             Discover our full catalog of premium anime books, collections, and fan-made prints. High-quality paper, vibrant prints, delivered islandwide.
                         </m.p>

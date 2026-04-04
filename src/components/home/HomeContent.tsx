@@ -146,8 +146,8 @@ export function FeaturedProducts() {
                                     fill
                                     className="object-contain p-8 scale-100 group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-2xl"
                                 />
-                                <div className="absolute top-6 right-6 z-20 bg-brand-600 text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl">
-                                    {product.category?.name || "Fan Pick"}
+                                <div className="absolute top-6 right-6 z-20 bg-brand-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] shadow-2xl border border-white/10">
+                                    {product.category?.name || "Exclusive Pick"}
                                 </div>
                             </div>
 

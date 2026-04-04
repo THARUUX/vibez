@@ -115,7 +115,7 @@ export function CatalogSidebar({
                         >
                             All Categories
                         </button>
-                        {categories.map((category) => (
+                        {(Array.isArray(categories) ? categories : []).map((category) => (
                             <button
                                 key={category.id}
                                 onClick={() => setActiveCategoryId(category.id)}
@@ -144,7 +144,7 @@ export function CatalogSidebar({
                 <div className="px-2">
                     <div className="flex items-center justify-between mb-4">
                         <span className="text-[10px] font-black text-surface-400">RANGE</span>
-                        <span className="text-[10px] font-black text-brand-600">${priceRange[0]} - ${priceRange[1]}</span>
+                        <span className="text-[10px] font-black text-brand-600">Rs.{priceRange[0]} - Rs.{priceRange[1]}</span>
                     </div>
                     <div className="flex gap-4">
                         <input 

@@ -4,6 +4,7 @@
 import { Hexagon, ShoppingCart, Menu, X, LogOut, LayoutDashboard, User as UserIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { useCartStore } from "@/store/cartStore";
 import { useSettingsStore } from "@/store/settingsStore";
 import { motion, AnimatePresence } from "framer-motion";
@@ -19,6 +20,20 @@ export function Navigation() {
     const { data: session, status: sessionStatus } = useSession();
     const user = session?.user as any;
     const storeName = useSettingsStore(state => state.storeName);
+    const pathname = usePathname();
+
+    const navItems = [
+        { name: 'Catalog', href: '/catalog' },
+        { name: 'Categories', href: '/categories' },
+        { name: 'About', href: '/about' },
+        { name: 'Contact', href: '/contact' },
+    ];
+
+    const isActive = (path: string) => {
+        if (path === '/' && pathname === '/') return true;
+        if (path !== '/' && pathname?.startsWith(path)) return true;
+        return false;
+    };
 
     const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -43,20 +58,24 @@ export function Navigation() {
 
                     {/* Desktop Nav */}
                     <nav className="hidden lg:flex items-center gap-12">
-                        {['Catalog', 'Categories', 'About', 'Contact'].map((item, index) => (
+                        {navItems.map((item, index) => (
                             <Link
-                                key={item}
-                                href={`/${item.toLowerCase()}`}
-                                className="text-[10px] font-black uppercase tracking-[0.3em] text-surface-400 hover:text-brand-600 transition-all relative group/link"
+                                key={item.name}
+                                href={item.href}
+                                className={`text-[10px] font-black uppercase tracking-[0.3em] transition-all relative group/link ${
+                                    isActive(item.href) ? "text-brand-600" : "text-surface-400 hover:text-brand-600"
+                                }`}
                             >
                                 <m.span
                                     initial={{ opacity: 0, y: -4 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.1 + index * 0.05 }}
                                 >
-                                    {item}
+                                    {item.name}
                                 </m.span>
-                                <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-brand-600 group-hover/link:w-full transition-all duration-300" />
+                                <span className={`absolute -bottom-2 left-0 h-0.5 bg-brand-600 transition-all duration-300 ${
+                                    isActive(item.href) ? "w-full" : "w-0 group-hover/link:w-full"
+                                }`} />
                             </Link>
                         ))}
                     </nav>
@@ -148,14 +167,16 @@ export function Navigation() {
                         className="fixed inset-0 z-40 bg-white pt-32 px-8 md:hidden"
                     >
                         <nav className="flex flex-col gap-10">
-                            {['Catalog', 'Categories', 'About', 'Contact', 'Profile'].map((item) => (
+                            {navItems.map((item) => (
                                 <Link
-                                    key={item}
-                                    href={`/${item.toLowerCase()}`}
+                                    key={item.name}
+                                    href={item.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-5xl font-outfit font-black text-surface-950 uppercase tracking-tighter hover:text-brand-600 transition-all"
+                                    className={`text-5xl font-outfit font-black uppercase tracking-tighter transition-all ${
+                                        isActive(item.href) ? "text-brand-600 pl-4 border-l-8 border-brand-600" : "text-surface-950 hover:text-brand-600"
+                                    }`}
                                 >
-                                    {item}
+                                    {item.name}
                                 </Link>
                             ))}
                             {sessionStatus === "authenticated" && (
