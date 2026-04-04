@@ -462,7 +462,7 @@ export default function AdminProducts() {
                                             <h3 className="text-xs font-black text-indigo-600 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
                                                 <div className="w-1.5 h-1.5 rounded-full bg-indigo-600" /> Google Search Optimization
                                             </h3>
-                                            <div className="p-6 bg-indigo-50/30 rounded-[2rem] border border-indigo-100 space-y-5">
+                                            <div className="p-6 bg-indigo-50/30 rounded-4xl border border-indigo-100 space-y-5">
                                                 <div className="space-y-2">
                                                     <label className="text-[10px] font-black text-indigo-900/40 uppercase tracking-widest pl-1">Search Result Title</label>
                                                     <div className="relative">

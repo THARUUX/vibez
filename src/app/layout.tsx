@@ -14,31 +14,36 @@ const googleSans = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Premium Automotive Components | Universal Parts Store",
-  description: "High-performance motor spare parts, OEM replacements, and racing components. Precision engineered for maximum durability.",
-  keywords: ["auto parts", "motor spares", "car parts", "racing parts", "OEM", "performance auto"],
-  authors: [{ name: "Inventory Team" }],
+  title: "VibeZ | Premium Anime & K-pop Prints Sri Lanka",
+  description: "High-quality anime notebooks, K-pop collectibles, and custom prints. Islandwide delivery in Sri Lanka. Good Vibez Only.",
+  keywords: ["anime", "k-pop", "notebooks", "stickers", "prints", "collectibles", "fan art", "sri lanka", "vibez"],
+  authors: [{ name: "VibeZ Team" }],
+  icons: {
+    icon: "/about-us.png",
+    shortcut: "/about-us.png",
+    apple: "/about-us.png",
+  },
   openGraph: {
-    title: "Premium Automotive Components | Universal Parts Store",
-    description: "High-performance motor spare parts and racing components.",
-    url: "https://your-domain.com",
-    siteName: "Universal Parts Store",
+    title: "VibeZ | Premium Anime & K-pop Prints Sri Lanka",
+    description: "High-quality anime notebooks, K-pop collectibles, and custom prints. Islandwide delivery in Sri Lanka. Good Vibez Only.",
+    url: "https://vibez.lk",
+    siteName: "VibeZ Sri Lanka",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/about-us.png",
         width: 1200,
         height: 630,
-        alt: "Premium Parts Hero Image",
+        alt: "VibeZ Premium Prints",
       },
     ],
-    locale: "en_US",
+    locale: "en_LK",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Premium Automotive Components | Universal Parts Store",
-    description: "High-performance motor spare parts and racing components.",
-    images: ["/og-image.jpg"],
+    title: "VibeZ | Premium Anime & K-pop Prints Sri Lanka",
+    description: "High-quality anime notebooks, K-pop collectibles, and custom prints. Islandwide delivery in Sri Lanka.",
+    images: ["/about-us.png"],
   },
 };
 
