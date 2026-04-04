@@ -108,7 +108,7 @@ export function ProductCard({ product, index }: ProductCardProps) {
             </div>
             
             {/* Decoration line */}
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-surface-100 group-hover:bg-brand-600 transition-colors duration-700" />
+            {/* <div className="absolute bottom-0 left-0 w-full h-1 bg-surface-100 group-hover:bg-brand-600 transition-colors duration-700" /> */}
         </m.div>
     );
 }

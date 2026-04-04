@@ -28,7 +28,13 @@ export default function AdminCategories() {
         try {
             const res = await fetch('/api/categories');
             const data = await res.json();
-            setCategories(data);
+            if (Array.isArray(data)) {
+                setCategories(data);
+            } else {
+                console.warn("API returned non-array data:", data);
+                setCategories([]);
+                alerts.error("Data Synchronized Error", data.error || "The server returned an invalid data format.");
+            }
         } catch (error) {
             console.error("Failed to fetch categories:", error);
             alerts.error("Data Fetch Failure", "Could not synchronize category records from the database.");
@@ -124,9 +130,9 @@ export default function AdminCategories() {
         }
     };
 
-    const filteredCategories = categories.filter(c =>
-        c.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredCategories = Array.isArray(categories) 
+        ? categories.filter(c => c.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        : [];
 
     return (
         <div className="max-w-7xl mx-auto space-y-8 font-outfit">

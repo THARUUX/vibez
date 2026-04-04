@@ -46,10 +46,12 @@ export async function POST(request: Request) {
                 price: price,
                 image: body.image,
                 stock: stock,
-                sku: body.sku,
+                sku: body.sku && body.sku.trim() !== "" ? body.sku : null,
                 categoryId: body.categoryId,
-                metaTitle: body.metaTitle,
-                metaDescription: body.metaDescription,
+                metaTitle: body.metaTitle && body.metaTitle.trim() !== "" ? body.metaTitle : null,
+                metaDescription: body.metaDescription && body.metaDescription.trim() !== "" 
+                    ? body.metaDescription.substring(0, 160) 
+                    : body.description?.substring(0, 160),
                 warranty: body.warranty,
                 delivery: body.delivery,
                 returns: body.returns,

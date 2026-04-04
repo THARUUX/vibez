@@ -31,7 +31,7 @@ export function PriceDisplay({ amount, className = "", showCode = false }: Price
     }, [numericAmount, currency]);
 
     if (!mounted) {
-        return <span className={className}>${numericAmount.toFixed(2)}</span>;
+        return <span className={className}>LKR{numericAmount.toFixed(2)}</span>;
     }
 
     return (

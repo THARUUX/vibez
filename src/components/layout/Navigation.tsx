@@ -8,6 +8,7 @@ import { useCartStore } from "@/store/cartStore";
 import { useSettingsStore } from "@/store/settingsStore";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSession, signOut } from "next-auth/react";
+import Image from "next/image";
 
 const m = motion as any;
 
@@ -27,24 +28,25 @@ export function Navigation() {
                 <div className="container mx-auto h-24 flex items-center justify-between">
 
                     <Link href="/" className="flex items-center gap-3 group">
-                    <m.div
-                        whileHover={{ rotate: 180, scale: 1.1 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                        className="w-12 h-12 bg-surface-950 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:bg-brand-600 transition-colors duration-500"
-                    >
-                        <Hexagon size={24} />
-                    </m.div>
+                        <Image src="/logo.avif" alt="Logo" className="w-50" width={500} height={500} />
+                        {/* <m.div
+                            whileHover={{ rotate: 180, scale: 1.1 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                            className="w-12 h-12 bg-surface-950 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:bg-brand-600 transition-colors duration-500"
+                        >
+                            <Hexagon size={24} />
+                        </m.div>
                         <span className="font-outfit font-black text-3xl tracking-tighter text-surface-950 group-hover:text-brand-600 transition-all duration-300 uppercase leading-none">
                             {storeName}
-                        </span>
+                        </span> */}
                     </Link>
 
                     {/* Desktop Nav */}
                     <nav className="hidden lg:flex items-center gap-12">
                         {['Catalog', 'Categories', 'About', 'Contact'].map((item, index) => (
-                            <Link 
-                                key={item} 
-                                href={`/${item.toLowerCase()}`} 
+                            <Link
+                                key={item}
+                                href={`/${item.toLowerCase()}`}
                                 className="text-[10px] font-black uppercase tracking-[0.3em] text-surface-400 hover:text-brand-600 transition-all relative group/link"
                             >
                                 <m.span
@@ -63,33 +65,33 @@ export function Navigation() {
                         {/* Auth Status */}
                         <div className="hidden md:flex items-center gap-6">
                             {sessionStatus === "authenticated" ? (
-                                    <m.div 
-                                        whileHover={{ y: -1 }} 
-                                        className="flex items-center gap-6"
+                                <m.div
+                                    whileHover={{ y: -1 }}
+                                    className="flex items-center gap-6"
+                                >
+                                    <Link
+                                        href={user?.role === "ADMIN" ? "/admin" : "/profile"}
+                                        className="flex items-center gap-3 px-2 py-2 pr-6 bg-white hover:bg-surface-50 rounded-full transition-all border border-surface-200 group shadow-sm hover:shadow-xl active:scale-95"
                                     >
-                                        <Link
-                                            href={user?.role === "ADMIN" ? "/admin" : "/profile"}
-                                            className="flex items-center gap-3 px-2 py-2 pr-6 bg-white hover:bg-surface-50 rounded-full transition-all border border-surface-200 group shadow-sm hover:shadow-xl active:scale-95"
-                                        >
-                                            <div className="w-10 h-10 bg-surface-950 rounded-full flex items-center justify-center text-white font-black text-sm shadow-lg group-hover:bg-brand-600 transition-colors">
-                                                {user?.name?.[0]?.toUpperCase()}
-                                            </div>
-                                            <div className="flex flex-col">
-                                                <span className="text-[10px] font-black text-surface-950 uppercase tracking-tight group-hover:text-brand-600 transition-colors">{user?.name}</span>
-                                                <span className="text-[8px] font-black text-surface-400 uppercase tracking-widest leading-none">Authorized Client</span>
-                                            </div>
-                                        </Link>
-                                        <m.button
-                                            whileHover={{ x: 2 }}
-                                            whileTap={{ scale: 0.95 }}
-                                            onClick={() => signOut()}
-                                            className="flex items-center gap-2 px-3 py-2 text-surface-400 hover:text-red-600 transition-all hover:bg-red-50 rounded-lg group"
-                                            title="Log Out"
-                                        >
-                                            <LogOut size={18} className="group-hover:-translate-x-0.5 transition-transform" />
-                                            <span className="text-[10px] font-black uppercase tracking-widest leading-none mt-0.5">Logout</span>
-                                        </m.button>
-                                    </m.div>
+                                        <div className="w-10 h-10 bg-surface-950 rounded-full flex items-center justify-center text-white font-black text-sm shadow-lg group-hover:bg-brand-600 transition-colors">
+                                            {user?.name?.[0]?.toUpperCase()}
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] font-black text-surface-950 uppercase tracking-tight group-hover:text-brand-600 transition-colors">{user?.name}</span>
+                                            <span className="text-[8px] font-black text-surface-400 uppercase tracking-widest leading-none">Authorized Client</span>
+                                        </div>
+                                    </Link>
+                                    <m.button
+                                        whileHover={{ x: 2 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        onClick={() => signOut()}
+                                        className="flex items-center gap-2 px-3 py-2 text-surface-400 hover:text-red-600 transition-all hover:bg-red-50 rounded-lg group"
+                                        title="Log Out"
+                                    >
+                                        <LogOut size={18} className="group-hover:-translate-x-0.5 transition-transform" />
+                                        <span className="text-[10px] font-black uppercase tracking-widest leading-none mt-0.5">Logout</span>
+                                    </m.button>
+                                </m.div>
                             ) : (
                                 <div className="flex items-center gap-4">
                                     <Link
@@ -125,9 +127,9 @@ export function Navigation() {
                                 </m.div>
                             )}
                         </m.button>
-                        
-                        <button 
-                            className="md:hidden w-12 h-12 flex items-center justify-center bg-surface-50 rounded-xl text-surface-950" 
+
+                        <button
+                            className="md:hidden w-12 h-12 flex items-center justify-center bg-surface-50 rounded-xl text-surface-950"
                             onClick={() => setIsOpen(!isOpen)}
                         >
                             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -147,17 +149,17 @@ export function Navigation() {
                     >
                         <nav className="flex flex-col gap-10">
                             {['Catalog', 'Categories', 'About', 'Contact', 'Profile'].map((item) => (
-                                <Link 
-                                    key={item} 
-                                    href={`/${item.toLowerCase()}`} 
-                                    onClick={() => setIsOpen(false)} 
+                                <Link
+                                    key={item}
+                                    href={`/${item.toLowerCase()}`}
+                                    onClick={() => setIsOpen(false)}
                                     className="text-5xl font-outfit font-black text-surface-950 uppercase tracking-tighter hover:text-brand-600 transition-all"
                                 >
                                     {item}
                                 </Link>
                             ))}
                             {sessionStatus === "authenticated" && (
-                                <button 
+                                <button
                                     onClick={() => signOut()}
                                     className="text-left text-red-600 text-3xl font-black uppercase tracking-widest mt-12 bg-red-50 p-6 rounded-3xl"
                                 >

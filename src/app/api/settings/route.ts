@@ -12,9 +12,9 @@ export async function GET() {
             settings = await prisma.settings.create({
                 data: {
                     id: 'global',
-                    currencyCode: 'USD',
-                    currencySymbol: '$',
-                    storeName: 'Apex Auto Parts',
+                    currencyCode: 'LKR',
+                    currencySymbol: 'Rs.',
+                    storeName: 'VibeZ',
                 },
             });
         }

@@ -33,19 +33,20 @@ export function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-6xl md:text-9xl font-black tracking-tighter mb-6 leading-[0.85] text-surface-950 uppercase"
+                    className="text-6xl w-fit flex flex-col items-center md:text-9xl font-black tracking-tighter mb-6 leading-[0.85] text-surface-950 uppercase"
                 >
                     ONLY GOOD<br />
-                    <span className="text-brand-600 neon-text">
+                    <Image src="/logo.avif" alt="Logo" className="w-100" width={500} height={500} />
+                    {/* <span className="text-brand-600 neon-text">
                         VIBEZ
-                    </span>
+                    </span> */}
                 </m.h1>
 
                 <m.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="text-xl md:text-2xl text-surface-500 max-w-2xl mb-12 font-medium leading-relaxed"
+                    className="text-xl md:text-2xl text-surface-500 max-w-2xl mb-12 font-light leading-relaxed"
                 >
                     High-quality prints of your favorite Anime series and K-pop idols. Premium collectors' editions delivered right to your doorstep.
                 </m.p>

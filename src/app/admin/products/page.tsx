@@ -87,7 +87,7 @@ export default function AdminProducts() {
                 image: "",
                 stock: 0,
                 sku: "",
-                categoryId: categories[0]?.id || "",
+                categoryId: Array.isArray(categories) && categories.length > 0 ? categories[0].id : "",
                 metaTitle: "",
                 metaDescription: "",
                 warranty: "",
@@ -117,8 +117,11 @@ export default function AdminProducts() {
         // Final SEO Sanity Check
         const finalData = {
             ...formData,
-            metaTitle: formData.metaTitle || `${formData.name} | Apex Auto Parts`,
-            metaDescription: formData.metaDescription || formData.description.substring(0, 155).replace(/\n/g, ' ')
+            metaTitle: formData.metaTitle || `${formData.name} | VibeZ`,
+            metaDescription: (formData.metaDescription || formData.description || "")
+                .replace(/\r?\n|\r/g, " ")
+                .substring(0, 155)
+                .trim()
         };
 
         const method = editingProduct ? 'PUT' : 'POST';
@@ -172,7 +175,7 @@ export default function AdminProducts() {
         }
     };
 
-    const filteredProducts = products.filter(p => {
+    const filteredProducts = (Array.isArray(products) ? products : []).filter(p => {
         const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             p.category?.name?.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesCategory = filterCategory === "all" || p.categoryId === filterCategory;
@@ -181,10 +184,12 @@ export default function AdminProducts() {
 
     const categoryOptions: SelectOption[] = [
         { value: "all", label: "All Categories" },
-        ...categories.map(c => ({ value: c.id, label: c.name }))
+        ...(Array.isArray(categories) ? categories.map(c => ({ value: c.id, label: c.name })) : [])
     ];
 
-    const categoryFormOptions: SelectOption[] = categories.map(c => ({ value: c.id, label: c.name }));
+    const categoryFormOptions: SelectOption[] = Array.isArray(categories) 
+        ? categories.map(c => ({ value: c.id, label: c.name })) 
+        : [];
 
     return (
         <div className="max-w-7xl mx-auto space-y-8 font-outfit">

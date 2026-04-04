@@ -20,11 +20,11 @@ interface SettingsState {
 export const useSettingsStore = create<SettingsState>()(
     persist(
         (set, get) => ({
-            storeName: 'Apex Auto Parts',
-            currency: { code: 'USD', symbol: '$', rate: 1 },
+            storeName: 'VibeZ',
+            currency: { code: 'LKR', symbol: 'Rs.', rate: 1 },
             availableCurrencies: [
-                { code: 'USD', symbol: '$', rate: 1 },
-                { code: 'LKR', symbol: 'Rs.', rate: 300 },
+                { code: 'LKR', symbol: 'Rs.', rate: 1 },
+                { code: 'USD', symbol: '$', rate: 0.0033 },
                 { code: 'EUR', symbol: '€', rate: 0.92 },
                 { code: 'GBP', symbol: '£', rate: 0.79 },
             ],

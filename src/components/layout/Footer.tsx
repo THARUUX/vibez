@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useSettingsStore } from "@/store/settingsStore";
+import Image from "next/image";
 
 export function Footer() {
     const storeName = useSettingsStore(state => state.storeName);
@@ -28,7 +29,8 @@ export function Footer() {
                     {/* Brand Section */}
                     <div className="space-y-6">
                         <Link href="/" className="flex items-center gap-2 group">
-                            <motion.div
+                            <Image src="/logo.avif" alt="Logo" className="w-50" width={500} height={500} />
+                            {/* <motion.div
                                 whileHover={{ rotate: 180, scale: 1.1 }}
                                 className="text-brand-600"
                             >
@@ -36,7 +38,7 @@ export function Footer() {
                             </motion.div>
                             <span className="font-black text-2xl tracking-tighter uppercase">
                                 {storeName}
-                            </span>
+                            </span> */}
                         </Link>
                         <p className="text-surface-400 font-medium leading-relaxed max-w-xs">
                             Premium automotive spare parts and performance components. Engineered for excellence, delivered with precision.
@@ -87,15 +89,15 @@ export function Footer() {
                             <div className="space-y-4 text-surface-400 font-medium">
                                 <div className="flex items-start gap-3">
                                     <MapPin size={20} className="text-brand-600 shrink-0" />
-                                    <span>721 Performance Drive, Detroit, MI 48201</span>
+                                    <span>44, Udahamulla Station Road, Nugegoda.</span>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <Phone size={20} className="text-brand-600 shrink-0" />
-                                    <span>+1 (800) APEX-AUTO</span>
+                                    <span>+94 (76) 826 1160</span>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <Mail size={20} className="text-brand-600 shrink-0" />
-                                    <span>support@apexauto.parts</span>
+                                    <span>support@vibez.lk</span>
                                 </div>
                             </div>
                         </div>

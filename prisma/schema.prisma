@@ -24,8 +24,8 @@ model Category {
   slug            String    @unique
   description     String?   @db.Text
   image           String?   @db.Text
-  metaTitle       String?
-  metaDescription String?
+  metaTitle       String?   @db.Text
+  metaDescription String?   @db.Text
   products        Product[]
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
@@ -40,8 +40,8 @@ model Product {
   image           String      @db.Text
   sku             String?     @unique
   stock           Int         @default(0)
-  metaTitle       String?
-  metaDescription String?
+  metaTitle       String?     @db.Text
+  metaDescription String?     @db.Text
   warranty        String?
   delivery        String?
   returns         String?
