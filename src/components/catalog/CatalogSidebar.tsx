@@ -46,7 +46,7 @@ export function CatalogSidebar({
                     <Search className="absolute left-6 text-surface-400 group-focus-within:text-brand-600 transition-colors" size={20} />
                     <input 
                         type="text" 
-                        placeholder="SEARCH PARTS..." 
+                        placeholder="Search books..." 
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="w-full pl-16 pr-6 py-5 focus:outline-none font-black text-[10px] uppercase tracking-widest text-surface-950 placeholder:text-surface-300"
@@ -66,7 +66,7 @@ export function CatalogSidebar({
             <div className="hidden lg:block space-y-6">
                 <div className="flex items-center gap-3 text-surface-950 px-2">
                     <SlidersHorizontal size={18} className="text-brand-600" />
-                    <h3 className="font-black text-xs uppercase tracking-[0.2em]">Engineering Sort</h3>
+                    <h3 className="font-black text-xs uppercase tracking-[0.2em]">Sort Collections</h3>
                 </div>
                 <div className="grid grid-cols-1 gap-2">
                     {sortOptions.map((option) => (
@@ -94,7 +94,7 @@ export function CatalogSidebar({
                 >
                     <div className="flex items-center gap-3">
                         <div className="w-2 h-6 bg-brand-600 rounded-full" />
-                        <h3 className="font-black text-xs uppercase tracking-[0.2em]">Component Sector</h3>
+                        <h3 className="font-black text-xs uppercase tracking-[0.2em]">Select Category</h3>
                     </div>
                     <ChevronDown size={18} className={`transition-transform duration-300 ${isCategoriesOpen ? "rotate-180" : ""}`} />
                 </button>
@@ -139,7 +139,7 @@ export function CatalogSidebar({
             <div className="space-y-6 pt-6 border-t border-surface-200">
                 <div className="flex items-center gap-3 text-surface-950 px-2">
                     <div className="w-2 h-6 bg-surface-950 rounded-full" />
-                    <h3 className="font-black text-xs uppercase tracking-[0.2em]">Price Budget</h3>
+                    <h3 className="font-black text-xs uppercase tracking-[0.2em]">Price Range</h3>
                 </div>
                 <div className="px-2">
                     <div className="flex items-center justify-between mb-4">

@@ -96,7 +96,7 @@ function CatalogContent() {
                         <Zap className="absolute inset-0 m-auto w-8 h-8 text-brand-600 animate-pulse" />
                     </div>
                     <span className="font-black uppercase tracking-[0.5em] text-surface-400 text-xs text-center">
-                        Initializing Apex<br />Neural Interface
+                        Loading your<br />Collection
                     </span>
                 </div>
             </div>
@@ -115,15 +115,15 @@ function CatalogContent() {
                             className="flex items-center gap-3 text-brand-600 font-black uppercase tracking-[0.4em] text-[10px] mb-6"
                         >
                             <Target size={16} />
-                            <span>Precision Component Matrix v4.2</span>
+                            <span>VIBE COLLECTION v1.0</span>
                         </m.div>
                         <m.h1
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, ease: "circOut" }}
-                            className="text-7xl md:text-[9rem] font-black tracking-tighter text-surface-950 uppercase leading-[0.75] mb-8"
+                            className="text-7xl md:text-[9.5rem] font-black tracking-tighter text-surface-950 uppercase leading-[0.75] mb-8"
                         >
-                            THE <span className="text-brand-600 drop-shadow-[0_10px_30px_rgba(220,38,38,0.2)]">CATALOG</span>
+                            THE <span className="text-brand-600 drop-shadow-[0_10px_30px_rgba(220,38,38,0.2)]">STORE</span>
                         </m.h1>
                         <m.p
                             initial={{ opacity: 0, y: 20 }}
@@ -131,7 +131,7 @@ function CatalogContent() {
                             transition={{ duration: 0.8, delay: 0.2 }}
                             className="text-surface-500 max-w-2xl text-xl font-medium leading-relaxed tracking-tight"
                         >
-                            Access our full spectrum of high-velocity engineering assets. Every component is stress-tested beyond industrial standards for maximum tactical efficiency.
+                            Discover our full catalog of premium anime books, collections, and fan-made prints. High-quality paper, vibrant prints, delivered islandwide.
                         </m.p>
                     </div>
 
@@ -142,13 +142,13 @@ function CatalogContent() {
                     >
                         <div className="flex items-center gap-6">
                             <div className="flex flex-col">
-                                <span className="text-[10px] font-black uppercase tracking-widest text-surface-400 mb-1">Matrix Online</span>
-                                <span className="text-2xl font-black text-surface-950">{products.length} ASSETS</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-surface-400 mb-1">Items Online</span>
+                                <span className="text-2xl font-black text-surface-950">{products.length} BOOKS</span>
                             </div>
                             <div className="w-px h-12 bg-surface-100" />
                             <div className="flex flex-col">
-                                <span className="text-[10px] font-black uppercase tracking-widest text-surface-400 mb-1">System Load</span>
-                                <span className="text-2xl font-black text-brand-600">OPTIMIZED</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-surface-400 mb-1">Status</span>
+                                <span className="text-2xl font-black text-brand-600">READY</span>
                             </div>
                         </div>
                     </m.div>

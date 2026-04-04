@@ -23,33 +23,29 @@ export function ProductCard({ product, index }: ProductCardProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.05 }}
-            className="group relative flex flex-col bg-white rounded-xl border border-surface-100 hover:border-brand-600 hover:shadow-[0_20px_50px_rgba(220,38,38,0.1)] transition-all duration-700 overflow-hidden"
+            className="vibez-card group"
         >
             {/* Header / Badges */}
             <div className="absolute top-6 left-6 right-6 z-20 flex justify-between items-start pointer-events-none">
                 <div className="flex flex-col gap-2">
-                    <span className="bg-surface-950/90 backdrop-blur-md text-white px-4 py-1.5 rounded-lg text-[8px] font-black uppercase tracking-[0.2em] shadow-xl border border-white/10 flex items-center gap-2">
-                        <Activity size={10} className="text-brand-500" />
-                        {product.category?.name || "Premium Component"}
+                    <span className="bg-brand-600 text-white px-4 py-1.5 rounded-xl text-[8px] font-black uppercase tracking-[0.2em] shadow-xl border border-white/10 flex items-center gap-2">
+                        {product.category?.name || "Premium Collection"}
                     </span>
                     {product.stock > 0 && product.stock <= 5 && (
                         <span className="bg-orange-500 text-white px-3 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest shadow-lg">
-                            Critical Stock: {product.stock}
+                            Last {product.stock} Left!
                         </span>
                     )}
-                </div>
-                <div className="bg-white/90 backdrop-blur-md text-surface-950 p-2 rounded-xl border border-surface-200 shadow-xl group-hover:bg-brand-600 group-hover:text-white transition-colors duration-500">
-                    <Zap size={14} className={product.stock > 0 ? "text-brand-600 group-hover:text-white" : "text-surface-300"} />
                 </div>
             </div>
 
             {/* Image Container */}
             <Link 
-                href={`/products/${product.slug}`} 
-                className="relative h-96 overflow-hidden bg-surface-50 flex items-center justify-center p-12"
+                href={`/catalog/${product.slug}`} 
+                className="relative h-96 overflow-hidden bg-surface-50 flex items-center justify-center p-8"
             >
                 <m.div
-                    whileHover={{ scale: 1.1, rotate: 2 }}
+                    whileHover={{ scale: 1.05 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     className="relative w-full h-full"
                 >
@@ -57,7 +53,7 @@ export function ProductCard({ product, index }: ProductCardProps) {
                         src={product.image}
                         alt={product.name}
                         fill
-                        className="object-contain drop-shadow-2xl grayscale-[0.2] group-hover:grayscale-0 transition-all duration-500"
+                        className="object-contain drop-shadow-2xl transition-all duration-500"
                     />
                 </m.div>
                 
@@ -69,43 +65,43 @@ export function ProductCard({ product, index }: ProductCardProps) {
             <div className="p-10 flex flex-col flex-1 relative bg-white">
                 <div className="mb-4">
                     <span className="text-[8px] font-black text-surface-300 uppercase tracking-[0.3em] mb-1 block leading-none">
-                        APEX-SPEC-{product.sku || "UNKN"}
+                        VIBE-ID-{product.sku || "UNKN"}
                     </span>
-                    <h2 className="text-2xl font-black text-surface-950 uppercase tracking-tight group-hover:text-brand-600 transition-colors line-clamp-2 leading-[1.1]">
+                    <h2 className="text-3xl font-black text-surface-950 uppercase tracking-tighter group-hover:text-brand-600 transition-colors line-clamp-2 leading-none">
                         {product.name}
                     </h2>
                 </div>
 
-                <p className="text-surface-400 font-medium text-xs mb-10 line-clamp-2 leading-relaxed tracking-wide">
+                <p className="text-surface-400 font-medium text-xs mb-10 line-clamp-2 leading-relaxed">
                     {product.description}
                 </p>
 
                 <div className="mt-auto space-y-6">
                     <div className="flex items-end justify-between">
                         <div className="flex flex-col">
-                            <span className="text-[8px] font-black text-surface-300 uppercase tracking-[0.2em] mb-1">MSRP-VALUATION</span>
+                            <span className="text-[10px] font-black text-surface-300 uppercase tracking-widest mb-1">Store Price</span>
                             <PriceDisplay amount={product.price} className="text-4xl font-black text-surface-950 tracking-tighter" />
                         </div>
                         
                         <m.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
                             onClick={(e: React.MouseEvent) => {
                                 e.preventDefault();
                                 addItem(product);
-                                alerts.toast(`${product.name} SECURED`);
+                                alerts.toast(`${product.name} ADDED TO CART`);
                             }}
-                            className="w-16 h-16 bg-surface-950 hover:bg-brand-600 text-white rounded-xl flex items-center justify-center transition-all duration-500 shadow-2xl shadow-surface-950/20 active:bg-brand-700 group/btn"
+                            className="w-16 h-16 bg-surface-950 hover:bg-brand-600 text-white rounded-2xl flex items-center justify-center transition-all duration-500 shadow-2xl active:bg-brand-700 group/btn"
                         >
-                            <ShoppingCart size={24} className="group-hover/btn:rotate-12 transition-transform" />
+                            <ShoppingCart size={28} className="group-hover/btn:rotate-12 transition-transform" />
                         </m.button>
                     </div>
 
                     <Link 
-                        href={`/products/${product.slug}`}
-                        className="flex items-center justify-center gap-3 w-full py-4 border-2 border-surface-100 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] text-surface-400 hover:text-brand-600 hover:border-brand-600/20 hover:bg-surface-50 transition-all duration-300"
+                        href={`/catalog/${product.slug}`}
+                        className="flex items-center justify-center gap-3 w-full py-5 border-2 border-surface-100 rounded-2xl text-[10px] font-black uppercase tracking-widest text-surface-400 hover:text-brand-600 hover:border-brand-600/20 hover:bg-surface-50 transition-all duration-300"
                     >
-                        Detailed Specs
+                        View Details
                         <ArrowRight size={14} />
                     </Link>
                 </div>

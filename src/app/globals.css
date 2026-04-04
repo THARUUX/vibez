@@ -36,7 +36,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  font-family: var(--font-google-sans), var(--font-inter), Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }
 
@@ -56,34 +56,34 @@ body {
 }
 
 /* Premium Gradients */
-.bg-apex-gradient {
+.bg-vibez-gradient {
   background: linear-gradient(135deg, var(--color-brand-600) 0%, var(--color-brand-800) 100%);
 }
 
-.bg-slate-gradient {
-  background: linear-gradient(135deg, var(--color-surface-800) 0%, var(--color-surface-950) 100%);
+.bg-soft-gradient {
+  background: linear-gradient(135deg, var(--color-surface-50) 0%, var(--color-surface-100) 100%);
 }
 
 /* Subtle Accents */
-.neon-glow {
-  box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+.vibez-glow {
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.15);
 }
 
 .neon-text {
-  text-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+  text-shadow: 0 0 8px rgba(220, 38, 38, 0.3);
   font-weight: 800;
 }
 
-.apex-button {
-  @apply px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-black rounded-xl transition-all duration-300 shadow-lg shadow-brand-600/20 active:scale-95 flex items-center justify-center gap-2 uppercase tracking-widest text-sm;
+.vibez-button {
+  @apply px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-black rounded-2xl transition-all duration-300 shadow-xl shadow-brand-600/10 active:scale-95 flex items-center justify-center gap-2 uppercase tracking-wider text-sm border-b-4 border-brand-800 active:border-b-0 active:translate-y-1;
 }
 
-.apex-card {
-  @apply bg-white rounded-xl border border-surface-200 hover:border-brand-500 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden;
+.vibez-card {
+  @apply bg-white rounded-[2rem] border border-surface-200 hover:border-brand-500 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden;
 }
 
-.neon-glow-accent {
-  box-shadow: 0 2px 8px 0 rgba(100, 116, 139, 0.2);
+.soft-glow-accent {
+  box-shadow: 0 4px 12px 0 rgba(100, 116, 139, 0.1);
 }
 
 /* ─── Global Select Styling ─────────────────────────────────────────────── */

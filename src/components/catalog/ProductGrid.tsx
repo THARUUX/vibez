@@ -31,12 +31,12 @@ export function ProductGrid({ products, loading }: ProductGridProps) {
                 animate={{ opacity: 1, scale: 1 }}
                 className="w-full py-32 flex flex-col items-center justify-center bg-white rounded-3xl border-2 border-dashed border-surface-200"
             >
-                <div className="w-24 h-24 rounded-2xl bg-surface-100 flex items-center justify-center text-surface-250 mb-8 border border-surface-200">
+                <div className="w-24 h-24 rounded-3xl bg-surface-100 flex items-center justify-center text-surface-250 mb-8 border border-surface-200">
                     <Box size={40} className="text-surface-300" />
                 </div>
-                <h3 className="text-2xl font-black text-surface-950 uppercase tracking-tight mb-2">Inventory Depleted</h3>
-                <p className="text-surface-400 font-medium text-sm text-center max-w-xs uppercase tracking-widest leading-loose">
-                    No components matching the specified engineering parameters found in our current matrix.
+                <h3 className="text-2xl font-black text-surface-950 uppercase tracking-tight mb-2">No Items Found</h3>
+                <p className="text-surface-400 font-medium text-sm text-center max-w-xs uppercase tracking-widest leading-loose px-4">
+                    We couldn't find any books or collectibles matching your current filters.
                 </p>
             </m.div>
         );

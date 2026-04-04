@@ -2,50 +2,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Zap, Target, Box, ShoppingCart } from "lucide-react";
+import { ArrowRight, Zap, Target, Box, ShoppingCart, Truck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { PriceDisplay } from "@/components/common/PriceDisplay";
+import { useState, useEffect } from "react";
 
 const m = motion as any;
-
-const products = [
-    {
-        id: "1",
-        name: "Premium Ceramic Brake Pads",
-        slug: "premium-ceramic-brake-pads",
-        price: 89.99,
-        description: "High-performance ceramic compound engineered for stopping power and low dust.",
-        image: "https://images.unsplash.com/photo-1598083842605-7af83fb18ebd?auto=format&fit=crop&q=80&w=800",
-        category: "Brakes"
-    },
-    {
-        id: "2",
-        name: "Synthetic Motor Oil 5W-30",
-        slug: "synthetic-motor-oil-5w-30",
-        price: 34.99,
-        description: "Full synthetic motor oil designed for optimal engine protection and performance.",
-        image: "https://images.unsplash.com/photo-1610493864198-4eabd27df61a?auto=format&fit=crop&q=80&w=800",
-        category: "Fluids"
-    },
-    {
-        id: "3",
-        name: "Performance Air Filter",
-        slug: "performance-air-filter",
-        price: 45.99,
-        description: "High-flow cotton gauze air filter for increased horsepower and acceleration.",
-        image: "https://images.unsplash.com/photo-1610493863481-9b7e779a543f?auto=format&fit=crop&q=80&w=800",
-        category: "Engine"
-    }
-];
-
 export function Hero() {
     return (
         <div className="relative min-h-[90vh] flex flex-col justify-center pt-32 pb-20 overflow-hidden bg-surface-50 font-outfit">
-            {/* Clean Background Elements */}
+            {/* Simple Background Elements */}
             <div className="absolute inset-0 z-0">
-                <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[800px] h-[800px] bg-brand-50 rounded-full blur-[120px] opacity-40" />
-                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-surface-100 rounded-full blur-[100px]" />
+                <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-brand-50 rounded-full blur-[100px] opacity-30" />
+                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-surface-100 rounded-full blur-[80px]" />
             </div>
 
             <div className="container mx-auto px-4 relative z-10 flex flex-col items-center text-center mt-8">
@@ -53,10 +23,10 @@ export function Hero() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-surface-200 text-surface-600 font-bold text-xs mb-8 shadow-sm uppercase tracking-widest"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-surface-200 text-surface-600 font-bold text-[10px] mb-8 shadow-sm uppercase tracking-[0.2em]"
                 >
                     <Target size={14} className="text-brand-600" />
-                    <span>PREMIUM AUTO SPARES</span>
+                    <span>🇱🇰 SRI LANKA'S FAVOURITE PRINT SHOP</span>
                 </m.div>
 
                 <m.h1
@@ -65,9 +35,9 @@ export function Hero() {
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="text-6xl md:text-9xl font-black tracking-tighter mb-6 leading-[0.85] text-surface-950 uppercase"
                 >
-                    POWER YOUR<br />
+                    ONLY GOOD<br />
                     <span className="text-brand-600 neon-text">
-                        PERFORMANCE
+                        VIBEZ
                     </span>
                 </m.h1>
 
@@ -75,9 +45,9 @@ export function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="text-xl md:text-2xl text-surface-500 max-w-3xl mb-12 font-medium leading-relaxed italic"
+                    className="text-xl md:text-2xl text-surface-500 max-w-2xl mb-12 font-medium leading-relaxed"
                 >
-                    Engineered for durability. Designed for speed. Discover our curated catalog of precision automotive components.
+                    High-quality prints of your favorite Anime series and K-pop idols. Premium collectors' editions delivered right to your doorstep.
                 </m.p>
 
                 <m.div
@@ -86,10 +56,10 @@ export function Hero() {
                     transition={{ duration: 0.8, delay: 0.6 }}
                     className="flex flex-col sm:flex-row gap-6"
                 >
-                    <Link href="/products" className="apex-button min-w-[240px]">
-                        SHOP CATALOG <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                    <Link href="/catalog" className="vibez-button min-w-[240px]">
+                        BROWSE BOOKS <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                     </Link>
-                    <Link href="/categories" className="px-8 py-4 bg-white border border-surface-200 hover:border-brand-600 text-surface-950 font-black rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 shadow-sm uppercase tracking-widest text-sm min-w-[240px]">
+                    <Link href="/catalog" className="px-8 py-4 bg-white border-2 border-surface-200 hover:border-brand-600 text-surface-950 font-black rounded-2xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 shadow-sm uppercase tracking-wider text-sm min-w-[240px]">
                         VIEW CATEGORIES
                     </Link>
                 </m.div>
@@ -102,16 +72,16 @@ export function Hero() {
                     className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-32 w-full max-w-5xl text-left"
                 >
                     {[
-                        { icon: Zap, title: "Fast Shipping", desc: "Same-day dispatch nationwide" },
-                        { icon: Target, title: "Exact Fitment", desc: "Guaranteed compatibility" },
-                        { icon: Box, title: "Quality Assured", desc: "Exceeding OEM standards" },
+                        { icon: Truck, title: "Islandwide Delivery", desc: "Delivered to any corner of Sri Lanka" },
+                        { icon: Box, title: "Premium Packing", desc: "Safe arrival for every collection" },
+                        { icon: Zap, title: "Best Quality", desc: "Vibrant colors & high GSM paper" },
                     ].map((feature, idx) => (
-                        <div key={idx} className="bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-surface-200 hover:border-brand-300 transition-all group hover:bg-white hover:shadow-xl">
-                            <div className="w-14 h-14 rounded-xl bg-brand-50 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white transition-all duration-300">
-                                <feature.icon size={28} className="text-brand-600 group-hover:text-white" />
+                        <div key={idx} className="bg-white/50 backdrop-blur-sm p-10 rounded-3xl border border-surface-100 hover:border-brand-200 transition-all group hover:bg-white hover:shadow-2xl">
+                            <div className="w-16 h-16 rounded-2xl bg-brand-50 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white transition-all duration-300">
+                                <feature.icon size={32} className="text-brand-600 group-hover:text-white" />
                             </div>
                             <h3 className="text-2xl font-black text-surface-950 mb-3 uppercase tracking-tight">{feature.title}</h3>
-                            <p className="text-surface-500 font-medium leading-relaxed italic">{feature.desc}</p>
+                            <p className="text-surface-500 font-medium leading-relaxed">{feature.desc}</p>
                         </div>
                     ))}
                 </m.div>
@@ -121,18 +91,40 @@ export function Hero() {
 }
 
 export function FeaturedProducts() {
+    const [products, setProducts] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchFeatured = async () => {
+            try {
+                const res = await fetch('/api/products?limit=3');
+                const data = await res.json();
+                if (Array.isArray(data)) {
+                    setProducts(data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch featured products:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchFeatured();
+    }, []);
+
+    if (loading) return null; // Or a skeleton if you prefer
+
     return (
         <section className="py-32 relative z-10 bg-white font-outfit">
             <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-6">
                     <div className="text-center md:text-left">
                         <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-surface-950 mb-4 uppercase">
-                            NEW <span className="text-brand-600">ARRIVALS</span>
+                            MUST-HAVE <span className="text-brand-600">COLLECTIONS</span>
                         </h2>
-                        <p className="text-surface-500 font-medium text-xl max-w-xl">Precision-engineered additions to our high-performance catalog.</p>
+                        <p className="text-surface-500 font-medium text-xl max-w-xl">Explore our hand-picked favorites for this season.</p>
                     </div>
-                    <Link href="/products" className="apex-button px-6 py-3 bg-surface-950 hover:bg-black">
-                        View All Parts <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+                    <Link href="/catalog" className="vibez-button px-8 py-3 bg-surface-950 hover:bg-black border-none">
+                        All Books <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
                     </Link>
                 </div>
 
@@ -144,32 +136,35 @@ export function FeaturedProducts() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ duration: 0.6, delay: idx * 0.1 }}
-                            className="apex-card group"
+                            className="vibez-card group shadow-brand-600/5 hover:shadow-brand-600/10"
                         >
-                            <div className="relative h-80 overflow-hidden bg-surface-100">
+                            <div className="relative h-96 overflow-hidden bg-surface-50">
                                 <Image
                                     src={product.image}
                                     alt={product.name}
                                     fill
-                                    className="object-cover scale-100 group-hover:scale-110 transition-transform duration-700 ease-out"
+                                    className="object-contain p-8 scale-100 group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-2xl"
                                 />
-                                <div className="absolute top-6 right-6 z-20 bg-surface-950 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg">
-                                    {product.category}
+                                <div className="absolute top-6 right-6 z-20 bg-brand-600 text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl">
+                                    {product.category?.name || "Fan Pick"}
                                 </div>
                             </div>
 
-                            <div className="p-10 relative">
-                                <h3 className="text-2xl font-black text-surface-950 mb-4 leading-tight group-hover:text-brand-600 transition-colors uppercase tracking-tight">
+                            <div className="p-10 relative bg-white">
+                                <h3 className="text-3xl font-black text-surface-950 mb-3 leading-none group-hover:text-brand-600 transition-colors uppercase tracking-tighter">
                                     {product.name}
                                 </h3>
-                                <p className="text-surface-500 text-base mb-10 line-clamp-2 font-medium leading-relaxed italic">
+                                <p className="text-surface-400 text-sm mb-10 line-clamp-2 font-medium leading-relaxed">
                                     {product.description}
                                 </p>
 
-                                <div className="flex items-center justify-between border-t border-surface-100 pt-8">
-                                    <PriceDisplay amount={product.price} className="text-4xl font-black text-surface-950" />
-                                    <Link href={`/products/${product.slug}`} className="w-14 h-14 bg-brand-600 hover:bg-brand-700 text-white rounded-lg flex items-center justify-center transition-all duration-300 shadow-lg shadow-brand-600/20 active:scale-90">
-                                        <ShoppingCart size={24} />
+                                <div className="flex items-center justify-between pt-8 border-t border-surface-50">
+                                    <div className="flex flex-col">
+                                        <span className="text-[10px] font-black text-surface-300 uppercase tracking-widest mb-1">Price</span>
+                                        <PriceDisplay amount={product.price} className="text-3xl font-black text-surface-950" />
+                                    </div>
+                                    <Link href={`/catalog/${product.slug}`} className="w-16 h-16 bg-surface-950 hover:bg-brand-600 text-white rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xl active:scale-90">
+                                        <ShoppingCart size={28} />
                                     </Link>
                                 </div>
                             </div>

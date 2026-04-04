@@ -37,9 +37,18 @@ export default function AdminOrders() {
         try {
             const res = await fetch('/api/orders');
             const data = await res.json();
-            setOrders(data);
+            if (Array.isArray(data)) {
+                setOrders(data);
+            } else {
+                console.error("API Error Response:", data);
+                setOrders([]);
+                if (data.error) {
+                    alerts.error("ERROR", data.error);
+                }
+            }
         } catch (error) {
             console.error("Failed to fetch orders:", error);
+            setOrders([]);
         } finally {
             setLoading(false);
         }
@@ -106,7 +115,7 @@ export default function AdminOrders() {
         }
     };
 
-    const filteredOrders = orders.filter(order => {
+    const filteredOrders = (Array.isArray(orders) ? orders : []).filter(order => {
         const matchesSearch =
             order.id?.toLowerCase().includes(searchTerm.toLowerCase()) ||
             order.shippingFirstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -249,7 +258,7 @@ export default function AdminOrders() {
 
             <AnimatePresence>
                 {selectedOrder && (
-                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8 print:p-0 print:static print:z-auto">
+                    <div className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-8 print:p-0 print:static print:z-auto">
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -329,7 +338,7 @@ export default function AdminOrders() {
                                             <div className="space-y-3">
                                                 {selectedOrder.orderItems.map((item: any) => (
                                                     <div key={item.id} className="flex items-center gap-4 p-4 bg-white border border-surface-100 rounded-2xl group hover:border-brand-200 transition-colors">
-                                                        <div className="w-14 h-14 bg-surface-50 rounded-xl border border-surface-200 overflow-hidden flex-shrink-0 flex items-center justify-center p-1">
+                                                        <div className="w-14 h-14 bg-surface-50 rounded-xl border border-surface-200 overflow-hidden shrink-0 flex items-center justify-center p-1">
                                                             <img src={item.product?.image} alt="" className="w-full h-full object-contain rounded-lg shadow-sm" />
                                                         </div>
                                                         <div className="flex-1 min-w-0">
