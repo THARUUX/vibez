@@ -11,14 +11,14 @@ import { useState, useEffect } from "react";
 const m = motion as any;
 export function Hero() {
     return (
-        <div className="relative min-h-[90vh] flex flex-col justify-center pt-32 pb-20 overflow-hidden bg-surface-50 font-outfit">
+        <div className="relative min-h-[90vh] flex flex-col justify-center pt-16 md:pt-32 md:pb-20 overflow-hidden bg-surface-50 font-outfit">
             {/* Simple Background Elements */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-brand-50 rounded-full blur-[100px] opacity-30" />
                 <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-surface-100 rounded-full blur-[80px]" />
             </div>
 
-            <div className="container mx-auto px-4 relative z-10 flex flex-col items-center text-center mt-8">
+            <div className="container md:mx-auto px-4 relative z-10 flex flex-col items-center text-center md:mt-8">
                 <m.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -33,10 +33,10 @@ export function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-6xl w-fit flex flex-col items-center md:text-9xl font-black tracking-tighter mb-6 leading-[0.85] text-surface-950 uppercase"
+                    className="text-6xl w-fit flex flex-col md:items-center md:text-9xl font-black tracking-tighter mb-6 leading-[0.85] text-surface-950 uppercase"
                 >
                     ONLY GOOD<br />
-                    <Image src="/logo.avif" alt="Logo" className="w-100" width={500} height={500} />
+                    <Image src="/logo.avif" alt="Logo" className="w-64 md:w-100" width={500} height={500} />
                     {/* <span className="text-brand-600 neon-text">
                         VIBEZ
                     </span> */}
@@ -46,7 +46,7 @@ export function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="text-xl md:text-2xl text-surface-500 max-w-2xl mb-12 font-light leading-relaxed"
+                    className="text-md md:text-2xl text-surface-500 max-w-2xl mb-12 font-light text-start md:text-center leading-relaxed"
                 >
                     High-quality prints of your favorite Anime series and K-pop idols. Premium collectors' editions delivered right to your doorstep.
                 </m.p>
@@ -70,19 +70,19 @@ export function Hero() {
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.8 }}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-32 w-full max-w-5xl text-left"
+                    className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mt-12 md:mt-32 w-full max-w-5xl text-left"
                 >
                     {[
                         { icon: Truck, title: "Islandwide Delivery", desc: "Delivered to any corner of Sri Lanka" },
                         { icon: Box, title: "Premium Packing", desc: "Safe arrival for every collection" },
                         { icon: Zap, title: "Best Quality", desc: "Vibrant colors & high GSM paper" },
                     ].map((feature, idx) => (
-                        <div key={idx} className="bg-white/50 backdrop-blur-sm p-10 rounded-3xl border border-surface-100 hover:border-brand-200 transition-all group hover:bg-white hover:shadow-2xl">
-                            <div className="w-16 h-16 rounded-2xl bg-brand-50 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white transition-all duration-300">
-                                <feature.icon size={32} className="text-brand-600 group-hover:text-white" />
+                        <div key={idx} className="bg-white/50 backdrop-blur-sm p-6 md:p-10 rounded-3xl border border-surface-100 hover:border-brand-200 transition-all group hover:bg-white hover:shadow-2xl">
+                            <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-brand-50 flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white transition-all duration-300">
+                                <feature.icon size={24} className="text-brand-600 md:size-[32px] group-hover:text-white" />
                             </div>
-                            <h3 className="text-2xl font-black text-surface-950 mb-3 uppercase tracking-tight">{feature.title}</h3>
-                            <p className="text-surface-500 font-medium leading-relaxed">{feature.desc}</p>
+                            <h3 className="text-lg md:text-2xl font-black text-surface-950 mb-2 md:mb-3 uppercase tracking-tight leading-none">{feature.title}</h3>
+                            <p className="text-surface-500 text-xs md:text-base font-medium leading-relaxed">{feature.desc}</p>
                         </div>
                     ))}
                 </m.div>
