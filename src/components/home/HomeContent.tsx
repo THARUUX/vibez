@@ -139,14 +139,14 @@ export function FeaturedProducts() {
                             transition={{ duration: 0.6, delay: idx * 0.1 }}
                             className="vibez-card group shadow-brand-600/5 hover:shadow-brand-600/10"
                         >
-                            <div className="relative h-96 overflow-hidden bg-surface-50">
+                            <Link href={`/products/${product.slug}`} className="relative h-96 overflow-hidden bg-surface-50 block">
                                 <Image
                                     src={product.image}
                                     alt={product.name}
                                     fill
                                     className="object-contain p-8 scale-100 group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-2xl"
                                 />
-                            </div>
+                            </Link>
  
                             <div className="p-10 relative bg-white">
                                 <div className="flex flex-wrap gap-2 mb-4">
@@ -159,9 +159,11 @@ export function FeaturedProducts() {
                                         </span>
                                     ))}
                                 </div>
-                                <h3 className="text-3xl font-black text-surface-950 mb-3 leading-none group-hover:text-brand-600 transition-colors uppercase tracking-tighter">
-                                    {product.name}
-                                </h3>
+                                <Link href={`/products/${product.slug}`}>
+                                    <h3 className="text-3xl font-black text-surface-950 mb-3 leading-none group-hover:text-brand-600 transition-colors uppercase tracking-tighter">
+                                        {product.name}
+                                    </h3>
+                                </Link>
                                 <p className="text-surface-400 text-sm mb-10 line-clamp-2 font-medium leading-relaxed">
                                     {product.description}
                                 </p>
@@ -171,7 +173,7 @@ export function FeaturedProducts() {
                                         <span className="text-[10px] font-black text-surface-300 uppercase tracking-widest mb-1">Price</span>
                                         <PriceDisplay amount={product.price} className="text-3xl font-black text-surface-950" />
                                     </div>
-                                    <Link href={`/catalog/${product.slug}`} className="w-16 h-16 bg-surface-950 hover:bg-brand-600 text-white rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xl active:scale-90">
+                                    <Link href={`/products/${product.slug}`} className="w-16 h-16 bg-surface-950 hover:bg-brand-600 text-white rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xl active:scale-90">
                                         <ShoppingCart size={28} />
                                     </Link>
                                 </div>

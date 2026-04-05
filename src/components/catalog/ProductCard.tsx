@@ -27,7 +27,7 @@ export function ProductCard({ product, index }: ProductCardProps) {
         >
             {/* Image Container */}
             <Link 
-                href={`/catalog/${product.slug}`} 
+                href={`/products/${product.slug}`} 
                 className="relative h-96 overflow-hidden bg-surface-50 flex items-center justify-center p-8"
             >
                 <m.div
@@ -69,9 +69,11 @@ export function ProductCard({ product, index }: ProductCardProps) {
                     <span className="text-[8px] font-black text-surface-300 uppercase tracking-[0.3em] mb-1 block leading-none">
                         VIBE-ID-{product.sku || "UNKN"}
                     </span>
-                    <h2 className="text-3xl font-black text-surface-950 uppercase tracking-tighter group-hover:text-brand-600 transition-colors line-clamp-2 leading-none">
-                        {product.name}
-                    </h2>
+                    <Link href={`/products/${product.slug}`}>
+                        <h2 className="text-3xl font-black text-surface-950 uppercase tracking-tighter group-hover:text-brand-600 transition-colors line-clamp-2 leading-none">
+                            {product.name}
+                        </h2>
+                    </Link>
                 </div>
 
                 <p className="text-surface-400 font-medium text-xs mb-10 line-clamp-2 leading-relaxed">
@@ -86,26 +88,27 @@ export function ProductCard({ product, index }: ProductCardProps) {
                         </div>
                         
                         <m.button
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
+                            whileHover={{ scale: 1.05, y: -2 }}
+                            whileTap={{ scale: 0.95 }}
                             onClick={(e: React.MouseEvent) => {
                                 e.preventDefault();
                                 addItem(product);
                                 alerts.toast(`${product.name} ADDED TO CART`);
                             }}
-                            className="w-16 h-16 bg-surface-950 hover:bg-brand-600 text-white rounded-2xl flex items-center justify-center transition-all duration-500 shadow-2xl active:bg-brand-700 group/btn"
+                            className="vibez-button w-full sm:w-auto"
                         >
-                            <ShoppingCart size={28} className="group-hover/btn:rotate-12 transition-transform" />
+                            <ShoppingCart size={18} />
+                            <span>Add to Cart</span>
                         </m.button>
                     </div>
 
-                    <Link 
-                        href={`/catalog/${product.slug}`}
+                    {/* <Link 
+                        href={`/products/${product.slug}`}
                         className="flex items-center justify-center gap-3 w-full py-5 border-2 border-surface-100 rounded-2xl text-[10px] font-black uppercase tracking-widest text-surface-400 hover:text-brand-600 hover:border-brand-600/20 hover:bg-surface-50 transition-all duration-300"
                     >
                         View Details
                         <ArrowRight size={14} />
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
             

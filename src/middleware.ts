@@ -6,7 +6,7 @@ export default auth((req) => {
   const { nextUrl } = req
   
   const isApiAuthRoute = nextUrl.pathname.startsWith("/api/auth")
-  const isPublicRoute = ["/", "/catalog", "/categories", "/about"].some(path => 
+  const isPublicRoute = ["/", "/catalog", "/categories", "/about", "/products", "/contact"].some(path => 
     nextUrl.pathname === path || nextUrl.pathname.startsWith(path + "/")
   )
   const isAuthRoute = nextUrl.pathname.startsWith("/auth")

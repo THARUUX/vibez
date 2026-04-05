@@ -40,7 +40,7 @@ export default function ProductClientContent({ product }: ProductClientContentPr
                         priority
                         className="object-cover group-hover:scale-105 transition-transform duration-1000"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent pointer-events-none" />
                 </motion.div>
 
                 {/* Product Details */}
@@ -82,20 +82,26 @@ export default function ProductClientContent({ product }: ProductClientContentPr
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <button
+                        <motion.button
+                            whileHover={{ scale: 1.02, y: -4 }}
+                            whileTap={{ scale: 0.98 }}
                             onClick={() => {
                                 addItem(product);
-                                alerts.toast(`${product.name} added to cart!`);
+                                alerts.toast(`${product.name} ADDED TO CART`);
                             }}
-                            className="apex-button py-6 text-base"
+                            className="apex-button"
                         >
-                            <ShoppingCart size={24} />
+                            <ShoppingCart size={20} />
                             ADD TO CART
-                        </button>
-                        <button className="bg-surface-950 border-2 border-surface-200 hover:border-surface-950 text-white px-8 py-6 rounded-xl font-black transition-all uppercase tracking-widest text-xs flex items-center justify-center gap-2 hover:bg-surface-50 shadow-sm active:scale-95">
-                            <ShoppingCart size={24} />
+                        </motion.button>
+                        <motion.button 
+                            whileHover={{ scale: 1.02, y: -4 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="apex-button-outline"
+                        >
+                            <Zap size={20} className="fill-surface-950 group-hover:fill-brand-600 transition-colors" />
                             Buy Now
-                        </button>
+                        </motion.button>
                     </div>
 
                     {/* Features/Info */}

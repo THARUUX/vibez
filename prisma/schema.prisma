@@ -85,9 +85,17 @@ model OrderItem {
 }
 
 model Settings {
-  id            String   @id @default("global")
-  currencyCode  String   @default("USD")
-  currencySymbol String   @default("$")
-  storeName     String   @default("Apex Auto Parts")
-  updatedAt     DateTime @updatedAt
+  id              String   @id @default("global")
+  currencyCode    String   @default("USD")
+  currencySymbol  String   @default("$")
+  storeName       String   @default("Apex Auto Parts")
+  payhereEnabled  Boolean  @default(true)
+  bankEnabled     Boolean  @default(true)
+  codEnabled      Boolean  @default(true)
+  bankName        String   @default("")
+  bankAccount     String   @default("")
+  bankBranch      String   @default("")
+  codTerms        String?  @db.Text
+  deliveryTerms   String?  @db.Text
+  updatedAt       DateTime @updatedAt
 }

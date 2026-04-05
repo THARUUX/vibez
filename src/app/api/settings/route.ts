@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
     try {
         let settings = await prisma.settings.findUnique({
@@ -15,6 +17,14 @@ export async function GET() {
                     currencyCode: 'LKR',
                     currencySymbol: 'Rs.',
                     storeName: 'VibeZ',
+                    payhereEnabled: true,
+                    bankEnabled: true,
+                    codEnabled: true,
+                    bankName: '',
+                    bankAccount: '',
+                    bankBranch: '',
+                    codTerms: '',
+                    deliveryTerms: '',
                 },
             });
         }
@@ -35,12 +45,28 @@ export async function POST(request: Request) {
                 currencyCode: body.currencyCode,
                 currencySymbol: body.currencySymbol,
                 storeName: body.storeName,
+                payhereEnabled: body.payhereEnabled,
+                bankEnabled: body.bankEnabled,
+                codEnabled: body.codEnabled,
+                bankName: body.bankName,
+                bankAccount: body.bankAccount,
+                bankBranch: body.bankBranch,
+                codTerms: body.codTerms,
+                deliveryTerms: body.deliveryTerms,
             },
             create: {
                 id: 'global',
                 currencyCode: body.currencyCode,
                 currencySymbol: body.currencySymbol,
                 storeName: body.storeName,
+                payhereEnabled: body.payhereEnabled !== undefined ? body.payhereEnabled : true,
+                bankEnabled: body.bankEnabled !== undefined ? body.bankEnabled : true,
+                codEnabled: body.codEnabled !== undefined ? body.codEnabled : true,
+                bankName: body.bankName || '',
+                bankAccount: body.bankAccount || '',
+                bankBranch: body.bankBranch || '',
+                codTerms: body.codTerms || '',
+                deliveryTerms: body.deliveryTerms || '',
             },
         });
         return NextResponse.json(settings);

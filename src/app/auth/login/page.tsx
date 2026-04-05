@@ -8,12 +8,15 @@ import { alerts } from "@/lib/alerts";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useSettingsStore } from "@/store/settingsStore";
 
 export default function CustomerLogin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    /* eslint-disable */
+    const storeName = useSettingsStore(state => state.storeName);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -28,7 +31,7 @@ export default function CustomerLogin() {
             if (result?.error) {
                 alerts.error("Invalid credentials. Please try again.");
             } else {
-                alerts.success("Welcome back to Apex Auto!");
+                alerts.success(`Welcome back to ${storeName}!`);
                 router.push("/");
                 router.refresh();
             }

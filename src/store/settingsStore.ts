@@ -12,6 +12,14 @@ interface SettingsState {
     storeName: string;
     currency: Currency;
     availableCurrencies: Currency[];
+    payhereEnabled: boolean;
+    bankEnabled: boolean;
+    codEnabled: boolean;
+    bankName: string;
+    bankAccount: string;
+    bankBranch: string;
+    codTerms: string;
+    deliveryTerms: string;
     setCurrency: (code: string) => void;
     updateRate: (code: string, newRate: number) => void;
     syncSettings: () => Promise<void>;
@@ -28,6 +36,14 @@ export const useSettingsStore = create<SettingsState>()(
                 { code: 'EUR', symbol: '€', rate: 0.92 },
                 { code: 'GBP', symbol: '£', rate: 0.79 },
             ],
+            payhereEnabled: true,
+            bankEnabled: true,
+            codEnabled: true,
+            bankName: '',
+            bankAccount: '',
+            bankBranch: '',
+            codTerms: '',
+            deliveryTerms: '',
             setCurrency: (code) => set((state) => {
                 const newCurrency = state.availableCurrencies.find(c => c.code === code);
                 return newCurrency ? { currency: newCurrency } : state;
@@ -50,8 +66,16 @@ export const useSettingsStore = create<SettingsState>()(
                             currency: {
                                 code: data.currencyCode,
                                 symbol: data.currencySymbol,
-                                rate: 1 // For now, we assume the DB currency is the base
-                            }
+                                rate: 1 
+                            },
+                            payhereEnabled: data.payhereEnabled,
+                            bankEnabled: data.bankEnabled,
+                            codEnabled: data.codEnabled,
+                            bankName: data.bankName || '',
+                            bankAccount: data.bankAccount || '',
+                            bankBranch: data.bankBranch || '',
+                            codTerms: data.codTerms || '',
+                            deliveryTerms: data.deliveryTerms || '',
                         });
                     }
                 } catch (error) {
