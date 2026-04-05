@@ -2,7 +2,7 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Edit2, Trash2, Search, X, Save, Loader2, Globe, Box, Tag, DollarSign, Image as ImageIcon } from "lucide-react";
+import { Plus, Edit2, Trash2, Search, X, Save, Loader2, Globe, Box, Tag, DollarSign, Image as ImageIcon, Copy, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { alerts } from "@/lib/alerts";
@@ -16,6 +16,9 @@ export default function AdminProducts() {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
     const [filterCategory, setFilterCategory] = useState("all");
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 8;
+    
     const [isIdling, setIsIdling] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingProduct, setEditingProduct] = useState<any>(null);
@@ -26,13 +29,17 @@ export default function AdminProducts() {
         price: 0,
         image: "",
         stock: 0,
+        weight: 0,
         sku: "",
         categoryId: "",
         metaTitle: "",
         metaDescription: "",
         warranty: "",
+        hasWarranty: true,
         delivery: "",
+        hasDelivery: true,
         returns: "",
+        hasReturns: true,
         terms: "",
         tags: ""
     });
@@ -59,6 +66,10 @@ export default function AdminProducts() {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm, filterCategory]);
+
     const handleOpenModal = (product: any = null) => {
         if (product) {
             setEditingProduct(product);
@@ -69,13 +80,17 @@ export default function AdminProducts() {
                 price: parseFloat(product.price),
                 image: product.image,
                 stock: product.stock,
+                weight: product.weight || 0,
                 sku: product.sku || "",
                 categoryId: product.categoryId,
                 metaTitle: product.metaTitle || "",
                 metaDescription: product.metaDescription || "",
                 warranty: product.warranty || "",
+                hasWarranty: product.hasWarranty ?? true,
                 delivery: product.delivery || "",
+                hasDelivery: product.hasDelivery ?? true,
                 returns: product.returns || "",
+                hasReturns: product.hasReturns ?? true,
                 terms: product.terms || "",
                 tags: product.tags || ""
             });
@@ -88,17 +103,47 @@ export default function AdminProducts() {
                 price: 0,
                 image: "",
                 stock: 0,
+                weight: 0,
                 sku: "",
                 categoryId: Array.isArray(categories) && categories.length > 0 ? categories[0].id : "",
                 metaTitle: "",
                 metaDescription: "",
                 warranty: "",
+                hasWarranty: true,
                 delivery: "",
+                hasDelivery: true,
                 returns: "",
+                hasReturns: true,
                 terms: "",
                 tags: ""
             });
         }
+        setIsModalOpen(true);
+    };
+
+    const handleCopyProduct = (product: any) => {
+        setEditingProduct(null);
+        setFormData({
+            name: `${product.name} (Copy)`,
+            slug: "", // Will be auto-generated
+            description: product.description,
+            price: parseFloat(product.price),
+            image: product.image,
+            stock: product.stock,
+            weight: product.weight || 0,
+            sku: "", // Reset SKU
+            categoryId: product.categoryId,
+            metaTitle: product.metaTitle || "",
+            metaDescription: product.metaDescription || "",
+            warranty: product.warranty || "",
+            hasWarranty: product.hasWarranty ?? true,
+            delivery: product.delivery || "",
+            hasDelivery: product.hasDelivery ?? true,
+            returns: product.returns || "",
+            hasReturns: product.hasReturns ?? true,
+            terms: product.terms || "",
+            tags: product.tags || ""
+        });
         setIsModalOpen(true);
     };
 
@@ -185,6 +230,12 @@ export default function AdminProducts() {
         return matchesSearch && matchesCategory;
     });
 
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+    const paginatedProducts = filteredProducts.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
+
     const categoryOptions: SelectOption[] = [
         { value: "all", label: "All Categories" },
         ...(Array.isArray(categories) ? categories.map(c => ({ value: c.id, label: c.name })) : [])
@@ -257,7 +308,7 @@ export default function AdminProducts() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-surface-100">
-                                {filteredProducts.map((product, i) => (
+                                {paginatedProducts.map((product, i) => (
                                     <m.tr
                                         key={product.id}
                                         initial={{ opacity: 0, scale: 0.98 }}
@@ -282,7 +333,7 @@ export default function AdminProducts() {
                                             </span>
                                         </td>
                                         <td className="py-5 px-8">
-                                            <span className="font-black text-surface-950">${parseFloat(product.price).toFixed(2)}</span>
+                                            <span className="font-black text-surface-950">LKR {parseFloat(product.price).toFixed(2)}</span>
                                         </td>
                                         <td className="py-5 px-8">
                                             <div className="flex flex-col gap-1.5">
@@ -298,14 +349,23 @@ export default function AdminProducts() {
                                         <td className="py-5 px-8">
                                             <div className="flex justify-end gap-2">
                                                 <button
+                                                    onClick={() => handleCopyProduct(product)}
+                                                    className="p-2.5 text-surface-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all border border-transparent hover:border-blue-100"
+                                                    title="Duplicate Product"
+                                                >
+                                                    <Copy size={18} />
+                                                </button>
+                                                <button
                                                     onClick={() => handleOpenModal(product)}
                                                     className="p-2.5 text-surface-400 hover:text-brand-600 hover:bg-brand-50 rounded-xl transition-all border border-transparent hover:border-brand-100"
+                                                    title="Edit Product"
                                                 >
                                                     <Edit2 size={18} />
                                                 </button>
                                                 <button
                                                     onClick={() => handleDelete(product.id)}
                                                     className="p-2.5 text-surface-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all border border-transparent hover:border-red-100"
+                                                    title="Delete Product"
                                                 >
                                                     <Trash2 size={18} />
                                                 </button>
@@ -317,6 +377,48 @@ export default function AdminProducts() {
                         </table>
                     )}
                 </div>
+
+                {/* Pagination */}
+                {!loading && totalPages > 1 && (
+                    <div className="p-6 bg-surface-50/50 border-t border-surface-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div className="text-[10px] font-black uppercase tracking-widest text-surface-400">
+                            Showing <span className="text-surface-950 font-black">{paginatedProducts.length}</span> of <span className="text-surface-950 font-black">{filteredProducts.length}</span> recorded parts
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <button
+                                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                                disabled={currentPage === 1}
+                                className="p-2 bg-white border border-surface-200 rounded-xl text-surface-400 hover:text-brand-600 hover:border-brand-600 disabled:opacity-50 disabled:hover:text-surface-400 disabled:hover:border-surface-200 transition-all shadow-sm"
+                            >
+                                <ChevronLeft size={18} />
+                            </button>
+                            
+                            <div className="flex items-center gap-1.5 focus-within:outline-none">
+                                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                                    <button
+                                        key={page}
+                                        onClick={() => setCurrentPage(page)}
+                                        className={`w-9 h-9 rounded-xl text-[10px] font-black transition-all ${
+                                            currentPage === page
+                                                ? "bg-brand-600 text-white shadow-lg shadow-brand-600/20"
+                                                : "bg-white border border-surface-200 text-surface-400 hover:border-brand-600 hover:text-brand-600"
+                                        }`}
+                                    >
+                                        {page}
+                                    </button>
+                                ))}
+                            </div>
+
+                            <button
+                                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                                disabled={currentPage === totalPages}
+                                className="p-2 bg-white border border-surface-200 rounded-xl text-surface-400 hover:text-brand-600 hover:border-brand-600 disabled:opacity-50 disabled:hover:text-surface-400 disabled:hover:border-surface-200 transition-all shadow-sm"
+                            >
+                                <ChevronRight size={18} />
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
 
             {/* Modal */}
@@ -397,6 +499,20 @@ export default function AdminProducts() {
                                                 </div>
 
                                                 <div className="space-y-2">
+                                                    <label className="text-[10px] font-black text-surface-500 uppercase tracking-widest pl-1">Shipping Weight (kg)</label>
+                                                    <div className="relative">
+                                                        <Box className="absolute left-4 top-1/2 -translate-y-1/2 text-surface-300" size={18} />
+                                                        <input
+                                                            type="number"
+                                                            step="0.01"
+                                                            value={formData.weight}
+                                                            onChange={e => setFormData({ ...formData, weight: parseFloat(e.target.value) })}
+                                                            className="w-full bg-surface-50 border border-surface-200 rounded-2xl py-3 pl-10 pr-4 font-bold text-surface-900 focus:border-brand-500 outline-none"
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div className="space-y-2">
                                                     <label className="text-[10px] font-black text-surface-500 uppercase tracking-widest pl-1">Global Category</label>
                                                     <CustomSelect
                                                         options={categoryFormOptions}
@@ -429,7 +545,13 @@ export default function AdminProducts() {
                                             </h3>
                                             <div className="grid grid-cols-1 gap-5">
                                                 <div className="space-y-2">
-                                                    <label className="text-[10px] font-black text-surface-500 uppercase tracking-widest pl-1">Warranty Coverage</label>
+                                                    <div className="flex items-center justify-between">
+                                                        <label className="text-[10px] font-black text-surface-500 uppercase tracking-widest pl-1">Warranty Coverage</label>
+                                                        <label className="flex items-center gap-2 cursor-pointer">
+                                                            <input type="checkbox" checked={formData.hasWarranty} onChange={e => setFormData({ ...formData, hasWarranty: e.target.checked })} className="w-3 h-3 text-brand-600 rounded" />
+                                                            <span className="text-[10px] font-bold text-surface-400 uppercase">Enable</span>
+                                                        </label>
+                                                    </div>
                                                     <input 
                                                         value={formData.warranty}
                                                         onChange={e => setFormData({ ...formData, warranty: e.target.value })}
@@ -438,7 +560,13 @@ export default function AdminProducts() {
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <label className="text-[10px] font-black text-surface-500 uppercase tracking-widest pl-1">Delivery Protocol</label>
+                                                    <div className="flex items-center justify-between">
+                                                        <label className="text-[10px] font-black text-surface-500 uppercase tracking-widest pl-1">Delivery Protocol</label>
+                                                        <label className="flex items-center gap-2 cursor-pointer">
+                                                            <input type="checkbox" checked={formData.hasDelivery} onChange={e => setFormData({ ...formData, hasDelivery: e.target.checked })} className="w-3 h-3 text-brand-600 rounded" />
+                                                            <span className="text-[10px] font-bold text-surface-400 uppercase">Enable</span>
+                                                        </label>
+                                                    </div>
                                                     <input 
                                                         value={formData.delivery}
                                                         onChange={e => setFormData({ ...formData, delivery: e.target.value })}
@@ -447,7 +575,13 @@ export default function AdminProducts() {
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <label className="text-[10px] font-black text-surface-500 uppercase tracking-widest pl-1">Return Policy</label>
+                                                    <div className="flex items-center justify-between">
+                                                        <label className="text-[10px] font-black text-surface-500 uppercase tracking-widest pl-1">Return Policy</label>
+                                                        <label className="flex items-center gap-2 cursor-pointer">
+                                                            <input type="checkbox" checked={formData.hasReturns} onChange={e => setFormData({ ...formData, hasReturns: e.target.checked })} className="w-3 h-3 text-brand-600 rounded" />
+                                                            <span className="text-[10px] font-bold text-surface-400 uppercase">Enable</span>
+                                                        </label>
+                                                    </div>
                                                     <input 
                                                         value={formData.returns}
                                                         onChange={e => setFormData({ ...formData, returns: e.target.value })}

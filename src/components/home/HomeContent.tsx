@@ -12,10 +12,26 @@ const m = motion as any;
 export function Hero() {
     return (
         <div className="relative min-h-[90vh] flex flex-col justify-center pt-16 md:pt-32 md:pb-20 overflow-hidden bg-surface-50 font-outfit">
-            {/* Simple Background Elements */}
+            {/* Background Elements */}
             <div className="absolute inset-0 z-0">
-                <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-brand-50 rounded-full blur-[100px] opacity-30" />
-                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-surface-100 rounded-full blur-[80px]" />
+                <m.div 
+                    animate={{ 
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 90, 0],
+                        opacity: [0.2, 0.4, 0.2]
+                    }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-brand-200/20 rounded-full blur-[120px]" 
+                />
+                <m.div 
+                    animate={{ 
+                        scale: [1, 1.5, 1],
+                        x: [0, 50, 0],
+                        opacity: [0.1, 0.3, 0.1]
+                    }}
+                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                    className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-500/10 rounded-full blur-[100px]" 
+                />
             </div>
 
             <div className="container md:mx-auto px-4 relative z-10 flex flex-col items-center text-center md:mt-8">
@@ -30,16 +46,38 @@ export function Hero() {
                 </m.div>
 
                 <m.h1
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-6xl w-fit flex flex-col items-center md:text-9xl font-black tracking-tighter mb-6 leading-[0.85] text-surface-950 uppercase"
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                    className="text-6xl w-fit flex flex-col items-center md:text-[10rem] font-black tracking-tighter mb-8 leading-[0.75] text-surface-950 uppercase"
                 >
-                    ONLY GOOD<br />
-                    <Image src="/logo.avif" alt="Logo" className="ml-10 md:ml-20 w-50 md:w-100" width={500} height={500} />
-                    {/* <span className="text-brand-600 neon-text">
-                        VIBEZ
-                    </span> */}
+                    <m.span 
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.4, duration: 0.8 }}
+                    >
+                        ONLY GOOD
+                    </m.span>
+                    <m.div 
+                        initial={{ scale: 0.8, opacity: 0, rotate: -5 }}
+                        animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                        transition={{ 
+                            type: "spring", 
+                            stiffness: 100, 
+                            damping: 20, 
+                            delay: 0.6 
+                        }}
+                        className="relative mt-4 md:mt-8"
+                    >
+                        <Image 
+                            src="/logo.avif" 
+                            alt="Logo" 
+                            className="w-48 md:w-96 drop-shadow-[0_0_50px_rgba(220,38,38,0.3)]" 
+                            width={500} 
+                            height={500} 
+                        />
+                        <div className="absolute -inset-4 bg-brand-600/5 blur-3xl rounded-full animate-pulse" />
+                    </m.div>
                 </m.h1>
 
                 <m.p
@@ -54,14 +92,14 @@ export function Hero() {
                 <m.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.6 }}
-                    className="flex flex-col sm:flex-row gap-6"
+                    transition={{ duration: 0.8, delay: 0.8 }}
+                    className="flex flex-col sm:flex-row gap-6 mt-4"
                 >
-                    <Link href="/catalog" className="vibez-button min-w-[240px]">
-                        BROWSE BOOKS <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                    <Link href="/catalog" className="vibez-button min-w-[240px] group">
+                        BROWSE BOOKS <m.span animate={{ x: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}><ArrowRight size={20} /></m.span>
                     </Link>
-                    <Link href="/catalog" className="px-8 py-4 bg-white border-2 border-surface-200 hover:border-brand-600 text-surface-950 font-black rounded-2xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 shadow-sm uppercase tracking-wider text-sm min-w-[240px]">
-                        VIEW CATEGORIES
+                    <Link href="/catalog" className="px-8 py-4 bg-white border-2 border-surface-200 hover:border-brand-600 hover:text-brand-600 text-surface-950 font-black rounded-2xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 shadow-sm uppercase tracking-wider text-sm min-w-[240px]">
+                        EXPLORE COLLECTIONS
                     </Link>
                 </m.div>
 

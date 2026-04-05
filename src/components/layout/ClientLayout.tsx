@@ -7,7 +7,9 @@ import { usePathname } from 'next/navigation';
 import { useEffect } from "react";
 import { useSettingsStore } from "@/store/settingsStore";
 
+import { LoadingScreen } from "./LoadingScreen";
 import { AuthProvider } from "./AuthProvider";
+
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
@@ -24,7 +26,9 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
                 <>{children}</>
             ) : (
                 <>
+                    {!isAdmin && <LoadingScreen />}
                     <Navigation />
+
                     <CartDrawer />
                     <main className="pt-20 min-h-screen">
                         {children}

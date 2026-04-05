@@ -18,6 +18,8 @@ export default function AdminSettings() {
         bankBranch: "",
         codTerms: "",
         deliveryTerms: "",
+        deliveryBaseFee: 400,
+        deliveryExtraFee: 100,
     });
     const [loading, setLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
@@ -39,6 +41,8 @@ export default function AdminSettings() {
                     bankBranch: data.bankBranch || "",
                     codTerms: data.codTerms || "",
                     deliveryTerms: data.deliveryTerms || "",
+                    deliveryBaseFee: data.deliveryBaseFee || 400,
+                    deliveryExtraFee: data.deliveryExtraFee || 100,
                 });
             }
         } catch (error) {
@@ -312,6 +316,29 @@ export default function AdminSettings() {
                             className="w-full bg-surface-50 border border-surface-200 rounded-xl py-4 px-6 font-medium text-surface-950 focus:border-brand-500 outline-none transition-all text-sm resize-none italic"
                             placeholder="Enter delivery terms and details here... e.g. Standard delivery takes 3-5 business days."
                         />
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-black text-surface-500 uppercase tracking-widest pl-1">Base Delivery Fee (1st kg) (LKR)</label>
+                            <input
+                                type="number"
+                                step="0.01"
+                                value={settings.deliveryBaseFee}
+                                onChange={e => setSettings({ ...settings, deliveryBaseFee: parseFloat(e.target.value) })}
+                                className="w-full bg-surface-50 border border-surface-200 rounded-xl py-4 px-6 font-medium text-surface-950 focus:border-brand-500 outline-none transition-all text-sm"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-black text-surface-500 uppercase tracking-widest pl-1">Additional Fee (per kg) (LKR)</label>
+                            <input
+                                type="number"
+                                step="0.01"
+                                value={settings.deliveryExtraFee}
+                                onChange={e => setSettings({ ...settings, deliveryExtraFee: parseFloat(e.target.value) })}
+                                className="w-full bg-surface-50 border border-surface-200 rounded-xl py-4 px-6 font-medium text-surface-950 focus:border-brand-500 outline-none transition-all text-sm"
+                            />
+                        </div>
                     </div>
                 </section>
 

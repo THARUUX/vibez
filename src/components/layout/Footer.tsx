@@ -54,9 +54,9 @@ export function Footer() {
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="text-sm font-black uppercase tracking-[0.2em] mb-8 text-brand-500">Categories</h4>
+                        <h4 className="text-sm font-black uppercase tracking-[0.2em] mb-8 text-brand-500">QUICK LINKS</h4>
                         <ul className="space-y-4">
-                            {['Brake Systems', 'Engine Components', 'Suspension & Steering', 'Performance Mods', 'Lighting & Electrical'].map((link) => (
+                            {['K-Pop', 'Anime', 'NoteBooks', 'Key Tags', 'Mugs'].map((link) => (
                                 <li key={link}>
                                     <Link href="/products" className="text-surface-400 hover:text-white font-bold transition-colors flex items-center gap-2 group">
                                         <ArrowRight size={14} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-600" />
@@ -71,7 +71,7 @@ export function Footer() {
                     <div>
                         <h4 className="text-sm font-black uppercase tracking-[0.2em] mb-8 text-brand-500">Company</h4>
                         <ul className="space-y-4">
-                            {['About Apex', 'Quality Standards', 'Store Locations', 'Shipping Policy', 'Contact Support'].map((link) => (
+                            {['About VibeZ', 'Quality Standards', 'Store Locations', 'Shipping Policy', 'Contact Support'].map((link) => (
                                 <li key={link}>
                                     <Link href="/about" className="text-surface-400 hover:text-white font-bold transition-colors flex items-center gap-2 group">
                                         <ArrowRight size={14} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-600" />

@@ -2,7 +2,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Search, Eye, MoreHorizontal, CheckCircle2, Clock, XCircle, Truck, AlertCircle, Loader2, X, MapPin, User as UserIcon, Package, DollarSign } from "lucide-react";
+import { Search, Eye, MoreHorizontal, CheckCircle2, Clock, XCircle, Truck, AlertCircle, Loader2, X, MapPin, User as UserIcon, Package, DollarSign, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { CustomSelect, SelectOption } from "@/components/common/CustomSelect";
 import { PriceDisplay } from "@/components/common/PriceDisplay";
@@ -31,7 +31,10 @@ export default function AdminOrders() {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
     const [filterStatus, setFilterStatus] = useState("all");
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
     const [selectedOrder, setSelectedOrder] = useState<any>(null);
+    
 
     const fetchOrders = async () => {
         try {
@@ -57,6 +60,10 @@ export default function AdminOrders() {
     useEffect(() => {
         fetchOrders();
     }, []);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm, filterStatus]);
 
     const handleStatusUpdate = async (orderId: string, newStatus: string) => {
         try {
@@ -125,6 +132,12 @@ export default function AdminOrders() {
         return matchesSearch && matchesStatus;
     });
 
+    const totalPages = Math.ceil(filteredOrders.length / itemsPerPage);
+    const paginatedOrders = filteredOrders.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
+
     return (
         <>
             <div className="max-w-7xl mx-auto space-y-8 font-outfit">
@@ -184,7 +197,7 @@ export default function AdminOrders() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-surface-100">
-                                {filteredOrders.map((order, i) => (
+                                {paginatedOrders.map((order, i) => (
                                     <motion.tr
                                         key={order.id}
                                         initial={{ opacity: 0, scale: 0.98 }}
@@ -253,6 +266,48 @@ export default function AdminOrders() {
                         </table>
                     )}
                 </div>
+
+                {/* Pagination */}
+                {!loading && totalPages > 1 && (
+                    <div className="p-6 bg-surface-50/50 border-t border-surface-100 flex flex-col sm:flex-row items-center justify-between gap-4 font-outfit">
+                        <div className="text-[10px] font-black uppercase tracking-widest text-surface-400">
+                            Showing <span className="text-surface-950 font-black">{paginatedOrders.length}</span> of <span className="text-surface-950 font-black">{filteredOrders.length}</span> ledger entries
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <button
+                                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                                disabled={currentPage === 1}
+                                className="p-2 bg-white border border-surface-200 rounded-xl text-surface-400 hover:text-brand-600 hover:border-brand-600 disabled:opacity-50 disabled:hover:text-surface-400 disabled:hover:border-surface-200 transition-all shadow-sm"
+                            >
+                                <ChevronLeft size={18} />
+                            </button>
+                            
+                            <div className="flex items-center gap-1.5 focus-within:outline-none">
+                                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                                    <button
+                                        key={page}
+                                        onClick={() => setCurrentPage(page)}
+                                        className={`w-9 h-9 rounded-xl text-[10px] font-black transition-all ${
+                                            currentPage === page
+                                                ? "bg-brand-600 text-white shadow-lg shadow-brand-600/20"
+                                                : "bg-white border border-surface-200 text-surface-400 hover:border-brand-600 hover:text-brand-600"
+                                        }`}
+                                    >
+                                        {page}
+                                    </button>
+                                ))}
+                            </div>
+
+                            <button
+                                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                                disabled={currentPage === totalPages}
+                                className="p-2 bg-white border border-surface-200 rounded-xl text-surface-400 hover:text-brand-600 hover:border-brand-600 disabled:opacity-50 disabled:hover:text-surface-400 disabled:hover:border-surface-200 transition-all shadow-sm"
+                            >
+                                <ChevronRight size={18} />
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
             </div>
 

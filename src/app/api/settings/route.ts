@@ -25,6 +25,8 @@ export async function GET() {
                     bankBranch: '',
                     codTerms: '',
                     deliveryTerms: '',
+                    deliveryBaseFee: 400,
+                    deliveryExtraFee: 100,
                 },
             });
         }
@@ -53,6 +55,8 @@ export async function POST(request: Request) {
                 bankBranch: body.bankBranch,
                 codTerms: body.codTerms,
                 deliveryTerms: body.deliveryTerms,
+                deliveryBaseFee: typeof body.deliveryBaseFee === 'number' ? body.deliveryBaseFee : parseFloat(body.deliveryBaseFee || 400),
+                deliveryExtraFee: typeof body.deliveryExtraFee === 'number' ? body.deliveryExtraFee : parseFloat(body.deliveryExtraFee || 100),
             },
             create: {
                 id: 'global',
@@ -67,6 +71,8 @@ export async function POST(request: Request) {
                 bankBranch: body.bankBranch || '',
                 codTerms: body.codTerms || '',
                 deliveryTerms: body.deliveryTerms || '',
+                deliveryBaseFee: typeof body.deliveryBaseFee === 'number' ? body.deliveryBaseFee : parseFloat(body.deliveryBaseFee || 400),
+                deliveryExtraFee: typeof body.deliveryExtraFee === 'number' ? body.deliveryExtraFee : parseFloat(body.deliveryExtraFee || 100),
             },
         });
         return NextResponse.json(settings);

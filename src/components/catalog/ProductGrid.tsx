@@ -9,14 +9,18 @@ const m = motion as any;
 interface ProductGridProps {
     products: any[];
     loading: boolean;
+    viewMode?: 'grid' | 'small';
 }
 
-export function ProductGrid({ products, loading }: ProductGridProps) {
+export function ProductGrid({ products, loading, viewMode = 'grid' }: ProductGridProps) {
     if (loading) {
         return (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                    <div key={i} className="h-[600px] bg-white rounded-2xl border border-surface-100 animate-pulse relative overflow-hidden">
+            <div className={viewMode === 'grid' 
+                ? "grid grid-cols-1 md:grid-cols-2 gap-10" 
+                : "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6"
+            }>
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                    <div key={i} className={`${viewMode === 'grid' ? "h-[600px]" : "h-72"} bg-white rounded-2xl border border-surface-100 animate-pulse relative overflow-hidden`}>
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-surface-50 to-transparent skew-x-12 translate-x-[-100%] animate-[shimmer_2s_infinite]" />
                     </div>
                 ))}
@@ -43,9 +47,17 @@ export function ProductGrid({ products, loading }: ProductGridProps) {
     }
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className={viewMode === 'grid' 
+            ? "grid grid-cols-1 md:grid-cols-2 gap-10" 
+            : "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6"
+        }>
             {products.map((product, idx) => (
-                <ProductCard key={product.id} product={product} index={idx} />
+                <ProductCard 
+                    key={product.id} 
+                    product={product} 
+                    index={idx} 
+                    small={viewMode === 'small'} 
+                />
             ))}
         </div>
     );

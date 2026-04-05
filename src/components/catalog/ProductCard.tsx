@@ -13,10 +13,51 @@ const m = motion as any;
 interface ProductCardProps {
     product: any;
     index: number;
+    small?: boolean;
 }
 
-export function ProductCard({ product, index }: ProductCardProps) {
+export function ProductCard({ product, index, small = false }: ProductCardProps) {
     const addItem = useCartStore((state) => state.addItem);
+
+    if (small) {
+        return (
+            <m.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: index * 0.02 }}
+                className="vibez-card group p-2 flex flex-col bg-white border border-surface-200"
+            >
+                <Link href={`/products/${product.slug}`} className="relative aspect-square overflow-hidden bg-surface-50 rounded-xl block mb-3">
+                    <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="object-contain p-4 scale-100 group-hover:scale-110 transition-transform duration-500"
+                    />
+                </Link>
+                <div className="px-2 pb-2 flex-1 flex flex-col">
+                    <Link href={`/products/${product.slug}`}>
+                        <h3 className="text-[10px] font-black text-surface-950 mb-1 line-clamp-2 uppercase tracking-tight group-hover:text-brand-600 transition-colors">
+                            {product.name}
+                        </h3>
+                    </Link>
+                    <div className="mt-auto flex justify-between items-end pt-2">
+                        <PriceDisplay amount={product.price} className="text-xs font-black text-surface-950" />
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                addItem(product);
+                                alerts.toast(`${product.name} ADDED!`);
+                            }}
+                            className="w-7 h-7 bg-surface-100 hover:bg-brand-600 text-surface-950 hover:text-white rounded-lg flex items-center justify-center transition-colors shadow-sm"
+                        >
+                            <ShoppingCart size={12} />
+                        </button>
+                    </div>
+                </div>
+            </m.div>
+        );
+    }
 
     return (
         <m.div
@@ -101,14 +142,6 @@ export function ProductCard({ product, index }: ProductCardProps) {
                             <span>Add to Cart</span>
                         </m.button>
                     </div>
-
-                    {/* <Link 
-                        href={`/products/${product.slug}`}
-                        className="flex items-center justify-center gap-3 w-full py-5 border-2 border-surface-100 rounded-2xl text-[10px] font-black uppercase tracking-widest text-surface-400 hover:text-brand-600 hover:border-brand-600/20 hover:bg-surface-50 transition-all duration-300"
-                    >
-                        View Details
-                        <ArrowRight size={14} />
-                    </Link> */}
                 </div>
             </div>
             

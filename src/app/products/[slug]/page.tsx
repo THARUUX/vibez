@@ -12,6 +12,11 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
+    
+    // Fetch settings to get actual store name
+    const settings = await prisma.settings.findUnique({ where: { id: 'global' } });
+    const storeName = settings?.storeName || 'VibeZ';
+
     const product = await prisma.product.findFirst({
         where: {
             OR: [
@@ -23,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     if (!product) return { title: 'Product Not Found' };
 
-    const title = product.metaTitle || `${product.name} | Apex Auto Parts`;
+    const title = product.metaTitle || `${product.name} | ZYNEX STORE`;
     const description = product.metaDescription || product.description.substring(0, 160);
 
     return {
@@ -55,6 +60,10 @@ export async function generateStaticParams() {
 
 export default async function ProductPage({ params }: Props) {
     const { slug } = await params;
+    
+    // Fetch settings to get actual store name
+    const settings = await prisma.settings.findUnique({ where: { id: 'global' } });
+    const storeName = settings?.storeName || 'VibeZ';
     
     const product = await prisma.product.findFirst({
         where: {
@@ -88,12 +97,12 @@ export default async function ProductPage({ params }: Props) {
         sku: product.sku || product.id,
         brand: {
             '@type': 'Brand',
-            name: 'Apex Auto Parts',
+            name: storeName,
         },
         offers: {
             '@type': 'Offer',
             url: `https://apex-auto-parts.com/products/${product.slug}`,
-            priceCurrency: 'USD',
+            priceCurrency: 'LKR',
             price: product.price,
             availability: product.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
         },

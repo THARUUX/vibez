@@ -2,7 +2,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Edit2, Trash2, Search, X, Save, Loader2, Globe, Tag, Image as ImageIcon } from "lucide-react";
+import { Plus, Edit2, Trash2, Search, X, Save, Loader2, Globe, Tag, Image as ImageIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { alerts } from "@/lib/alerts";
@@ -11,7 +11,10 @@ export default function AdminCategories() {
     const [categories, setCategories] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 6;
     const [isIdling, setIsIdling] = useState(false);
+    
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingCategory, setEditingCategory] = useState<any>(null);
     const [formData, setFormData] = useState({
@@ -46,6 +49,10 @@ export default function AdminCategories() {
     useEffect(() => {
         fetchCategories();
     }, []);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm]);
 
     const handleOpenModal = (category: any = null) => {
         if (category) {
@@ -134,6 +141,12 @@ export default function AdminCategories() {
         ? categories.filter(c => c.name.toLowerCase().includes(searchTerm.toLowerCase()))
         : [];
 
+    const totalPages = Math.ceil(filteredCategories.length / itemsPerPage);
+    const paginatedCategories = filteredCategories.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
+
     return (
         <div className="max-w-7xl mx-auto space-y-8 font-outfit">
             {/* Header */}
@@ -186,7 +199,7 @@ export default function AdminCategories() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-surface-100">
-                                {filteredCategories.map((category, i) => (
+                                {paginatedCategories.map((category, i) => (
                                     <motion.tr
                                         key={category.id}
                                         initial={{ opacity: 0, scale: 0.98 }}
@@ -232,6 +245,48 @@ export default function AdminCategories() {
                         </table>
                     )}
                 </div>
+
+                {/* Pagination */}
+                {!loading && totalPages > 1 && (
+                    <div className="p-6 bg-surface-50/50 border-t border-surface-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div className="text-[10px] font-black uppercase tracking-widest text-surface-400">
+                            Showing <span className="text-surface-950 font-black">{paginatedCategories.length}</span> of <span className="text-surface-950 font-black">{filteredCategories.length}</span> categories
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <button
+                                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                                disabled={currentPage === 1}
+                                className="p-2 bg-white border border-surface-200 rounded-xl text-surface-400 hover:text-brand-600 hover:border-brand-600 disabled:opacity-50 disabled:hover:text-surface-400 disabled:hover:border-surface-200 transition-all shadow-sm"
+                            >
+                                <ChevronLeft size={18} />
+                            </button>
+                            
+                            <div className="flex items-center gap-1.5 focus-within:outline-none">
+                                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                                    <button
+                                        key={page}
+                                        onClick={() => setCurrentPage(page)}
+                                        className={`w-9 h-9 rounded-xl text-[10px] font-black transition-all ${
+                                            currentPage === page
+                                                ? "bg-brand-600 text-white shadow-lg shadow-brand-600/20"
+                                                : "bg-white border border-surface-200 text-surface-400 hover:border-brand-600 hover:text-brand-600"
+                                        }`}
+                                    >
+                                        {page}
+                                    </button>
+                                ))}
+                            </div>
+
+                            <button
+                                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                                disabled={currentPage === totalPages}
+                                className="p-2 bg-white border border-surface-200 rounded-xl text-surface-400 hover:text-brand-600 hover:border-brand-600 disabled:opacity-50 disabled:hover:text-surface-400 disabled:hover:border-surface-200 transition-all shadow-sm"
+                            >
+                                <ChevronRight size={18} />
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
 
             {/* Modal */}

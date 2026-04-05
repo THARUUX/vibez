@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Loader2, Zap, Target, ArrowRight } from "lucide-react";
+import { Loader2, Zap, Target, ArrowRight, LayoutGrid, Grid3X3, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useMemo, Suspense } from "react";
 import { CatalogSidebar } from "@/components/catalog/CatalogSidebar";
 import { ProductGrid } from "@/components/catalog/ProductGrid";
@@ -19,6 +19,12 @@ function CatalogContent() {
     const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
     const [sortBy, setSortBy] = useState("newest");
     const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]);
+
+    // View Option & Pagination State
+    const [viewMode, setViewMode] = useState<'grid' | 'small'>('grid');
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 12;
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -86,6 +92,17 @@ function CatalogContent() {
 
         return result;
     }, [products, searchQuery, activeCategoryId, sortBy, priceRange]);
+
+    const totalPages = Math.ceil(filteredAndSortedProducts.length / itemsPerPage);
+    const paginatedProducts = filteredAndSortedProducts.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchQuery, activeCategoryId, sortBy, priceRange]);
+    
 
     if (loading) {
         return (
@@ -173,18 +190,78 @@ function CatalogContent() {
 
                     {/* Product Feed */}
                     <div className="flex-1">
-                        <div className="flex items-center justify-between mb-10 text-[10px] font-black uppercase tracking-[0.3em] text-surface-400">
-                            <span>Showing {filteredAndSortedProducts.length} Results</span>
-                            <div className="flex items-center gap-2">
-                                <div className="w-2 h-2 rounded-full bg-brand-600 animate-pulse" />
-                                <span>Real-time Filtering Active</span>
+                        <div className="flex items-center justify-between mb-10 pb-4 border-b border-surface-200">
+                            <div className="flex flex-col">
+                                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-surface-400 mb-1">
+                                    Showing {paginatedProducts.length} of {filteredAndSortedProducts.length} Results
+                                </span>
+                                <div className="flex items-center gap-2 text-[8px] font-black uppercase tracking-[0.2em] text-emerald-500">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                    <span>Real-time Filtering Active</span>
+                                </div>
+                            </div>
+                            
+                            <div className="flex items-center gap-2 bg-white p-1 rounded-xl shadow-sm border border-surface-200">
+                                <button 
+                                    onClick={() => setViewMode('grid')}
+                                    className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-brand-600 text-white shadow-lg shadow-brand-600/20' : 'text-surface-400 hover:text-surface-950'}`}
+                                    title="Grid View"
+                                >
+                                    <LayoutGrid size={18} />
+                                </button>
+                                <button 
+                                    onClick={() => setViewMode('small')}
+                                    className={`p-2 rounded-lg transition-all ${viewMode === 'small' ? 'bg-brand-600 text-white shadow-lg shadow-brand-600/20' : 'text-surface-400 hover:text-surface-950'}`}
+                                    title="Compact View"
+                                >
+                                    <Grid3X3 size={18} />
+                                </button>
                             </div>
                         </div>
                         
                         <ProductGrid 
-                            products={filteredAndSortedProducts} 
-                            loading={loading} 
+                            products={paginatedProducts} 
+                            loading={loading}
+                            viewMode={viewMode}
                         />
+
+                        {/* Pagination Controls */}
+                        {totalPages > 1 && (
+                            <div className="flex justify-center items-center gap-4 mt-20">
+                                <button 
+                                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                                    disabled={currentPage === 1}
+                                    className="w-12 h-12 bg-white border border-surface-200 rounded-xl flex items-center justify-center text-surface-600 hover:border-brand-600 hover:text-brand-600 disabled:opacity-50 disabled:hover:border-surface-200 disabled:hover:text-surface-600 transition-all shadow-sm"
+                                >
+                                    <ChevronLeft size={20} />
+                                </button>
+                                
+                                <div className="flex gap-2">
+                                    {Array.from({ length: totalPages }).map((_, i) => (
+                                        <button
+                                            key={i}
+                                            onClick={() => setCurrentPage(i + 1)}
+                                            className={`w-12 h-12 rounded-xl font-bold transition-all ${
+                                                currentPage === i + 1 
+                                                ? 'bg-brand-600 text-white shadow-lg shadow-brand-600/20' 
+                                                : 'bg-white border border-surface-200 text-surface-600 hover:border-brand-600 hover:text-brand-600'
+                                            }`}
+                                        >
+                                            {i + 1}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                <button 
+                                    onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                                    disabled={currentPage === totalPages}
+                                    className="w-12 h-12 bg-white border border-surface-200 rounded-xl flex items-center justify-center text-surface-600 hover:border-brand-600 hover:text-brand-600 disabled:opacity-50 disabled:hover:border-surface-200 disabled:hover:text-surface-600 transition-all shadow-sm"
+                                >
+                                    <ChevronRight size={20} />
+                                </button>
+                            </div>
+                        )}
+
                     </div>
                 </div>
             </div>

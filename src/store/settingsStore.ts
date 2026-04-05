@@ -20,6 +20,8 @@ interface SettingsState {
     bankBranch: string;
     codTerms: string;
     deliveryTerms: string;
+    deliveryBaseFee: number;
+    deliveryExtraFee: number;
     setCurrency: (code: string) => void;
     updateRate: (code: string, newRate: number) => void;
     syncSettings: () => Promise<void>;
@@ -44,6 +46,8 @@ export const useSettingsStore = create<SettingsState>()(
             bankBranch: '',
             codTerms: '',
             deliveryTerms: '',
+            deliveryBaseFee: 400,
+            deliveryExtraFee: 100,
             setCurrency: (code) => set((state) => {
                 const newCurrency = state.availableCurrencies.find(c => c.code === code);
                 return newCurrency ? { currency: newCurrency } : state;
@@ -76,6 +80,8 @@ export const useSettingsStore = create<SettingsState>()(
                             bankBranch: data.bankBranch || '',
                             codTerms: data.codTerms || '',
                             deliveryTerms: data.deliveryTerms || '',
+                            deliveryBaseFee: data.deliveryBaseFee || 400,
+                            deliveryExtraFee: data.deliveryExtraFee || 100,
                         });
                     }
                 } catch (error) {

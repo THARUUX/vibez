@@ -10,6 +10,7 @@ export interface Product {
     description: string;
     image: string;
     category: string;
+    weight: number;
 }
 
 export interface CartItem extends Product {

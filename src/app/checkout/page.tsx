@@ -16,7 +16,11 @@ type PaymentMethod = "PAYHERE" | "BANK_TRANSFER" | "COD";
 
 export default function CheckoutPage() {
     const [step, setStep] = useState<Step>("shipping");
-    const { payhereEnabled, bankEnabled, codEnabled, bankName, bankAccount, bankBranch, codTerms, deliveryTerms } = useSettingsStore();
+    const { payhereEnabled, bankEnabled, codEnabled, bankName, bankAccount, bankBranch, codTerms, deliveryTerms, deliveryBaseFee, deliveryExtraFee, syncSettings } = useSettingsStore();
+    
+    useEffect(() => {
+        syncSettings();
+    }, [syncSettings]);
     /* eslint-disable */
     const storeName = useSettingsStore(state => state.storeName);
 
@@ -46,7 +50,17 @@ export default function CheckoutPage() {
     const items = useCartStore((state) => state.items);
     const clearCart = useCartStore((state) => state.clearCart);
     const [finalTotal, setFinalTotal] = useState(0);
-    const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const totalWeight = items.reduce((acc, item) => acc + (item.weight || 0) * item.quantity, 0);
+    
+    // Dynamic Shipping fee calculation
+    const shippingFee = items.length > 0 
+        ? totalWeight > 1 
+            ? (deliveryBaseFee || 400) + Math.ceil(totalWeight - 1) * (deliveryExtraFee || 100)
+            : (deliveryBaseFee || 400)
+        : 0;
+
+    const total = subtotal + shippingFee;
 
     const [shippingData, setShippingData] = useState({
         firstName: "",
@@ -78,12 +92,12 @@ export default function CheckoutPage() {
                     items,
                     shippingData,
                     total,
-                    paymentMethod
+                    shippingFee,
+                    paymentMethod,
                 }),
             });
 
             const data = await res.json();
-
             if (!res.ok) throw new Error(data.error || "Order sequence failed.");
 
             if (paymentMethod === "PAYHERE" && data.payhereData) {
@@ -471,17 +485,28 @@ export default function CheckoutPage() {
                                     <div className="space-y-5 pt-10 border-t-2 border-dashed border-surface-100">
                                         <div className="flex justify-between text-[10px] font-black text-surface-400 uppercase tracking-[0.3em]">
                                             <span>Subtotal</span>
-                                            <PriceDisplay amount={total} />
+                                            <PriceDisplay amount={subtotal} />
                                         </div>
-                                        <div className="flex justify-between text-[10px] font-black text-surface-400 uppercase tracking-[0.3em]">
-                                            <span>Logistic Fee</span>
-                                            <span className="text-emerald-600">COMPLIMENTARY</span>
+                                        <div className="flex justify-between text-[10px] font-black text-surface-400 uppercase tracking-[0.3em] items-center">
+                                            <span>
+                                                Logistic Fee ({totalWeight.toFixed(2)}kg)
+                                            </span>
+                                            <PriceDisplay amount={shippingFee} className={shippingFee === 0 ? "text-emerald-600" : "text-surface-950"} />
                                         </div>
                                         <div className="flex justify-between items-center pt-6 border-t border-surface-950">
                                             <span className="text-2xl font-black text-surface-950 uppercase tracking-tighter font-outfit">Total AMT</span>
                                             <PriceDisplay amount={total} className="text-4xl font-black text-surface-950 tracking-tighter font-outfit" />
                                         </div>
                                     </div>
+                                </div>
+
+                                <div className="mt-8 p-6 bg-surface-50 rounded-3xl border border-surface-200 shadow-sm">
+                                    <div className="flex items-center gap-2 text-surface-900 font-black text-xs uppercase tracking-widest mb-3">
+                                        <Truck size={16} className="text-brand-600" /> Logistics Terms
+                                    </div>
+                                    <p className="text-xs text-surface-500 font-medium whitespace-pre-line leading-relaxed italic">
+                                        {deliveryTerms || "Standard delivery terms apply. Please expect logistics contact upon dispatch."}
+                                    </p>
                                 </div>
 
                                 <div className="mt-10 flex flex-col items-center gap-4 text-surface-400 font-black text-[10px] uppercase tracking-[0.3em]">

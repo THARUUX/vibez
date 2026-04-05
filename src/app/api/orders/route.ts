@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     try {
         const session = await auth();
         const body = await request.json();
-        const { items, shippingData, total, paymentMethod } = body;
+        const { items, shippingData, total, shippingFee, paymentMethod } = body;
 
         // Generate unique reference
         const reference = `AX-${Math.floor(100000 + Math.random() * 900000)}`;
@@ -30,6 +30,7 @@ export async function POST(request: Request) {
         const order = await (prisma.order.create as any)({
             data: {
                 total,
+                shippingFee: shippingFee || 0,
                 shippingFirstName: shippingData.firstName,
                 shippingLastName: shippingData.lastName,
                 shippingAddress: shippingData.address,

@@ -40,11 +40,15 @@ model Product {
   image           String      @db.Text
   sku             String?     @unique
   stock           Int         @default(0)
+  weight          Float       @default(0)
   metaTitle       String?     @db.Text
   metaDescription String?     @db.Text
   warranty        String?
+  hasWarranty     Boolean     @default(true)
   delivery        String?
+  hasDelivery     Boolean     @default(true)
   returns         String?
+  hasReturns      Boolean     @default(true)
   terms           String?     @db.Text
   tags            String?     @db.Text
   categoryId      String
@@ -60,6 +64,7 @@ model Order {
   user            User?       @relation(fields: [userId], references: [id])
   status          String      @default("PENDING")
   total           Float
+  shippingFee     Float       @default(0)
   shippingFirstName String
   shippingLastName  String
   shippingAddress String
@@ -97,5 +102,7 @@ model Settings {
   bankBranch      String   @default("")
   codTerms        String?  @db.Text
   deliveryTerms   String?  @db.Text
+  deliveryBaseFee Float    @default(400)
+  deliveryExtraFee Float   @default(100)
   updatedAt       DateTime @updatedAt
 }

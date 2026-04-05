@@ -6,7 +6,9 @@ import { alerts } from "@/lib/alerts";
 import { ArrowLeft, ShoppingCart, ShieldCheck, Truck, RotateCcw, CheckCircle2, Box, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { useCartStore } from "@/store/cartStore";
+import { useSettingsStore } from "@/store/settingsStore";
 import { PriceDisplay } from "@/components/common/PriceDisplay";
 
 interface ProductClientContentProps {
@@ -15,6 +17,11 @@ interface ProductClientContentProps {
 
 export default function ProductClientContent({ product }: ProductClientContentProps) {
     const addItem = useCartStore((state) => state.addItem);
+    const { deliveryTerms, syncSettings } = useSettingsStore();
+
+    useEffect(() => {
+        syncSettings();
+    }, [syncSettings]);
 
     return (
         <div className="container mx-auto px-4 py-24 min-h-screen bg-surface-50">
@@ -50,12 +57,12 @@ export default function ProductClientContent({ product }: ProductClientContentPr
                             <span className="bg-surface-950 text-white px-5 py-1.5 rounded-md text-[10px] font-black uppercase tracking-[0.2em] shadow-lg">
                                 {product.category?.name?.toUpperCase() || 'GENERAL'}
                             </span>
-                            {product.tags && product.tags.split(',').map((tag: string) => (
+                            {/* {product.tags && product.tags.split(',').map((tag: string) => (
                                 <span key={tag} className="bg-brand-50 text-brand-600 px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] border border-brand-100 flex items-center gap-2">
                                     <Zap size={12} className="fill-brand-600" />
                                     {tag.trim()}
                                 </span>
-                            ))}
+                            ))} */}
                             <span className="flex items-center gap-1.5 text-emerald-600 text-[10px] font-black uppercase tracking-[0.2em] bg-emerald-50 px-4 py-1.5 rounded-lg border border-emerald-100">
                                 <CheckCircle2 size={12} />
                                 Certified In Stock
@@ -76,9 +83,18 @@ export default function ProductClientContent({ product }: ProductClientContentPr
                             <PriceDisplay amount={product.price} className="text-4xl font-black text-surface-950 font-outfit tracking-tighter" />
                             <span className="text-surface-400 font-bold text-sm uppercase">Inc. VAT</span>
                         </div>
-                        <p className="text-surface-500 font-medium text-xl leading-relaxed max-w-xl italic">
-                            "{product.description}"
+                        <p className="text-surface-500 opacity-75 font-normal text-lg leading-relaxed max-w-xl ">
+                            {product.description}
                         </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1">
+                        {product.tags && product.tags.split(',').map((tag: string) => (
+                                <span key={tag} className="bg-brand-50 text-brand-600 px-4 py-1.5 rounded-lg text-[10px] font-medium opacity-75 uppercase tracking-[0.2em] border border-brand-100 flex items-center gap-2">
+                                    #
+                                    {tag.trim()}
+                                </span>
+                            ))}
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -105,26 +121,36 @@ export default function ProductClientContent({ product }: ProductClientContentPr
                     </div>
 
                     {/* Features/Info */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 border-t border-surface-200">
+                    <div className="grid grid-cols-3 md:grid-cols-3 gap-8 pt-12 border-t border-surface-200">
                         {[
-                            { 
+                            product.hasWarranty !== false ? { 
                                 icon: ShieldCheck, 
                                 title: product.warranty?.split(' ')[0] || "2-YEAR", 
                                 sub: product.warranty?.split(' ').slice(1).join(' ') || "FULL WARRANTY" 
-                            },
-                            { 
+                            } : null,
+                            product.hasDelivery !== false ? { 
                                 icon: Truck, 
                                 title: product.delivery?.split(' ')[0] || "EXPRESS", 
-                                sub: product.delivery?.split(' ').slice(1).join(' ') || "LOGISTICS" 
-                            },
-                            { 
+                                sub: product.delivery?.split(' ').slice(1).join(' ') || "LOGISTICS",
+                                onClick: () => {
+                                    alerts.info(
+                                        "Delivery Logistics", 
+                                        deliveryTerms || "Standard delivery terms apply. Please expect logistics contact upon dispatch."
+                                    );
+                                }
+                            } : null,
+                            product.hasReturns !== false ? { 
                                 icon: RotateCcw, 
                                 title: product.returns?.split(' ')[0] || "30-DAY", 
                                 sub: product.returns?.split(' ').slice(1).join(' ') || "EASY RETURNS" 
-                            },
-                        ].map((item, idx) => (
-                            <div key={idx} className="flex flex-col gap-4">
-                                <div className="w-12 h-12 bg-surface-950 text-white rounded-xl flex items-center justify-center shadow-lg">
+                            } : null,
+                        ].filter(Boolean).map((item: any, idx) => (
+                            <div 
+                                key={idx} 
+                                className={`flex flex-col gap-4 ${item.onClick ? 'cursor-pointer group/feature' : ''}`}
+                                onClick={item.onClick}
+                            >
+                                <div className={`w-12 h-12 bg-surface-950 text-white rounded-xl flex items-center justify-center shadow-lg ${item.onClick ? 'group-hover/feature:bg-brand-600 transition-colors' : ''}`}>
                                     <item.icon size={22} />
                                 </div>
                                 <div>

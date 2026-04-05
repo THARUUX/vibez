@@ -33,9 +33,10 @@ export async function POST(request: Request) {
         // Sanitize and validate numeric inputs
         const price = typeof body.price === 'string' ? parseFloat(body.price) : body.price;
         const stock = typeof body.stock === 'string' ? parseInt(body.stock) : body.stock;
+        const weight = typeof body.weight === 'string' ? parseFloat(body.weight) : (body.weight || 0);
 
-        if (isNaN(price) || isNaN(stock)) {
-            return NextResponse.json({ error: 'Invalid numeric data detected in price or stock levels.' }, { status: 400 });
+        if (isNaN(price) || isNaN(stock) || isNaN(weight)) {
+            return NextResponse.json({ error: 'Invalid numeric data detected in price, stock, or weight.' }, { status: 400 });
         }
         
         const product = await prisma.product.create({
@@ -46,6 +47,7 @@ export async function POST(request: Request) {
                 price: price,
                 image: body.image,
                 stock: stock,
+                weight: weight,
                 sku: body.sku && body.sku.trim() !== "" ? body.sku : null,
                 categoryId: body.categoryId,
                 metaTitle: body.metaTitle && body.metaTitle.trim() !== "" ? body.metaTitle : null,
@@ -53,8 +55,11 @@ export async function POST(request: Request) {
                     ? body.metaDescription.substring(0, 160) 
                     : body.description?.substring(0, 160),
                 warranty: body.warranty,
+                hasWarranty: body.hasWarranty ?? true,
                 delivery: body.delivery,
+                hasDelivery: body.hasDelivery ?? true,
                 returns: body.returns,
+                hasReturns: body.hasReturns ?? true,
                 terms: body.terms,
                 tags: body.tags,
             } as any,

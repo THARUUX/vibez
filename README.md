@@ -18,3 +18,5 @@ AUTH_SECRET="h63920970-1616-419b-8772-972bcc75aa54" # Added for Auth.js v5
 
 
 Remove .env file by gitignore file
+
+Edit the product/ [slug] / page.jsx file to SEO friendly
