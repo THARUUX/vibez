@@ -46,6 +46,7 @@ model Product {
   delivery        String?
   returns         String?
   terms           String?     @db.Text
+  tags            String?     @db.Text
   categoryId      String
   category        Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   orderItems      OrderItem[]

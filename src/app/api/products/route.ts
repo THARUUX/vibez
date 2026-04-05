@@ -56,6 +56,7 @@ export async function POST(request: Request) {
                 delivery: body.delivery,
                 returns: body.returns,
                 terms: body.terms,
+                tags: body.tags,
             } as any,
             include: {
                 category: true,

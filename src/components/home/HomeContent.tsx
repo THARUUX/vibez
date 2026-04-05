@@ -26,17 +26,17 @@ export function Hero() {
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-surface-200 text-surface-600 font-bold text-[10px] mb-8 shadow-sm uppercase tracking-[0.2em]"
                 >
                     <Target size={14} className="text-brand-600" />
-                    <span>🇱🇰 SRI LANKA'S FAVOURITE PRINT SHOP</span>
+                    <span>SRI LANKA'S FAVOURITE PRINT SHOP</span>
                 </m.div>
 
                 <m.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-6xl w-fit flex flex-col md:items-center md:text-9xl font-black tracking-tighter mb-6 leading-[0.85] text-surface-950 uppercase"
+                    className="text-6xl w-fit flex flex-col items-center md:text-9xl font-black tracking-tighter mb-6 leading-[0.85] text-surface-950 uppercase"
                 >
                     ONLY GOOD<br />
-                    <Image src="/logo.avif" alt="Logo" className="w-64 md:w-100" width={500} height={500} />
+                    <Image src="/logo.avif" alt="Logo" className="ml-10 md:ml-20 w-50 md:w-100" width={500} height={500} />
                     {/* <span className="text-brand-600 neon-text">
                         VIBEZ
                     </span> */}
@@ -46,7 +46,7 @@ export function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="text-md md:text-2xl text-surface-500 max-w-2xl mb-12 font-light text-start md:text-center leading-relaxed"
+                    className="text-md md:text-2xl text-surface-500 max-w-2xl mb-12 font-light text-center leading-relaxed"
                 >
                     High-quality prints of your favorite Anime series and K-pop idols. Premium collectors' editions delivered right to your doorstep.
                 </m.p>
@@ -146,12 +146,19 @@ export function FeaturedProducts() {
                                     fill
                                     className="object-contain p-8 scale-100 group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-2xl"
                                 />
-                                <div className="absolute top-6 right-6 z-20 bg-brand-600 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] shadow-2xl border border-white/10">
-                                    {product.category?.name || "Exclusive Pick"}
-                                </div>
                             </div>
-
+ 
                             <div className="p-10 relative bg-white">
+                                <div className="flex flex-wrap gap-2 mb-4">
+                                    <span className="bg-brand-600 text-white px-3 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest shadow-sm">
+                                        {product.category?.name || "Exclusive Pick"}
+                                    </span>
+                                    {product.tags && product.tags.split(',').map((tag: string) => (
+                                        <span key={tag} className="bg-surface-50 text-surface-400 px-3 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest border border-surface-100 italic transition-colors group-hover:border-brand-200">
+                                            #{tag.trim()}
+                                        </span>
+                                    ))}
+                                </div>
                                 <h3 className="text-3xl font-black text-surface-950 mb-3 leading-none group-hover:text-brand-600 transition-colors uppercase tracking-tighter">
                                     {product.name}
                                 </h3>

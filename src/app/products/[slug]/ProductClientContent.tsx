@@ -3,7 +3,7 @@
 
 import { motion } from "framer-motion";
 import { alerts } from "@/lib/alerts";
-import { ArrowLeft, ShoppingCart, ShieldCheck, Truck, RotateCcw, CheckCircle2, Box } from "lucide-react";
+import { ArrowLeft, ShoppingCart, ShieldCheck, Truck, RotateCcw, CheckCircle2, Box, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCartStore } from "@/store/cartStore";
@@ -50,6 +50,12 @@ export default function ProductClientContent({ product }: ProductClientContentPr
                             <span className="bg-surface-950 text-white px-5 py-1.5 rounded-md text-[10px] font-black uppercase tracking-[0.2em] shadow-lg">
                                 {product.category?.name?.toUpperCase() || 'GENERAL'}
                             </span>
+                            {product.tags && product.tags.split(',').map((tag: string) => (
+                                <span key={tag} className="bg-brand-50 text-brand-600 px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] border border-brand-100 flex items-center gap-2">
+                                    <Zap size={12} className="fill-brand-600" />
+                                    {tag.trim()}
+                                </span>
+                            ))}
                             <span className="flex items-center gap-1.5 text-emerald-600 text-[10px] font-black uppercase tracking-[0.2em] bg-emerald-50 px-4 py-1.5 rounded-lg border border-emerald-100">
                                 <CheckCircle2 size={12} />
                                 Certified In Stock

@@ -33,7 +33,8 @@ export default function AdminProducts() {
         warranty: "",
         delivery: "",
         returns: "",
-        terms: ""
+        terms: "",
+        tags: ""
     });
 
     const fetchData = async () => {
@@ -75,7 +76,8 @@ export default function AdminProducts() {
                 warranty: product.warranty || "",
                 delivery: product.delivery || "",
                 returns: product.returns || "",
-                terms: product.terms || ""
+                terms: product.terms || "",
+                tags: product.tags || ""
             });
         } else {
             setEditingProduct(null);
@@ -93,7 +95,8 @@ export default function AdminProducts() {
                 warranty: "",
                 delivery: "",
                 returns: "",
-                terms: ""
+                terms: "",
+                tags: ""
             });
         }
         setIsModalOpen(true);
@@ -519,6 +522,24 @@ export default function AdminProducts() {
                                                     className="w-full bg-surface-50 border border-surface-200 rounded-2xl py-4 px-5 font-bold text-surface-950 focus:border-brand-500 outline-none resize-none shadow-sm"
                                                     placeholder="Liability waivers or special handling clauses..."
                                                 />
+                                            </div>
+                                        </div>
+ 
+                                        <div className="pt-8 border-t border-surface-100">
+                                            <h3 className="text-xs font-black text-brand-600 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-brand-600" /> Market Tags
+                                            </h3>
+                                            <div className="space-y-2">
+                                                <label className="text-[10px] font-black text-surface-500 uppercase tracking-widest pl-1">Product Tags (Comma Separated)</label>
+                                                <div className="relative">
+                                                    <Tag className="absolute left-4 top-1/2 -translate-y-1/2 text-surface-300" size={18} />
+                                                    <input
+                                                        value={formData.tags}
+                                                        onChange={e => setFormData({ ...formData, tags: e.target.value })}
+                                                        className="w-full bg-surface-50 border border-surface-200 rounded-2xl py-3 pl-12 pr-6 font-bold text-surface-900 focus:border-brand-500 outline-none transition-all"
+                                                        placeholder="e.g. New, Trendy, Best Seller"
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

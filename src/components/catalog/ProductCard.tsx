@@ -25,20 +25,6 @@ export function ProductCard({ product, index }: ProductCardProps) {
             transition={{ duration: 0.6, delay: index * 0.05 }}
             className="vibez-card group"
         >
-            {/* Header / Badges */}
-            <div className="absolute top-6 left-6 right-6 z-20 flex justify-between items-start pointer-events-none">
-                <div className="flex flex-col gap-2">
-                    <span className="bg-brand-600 text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] shadow-xl border border-white/10 flex items-center gap-2">
-                        {product.category?.name || "Official VibeZ"}
-                    </span>
-                    {product.stock > 0 && product.stock <= 5 && (
-                        <span className="bg-orange-500 text-white px-3 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest shadow-lg">
-                            Last {product.stock} Left!
-                        </span>
-                    )}
-                </div>
-            </div>
-
             {/* Image Container */}
             <Link 
                 href={`/catalog/${product.slug}`} 
@@ -60,9 +46,25 @@ export function ProductCard({ product, index }: ProductCardProps) {
                 {/* Overlay with Quick View hint */}
                 <div className="absolute inset-0 bg-brand-600/0 group-hover:bg-brand-600/5 transition-all duration-700 pointer-events-none" />
             </Link>
-
+ 
             {/* Content */}
             <div className="p-10 flex flex-col flex-1 relative bg-white">
+                <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="bg-brand-600 text-white px-3 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest shadow-sm">
+                        {product.category?.name || "Official VibeZ"}
+                    </span>
+                    {product.tags && product.tags.split(',').map((tag: string) => (
+                        <span key={tag} className="bg-surface-100 text-surface-600 px-3 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest border border-surface-200">
+                            {tag.trim()}
+                        </span>
+                    ))}
+                    {product.stock > 0 && product.stock <= 5 && (
+                        <span className="bg-orange-500 text-white px-3 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest shadow-sm">
+                            Last {product.stock} Left!
+                        </span>
+                    )}
+                </div>
+
                 <div className="mb-4">
                     <span className="text-[8px] font-black text-surface-300 uppercase tracking-[0.3em] mb-1 block leading-none">
                         VIBE-ID-{product.sku || "UNKN"}
