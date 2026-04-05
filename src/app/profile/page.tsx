@@ -126,7 +126,7 @@ export default function ProfilePage() {
                                         </div>
                                     </div>
                                     <h1 className="text-3xl font-black text-surface-950 uppercase tracking-tighter leading-none mb-2 font-outfit">{user.name}</h1>
-                                    <div className="text-brand-600 font-black text-[10px] uppercase tracking-[0.2em] bg-brand-50 px-4 py-1 rounded-lg mb-4">Apex Premium Member</div>
+                                    <div className="text-brand-600 font-black text-[10px] uppercase tracking-[0.2em] bg-brand-50 px-4 py-1 rounded-lg mb-4">{storeName} Premium Member</div>
                                     <p className="text-surface-400 font-bold lowercase tracking-tight italic">{user.email}</p>
                                 </div>
 
