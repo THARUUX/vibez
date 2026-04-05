@@ -206,13 +206,14 @@ export function FeaturedProducts() {
                                     {product.description}
                                 </p>
 
-                                <div className="flex items-center justify-between pt-8 border-t border-surface-50">
+                                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-8 border-t border-surface-50">
                                     <div className="flex flex-col">
                                         <span className="text-[10px] font-black text-surface-300 uppercase tracking-widest mb-1">Price</span>
                                         <PriceDisplay amount={product.price} className="text-3xl font-black text-surface-950" />
                                     </div>
-                                    <Link href={`/products/${product.slug}`} className="w-16 h-16 bg-surface-950 hover:bg-brand-600 text-white rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xl active:scale-90">
-                                        <ShoppingCart size={28} />
+                                    <Link href={`/products/${product.slug}`} className="w-full sm:w-16 h-16 bg-surface-950 hover:bg-brand-600 text-white rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xl active:scale-90 text-[10px] font-black uppercase tracking-widest sm:text-base">
+                                        <ShoppingCart size={24} className="sm:size-[28px]" />
+                                        <span className="sm:hidden ml-2">Add to Cart</span>
                                     </Link>
                                 </div>
                             </div>

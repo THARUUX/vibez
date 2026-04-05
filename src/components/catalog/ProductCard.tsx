@@ -95,7 +95,7 @@ export function ProductCard({ product, index, small = false }: ProductCardProps)
                         {product.category?.name || "Official VibeZ"}
                     </span>
                     {product.tags && product.tags.split(',').map((tag: string) => (
-                        <span key={tag} className="bg-surface-100 text-surface-600 px-3 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest border border-surface-200">
+                        <span key={tag} className="bg-surface-100 hidden sm:block text-surface-600 px-3 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest border border-surface-200">
                             {tag.trim()}
                         </span>
                     ))}
@@ -122,10 +122,10 @@ export function ProductCard({ product, index, small = false }: ProductCardProps)
                 </p>
 
                 <div className="mt-auto space-y-6">
-                    <div className="flex items-end justify-between">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
                         <div className="flex flex-col">
                             <span className="text-[10px] font-black text-surface-300 uppercase tracking-widest mb-1">Store Price</span>
-                            <PriceDisplay amount={product.price} className="text-4xl font-black text-surface-950 tracking-tighter" />
+                            <PriceDisplay amount={product.price} className="text-3xl md:text-4xl font-black text-surface-950 tracking-tighter" />
                         </div>
                         
                         <m.button
