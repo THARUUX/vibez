@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { PriceDisplay } from "@/components/common/PriceDisplay";
 import Link from "next/link";
+import { useSettingsStore } from "@/store/settingsStore";
 
 const m = motion as any;
 
@@ -19,6 +20,7 @@ export default function ProfilePage() {
     const [loading, setLoading] = useState(true);
     const [selectedOrder, setSelectedOrder] = useState<any>(null);
     const router = useRouter();
+    const storeName = useSettingsStore(state => state.storeName);
 
     useEffect(() => {
         if (status === "unauthenticated") {
