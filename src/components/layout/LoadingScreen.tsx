@@ -9,8 +9,10 @@ const m = motion as any;
 export function LoadingScreen() {
     const [progress, setProgress] = useState(0);
     const [isVisible, setIsVisible] = useState(true);
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
         const interval = setInterval(() => {
             setProgress(prev => {
                 if (prev >= 100) {
@@ -24,6 +26,9 @@ export function LoadingScreen() {
 
         return () => clearInterval(interval);
     }, []);
+
+    if (!mounted) return null;
+
 
     return (
         <AnimatePresence>
@@ -48,7 +53,7 @@ export function LoadingScreen() {
                             className="mb-8"
                         >
                             <Image 
-                                src="/logo.avif" 
+                                src="/logo.svg" 
                                 alt="VibeZ Logo" 
                                 width={200} 
                                 height={200} 

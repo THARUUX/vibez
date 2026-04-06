@@ -58,8 +58,8 @@ export const metadata: Metadata = {
           className={`${inter.variable} ${googleSans.variable} font-sans antialiased bg-surface-100 text-surface-950 min-h-screen selection:bg-brand-500 selection:text-white`}
           suppressHydrationWarning
         >
-          <div className="fixed inset-0 z-[-1] bg-surface-100"></div>
           <ClientLayout>
+
             {children}
           </ClientLayout>
         </body>
