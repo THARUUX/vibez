@@ -106,7 +106,7 @@ export function Hero() {
                     transition={{ duration: 0.8, delay: 0.8 }}
                     className="flex flex-col sm:flex-row gap-6 mt-4"
                 >
-                    <Link href="/catalog" className="vibez-button min-w-[240px] group">
+                    <Link href="/categories" className="vibez-button min-w-[240px] group">
                         BROWSE BOOKS <m.span animate={{ x: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}><ArrowRight size={20} /></m.span>
                     </Link>
                     <Link href="/catalog" className="px-8 py-4 bg-white border-2 border-surface-200 hover:border-brand-600 hover:text-brand-600 text-surface-950 font-black rounded-2xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 shadow-sm uppercase tracking-wider text-sm min-w-[240px]">

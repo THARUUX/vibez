@@ -45,7 +45,7 @@ export default function ProductClientContent({ product }: ProductClientContentPr
                         alt={product.name}
                         fill
                         priority
-                        className="object-cover group-hover:scale-105 transition-transform duration-1000"
+                        className="object-contain group-hover:scale-105 transition-transform duration-1000"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent pointer-events-none" />
                 </motion.div>
