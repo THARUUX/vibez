@@ -14,11 +14,11 @@ export default function ContactPage() {
     const [inquiryType, setInquiryType] = useState("Technical Product Specification");
 
     const INQUIRY_OPTIONS = [
-        { value: "Technical Product Specification", label: "Technical Product Specification" },
-        { value: "Bulk/Trade Order Inquiry", label: "Bulk / Trade Order Inquiry" },
-        { value: "International Shipping Logistics", label: "International Shipping Logistics" },
-        { value: "Warranty & Returns Claim", label: "Warranty & Returns Claim" },
-        { value: "Partnership/Sponsorship", label: "Partnership / Sponsorship" },
+        { value: "Custom Print Order", label: "Custom Print Order" },
+        { value: "Bulk / Wholesale Inquiry", label: "Bulk / Wholesale Inquiry" },
+        { value: "Shipping & Delivery Status", label: "Shipping & Delivery Status" },
+        { value: "Quality & Damage Claim", label: "Quality & Damage Claim" },
+        { value: "Collaborations", label: "Collaborations" },
     ];
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -28,7 +28,7 @@ export default function ContactPage() {
         // Simulate API call
         setTimeout(() => {
             setIsSubmitting(false);
-            alerts.success("Transmission Received", "Our engineering team will review your inquiry and respond within 24 hours.");
+            alerts.success("Vibe Received", "Our team will review your message and get back to you within 24 hours.");
             (e.target as HTMLFormElement).reset();
         }, 1500);
     };
@@ -38,12 +38,16 @@ export default function ContactPage() {
             {/* Hero Section */}
             <div className="relative h-[500px] flex items-center justify-center overflow-hidden bg-surface-950">
                 <div className="absolute inset-0 z-0 opacity-40">
-                    <img 
-                        src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=2000" 
-                        alt="Engineering Background"
+                    <video 
+                        autoPlay 
+                        muted 
+                        loop 
+                        playsInline 
                         className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-b from-surface-950/20 via-surface-950/60 to-surface-950" />
+                    >
+                        <source src="/bg-video.mp4" type="video/mp4" />
+                    </video>
+                    <div className="absolute inset-0 bg-linear-to-b from-surface-950/40 via-surface-950/80 to-surface-950" />
                 </div>
                 
                 <div className="container mx-auto px-4 relative z-10 text-center">
@@ -60,10 +64,10 @@ export default function ContactPage() {
                             Direct Uplink
                         </div>
                         <h1 className="text-6xl md:text-8xl font-black text-white uppercase tracking-tighter leading-none mb-6">
-                            CONTACT <span className="text-brand-600">APEX</span>
+                            CONTACT <span className="text-brand-600">VIBEZ</span>
                         </h1>
                         <p className="text-surface-400 font-medium text-xl max-w-2xl mx-auto italic">
-                            High-performance support for high-performance engineering. Our specialists are standing by.
+                            High-quality prints of your favorite Anime series and K-pop idols. Our support team is here to help.
                         </p>
                     </m.div>
                 </div>
@@ -76,22 +80,22 @@ export default function ContactPage() {
                         {[
                             { 
                                 icon: MessageSquare, 
-                                title: "Technical Support", 
-                                detail: "tech-support@apexauto.parts", 
-                                sub: "24/7 Diagnostics Assistance",
+                                title: "Order Support", 
+                                detail: "support@vibez.lk", 
+                                sub: "24/7 Response Time Assistance",
                                 color: "brand" 
                             },
                             { 
                                 icon: Phone, 
-                                title: "Global Sales", 
-                                detail: "+1 (800) APEX-AUTO", 
-                                sub: "Mon-Fri: 08:00 - 18:00 EST",
+                                title: "Direct Contact", 
+                                detail: "+94 (76) 826 1160", 
+                                sub: "Mon-Sat: 09:00 - 18:00 IST",
                                 color: "emerald" 
                             },
                             { 
                                 icon: Mail, 
-                                title: "General Inquiries", 
-                                detail: "info@apexauto.parts", 
+                                title: "Custom Orders", 
+                                detail: "orders@vibez.lk", 
                                 sub: "Typical response time: 2 hours",
                                 color: "blue" 
                             }
@@ -117,21 +121,21 @@ export default function ContactPage() {
                             <div className="absolute top-0 right-0 w-32 h-32 bg-brand-600/20 blur-3xl rounded-full" />
                             <h3 className="text-2xl font-black tracking-tighter uppercase mb-8 flex items-center gap-3">
                                 <Globe className="text-brand-500" />
-                                HQ Inventory
+                                VibeZ HQ
                             </h3>
                             <div className="space-y-6">
                                 <div className="flex gap-4">
                                     <MapPin className="text-brand-600 shrink-0" size={20} />
                                     <div>
-                                        <p className="text-xs font-black uppercase tracking-widest text-surface-400 mb-1">Global Head Office</p>
-                                        <p className="font-bold">721 Performance Drive, Detroit, MI 48201, United States</p>
+                                        <p className="text-xs font-black uppercase tracking-widest text-surface-400 mb-1">Store Address</p>
+                                        <p className="font-bold">44, Udahamulla Station Road, Nugegoda, Sri Lanka</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
                                     <Clock className="text-brand-600 shrink-0" size={20} />
                                     <div>
                                         <p className="text-xs font-black uppercase tracking-widest text-surface-400 mb-1">Operating Hours</p>
-                                        <p className="font-bold">24/7 Digital Terminal Availability</p>
+                                        <p className="font-bold">Mon - Sat: 09:00 AM - 06:00 PM</p>
                                     </div>
                                 </div>
                             </div>
@@ -147,8 +151,8 @@ export default function ContactPage() {
                         >
                             <div className="p-12 border-b border-surface-100 flex justify-between items-center bg-surface-50">
                                 <div>
-                                    <h2 className="text-3xl font-black text-surface-950 uppercase tracking-tight">HOW CAN <span className="text-brand-600">APEX</span> HELP YOU?</h2>
-                                    <p className="text-surface-500 font-medium italic mt-1 text-lg">Send your query directly to our engineering queue.</p>
+                                    <h2 className="text-3xl font-black text-surface-950 uppercase tracking-tight">HOW CAN <span className="text-brand-600">VIBEZ</span> HELP YOU?</h2>
+                                    <p className="text-surface-500 font-medium italic mt-1 text-lg">Send your query directly to our customer support team.</p>
                                 </div>
                                 <Hexagon size={48} className="text-brand-600/20" />
                             </div>
@@ -161,7 +165,7 @@ export default function ContactPage() {
                                             required
                                             type="text"
                                             className="w-full bg-surface-50 border border-surface-200 rounded-xl px-6 py-4 focus:outline-none focus:border-brand-500 transition-all font-bold placeholder:text-surface-300"
-                                            placeholder="e.g. Lewis Hamilton"
+                                            placeholder="e.g. Kasun Perera"
                                         />
                                     </div>
                                     <div className="space-y-2">
@@ -170,7 +174,7 @@ export default function ContactPage() {
                                             required
                                             type="email"
                                             className="w-full bg-surface-50 border border-surface-200 rounded-xl px-6 py-4 focus:outline-none focus:border-brand-500 transition-all font-bold placeholder:text-surface-300"
-                                            placeholder="driver@apexauto.com"
+                                            placeholder="hello@vibez.lk"
                                         />
                                     </div>
                                 </div>
@@ -192,7 +196,7 @@ export default function ContactPage() {
                                         required
                                         rows={6}
                                         className="w-full bg-surface-50 border border-surface-200 rounded-xl px-6 py-4 focus:outline-none focus:border-brand-500 transition-all font-bold placeholder:text-surface-300 resize-none"
-                                        placeholder="Describe your technical requirement or order inquiry..."
+                                        placeholder="Describe your design requirement or order inquiry..."
                                     ></textarea>
                                 </div>
 

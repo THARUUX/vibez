@@ -13,24 +13,35 @@ export function Hero() {
     return (
         <div className="relative min-h-[90vh] flex flex-col justify-center pt-16 md:pt-32 md:pb-20 overflow-hidden bg-surface-50 font-outfit">
             {/* Background Elements */}
-            <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 z-0 overflow-hidden">
+                <video 
+                    autoPlay 
+                    muted 
+                    loop 
+                    playsInline 
+                    className="absolute inset-0 w-full h-full object-cover opacity-30"
+                >
+                    <source src="/bg-video.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-linear-to-b from-surface-50 via-transparent to-surface-50" />
+                
                 <m.div 
                     animate={{ 
                         scale: [1, 1.2, 1],
                         rotate: [0, 90, 0],
-                        opacity: [0.2, 0.4, 0.2]
+                        opacity: [0.1, 0.2, 0.1]
                     }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-brand-200/20 rounded-full blur-[120px]" 
+                    className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-brand-200/10 rounded-full blur-[120px]" 
                 />
                 <m.div 
                     animate={{ 
                         scale: [1, 1.5, 1],
                         x: [0, 50, 0],
-                        opacity: [0.1, 0.3, 0.1]
+                        opacity: [0.05, 0.15, 0.05]
                     }}
                     transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                    className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-500/10 rounded-full blur-[100px]" 
+                    className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-500/5 rounded-full blur-[100px]" 
                 />
             </div>
 
@@ -42,7 +53,7 @@ export function Hero() {
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-surface-200 text-surface-600 font-bold text-[10px] mb-8 shadow-sm uppercase tracking-[0.2em]"
                 >
                     <Target size={14} className="text-brand-600" />
-                    <span>SRI LANKA'S FAVOURITE PRINT SHOP</span>
+                    <span>Shop with Confidence: Officially Licensed Importers at Vibez.lk</span>
                 </m.div>
 
                 <m.h1

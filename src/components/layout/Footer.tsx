@@ -41,7 +41,7 @@ export function Footer() {
                             </span> */}
                         </Link>
                         <p className="text-surface-400 font-medium leading-relaxed max-w-xs">
-                            Premium automotive spare parts and performance components. Engineered for excellence, delivered with precision.
+                            Shop with Confidence: Officially Licensed Importers at Vibez.lk
                         </p>
                         <div className="flex gap-4">
                             {[Facebook, Twitter, Instagram].map((Icon, i) => (
