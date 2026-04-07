@@ -109,18 +109,17 @@ export function Footer() {
                     <p className="text-surface-500 text-xs font-bold uppercase tracking-widest">
                         © {new Date().getFullYear()} {storeName}. ALL RIGHTS RESERVED.
                     </p>
-                    <div className="flex items-center gap-8">
+                    {/* <div className="flex items-center gap-8">
                         <div className="flex items-center gap-2 text-emerald-500 text-[10px] font-black uppercase tracking-widest">
                             <ShieldCheck size={16} />
                             SECURE SSL ENCRYPTED
                         </div>
                         <div className="flex gap-4 opacity-50 grayscale hover:grayscale-0 transition-all">
-                            {/* Simple payment icons as placeholders */}
                             <div className="w-10 h-6 bg-white/10 rounded flex items-center justify-center font-black text-[8px]">VISA</div>
                             <div className="w-10 h-6 bg-white/10 rounded flex items-center justify-center font-black text-[8px]">MC</div>
                             <div className="w-10 h-6 bg-white/10 rounded flex items-center justify-center font-black text-[8px]">AMEX</div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </footer>

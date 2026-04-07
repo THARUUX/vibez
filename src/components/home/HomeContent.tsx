@@ -107,7 +107,7 @@ export function Hero() {
                     className="flex flex-col sm:flex-row gap-6 mt-4"
                 >
                     <Link href="/categories" className="vibez-button min-w-[240px] group">
-                        BROWSE BOOKS <m.span animate={{ x: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}><ArrowRight size={20} /></m.span>
+                        BROWSE VIBEZ <m.span animate={{ x: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}><ArrowRight size={20} /></m.span>
                     </Link>
                     <Link href="/catalog" className="px-8 py-4 bg-white border-2 border-surface-200 hover:border-brand-600 hover:text-brand-600 text-surface-950 font-black rounded-2xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 shadow-sm uppercase tracking-wider text-sm min-w-[240px]">
                         EXPLORE COLLECTIONS
@@ -174,7 +174,7 @@ export function FeaturedProducts() {
                         <p className="text-surface-500 font-medium text-xl max-w-xl">Explore our hand-picked favorites for this season.</p>
                     </div>
                     <Link href="/catalog" className="vibez-button px-8 py-3 bg-surface-950 hover:bg-black border-none">
-                        All Books <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+                        All Vibez <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
                     </Link>
                 </div>
 

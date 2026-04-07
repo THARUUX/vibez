@@ -22,13 +22,13 @@ export default function AboutPage() {
                             <span>ONLY GOOD VIBEZ</span>
                         </div>
                         <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-8 text-surface-950 uppercase leading-[0.85]">
-                            WE PRINT <span className="text-brand-600">PASSION.</span>
+                            DRIVEN BY <span className="text-brand-600">AMBITION.</span>  DELIVERED BY <span className="text-brand-600">VIBEZ.</span>
                         </h1>
                         <p className="text-xl text-surface-600 font-medium mb-8 leading-relaxed">
-                            VibeZ started with a simple idea: that your favorite stories deserve more than just a screen. They deserve to be held, felt, and carried with you every day.
+                            At vibez.lk, we believe that high-quality, innovative products shouldn't come with a massive price tag or a long wait. Based in the heart of Sri Lanka, we specialize in sourcing the latest trends directly from China’s leading manufacturers and bringing them straight to your doorstep.
                         </p>
                         <p className="text-surface-500 font-medium leading-relaxed mb-10 text-lg">
-                            We are a Sri Lankan-based print shop dedicated to bringing Anime, K-pop, and Gaming culture to life through premium stationery. Every notebook we craft is a tribute to the characters and moments that inspire us.
+                            We don't just "import" we curate. Our team handpicks every item in our inventory, ensuring it meets our standards for quality, durability, and that "wow" factor. By managing the logistics and quality control ourselves, we ensure that you get the best of China’s massive marketplace without the hassle of customs, long shipping delays, or hidden fees.
                         </p>
                         
                         <div className="flex flex-wrap gap-4">
@@ -39,6 +39,10 @@ export default function AboutPage() {
                             <div className="px-6 py-4 bg-white border border-surface-200 rounded-2xl shadow-sm">
                                 <span className="block text-3xl font-black text-brand-600">Islandwide</span>
                                 <span className="text-[10px] font-bold text-surface-400 uppercase tracking-widest">Delivery</span>
+                            </div>
+                            <div className="px-6 py-4 bg-white border border-surface-200 rounded-2xl shadow-sm">
+                                <span className="block text-3xl font-black text-surface-950">24/7</span>
+                                <span className="text-[10px] font-bold text-surface-400 uppercase tracking-widest">Customer Service</span>
                             </div>
                         </div>
                     </m.div>
@@ -74,7 +78,7 @@ export default function AboutPage() {
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-3xl mb-20">
                         <h2 className="text-5xl md:text-7xl font-black text-surface-950 mb-6 uppercase tracking-tighter leading-none">
-                            WHY OUR <span className="text-brand-600">BOOKS</span> HIT DIFFERENT?
+                            WHY OUR <span className="text-brand-600">PRODUCTS</span> HIT DIFFERENT?
                         </h2>
                         <div className="w-24 h-2 bg-brand-600 rounded-full mb-8" />
                     </div>
@@ -83,18 +87,18 @@ export default function AboutPage() {
                         {[
                             {
                                 icon: Star,
-                                title: "80gsm Ivory Paper",
-                                desc: "The perfect off-white shade that's easy on the eyes and smooth for any pen. No bleed, just flow."
+                                title: "Unique Products",
+                                desc: "Discover the 'where did you get that?' collection. From viral gadgets to one-of-a-kind finds, we bring you the latest global trends that you won't find anywhere else in Sri Lanka."
                             },
                             {
                                 icon: Zap,
-                                title: "Matte Lamination",
-                                desc: "Our premium hardcovers are finished with a silky-smooth matte laminate that's scratch-resistant and ultra-durable."
+                                title: "Premium Quality",
+                                desc: "The best of the best. We’ve done the heavy lifting to source high-grade materials and top-tier craftsmanship, ensuring you get world-class durability and performance without the luxury price tag."
                             },
                             {
                                 icon: Heart,
-                                title: "Fan-Curated Art",
-                                desc: "We don't just print pictures; we curate and optimize every artwork to ensure vibrant, true-to-source colors."
+                                title: "Unbeatable Value",
+                                desc: "By importing directly from the source and cutting out the middlemen, we bring you the same high-end products at a fraction of the market price. Premium items, Sri Lanka's best prices."
                             }
                         ].map((value, i) => (
                             <m.div
@@ -122,7 +126,7 @@ export default function AboutPage() {
 
             {/* Contact & Social Section */}
             <section className="container mx-auto px-4 mb-20">
-                <div className="bg-surface-950 rounded-[4rem] p-12 md:p-24 text-white relative overflow-hidden flex flex-col lg:flex-row items-center gap-20">
+                <div className="bg-surface-950 rounded-[4rem] p-8 md:p-24 text-white relative overflow-hidden flex flex-col lg:flex-row items-center gap-20">
                     <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-600 rounded-full blur-[150px] opacity-10 -translate-y-1/2 translate-x-1/4" />
 
                     <div className="relative z-10 flex-1">
@@ -163,7 +167,7 @@ export default function AboutPage() {
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-[10px] font-black text-surface-500 uppercase tracking-widest">Instagram</span>
-                                        <span className="text-lg font-black group-hover:text-brand-500 transition-colors tracking-tight">@vibez.lk</span>
+                                        <span className="text-lg font-black group-hover:text-brand-500 transition-colors tracking-tight">@vibezsrilanka</span>
                                     </div>
                                 </a>
                                 <a href="#" className="flex items-center gap-6 group">
@@ -171,8 +175,8 @@ export default function AboutPage() {
                                         <Send size={24} />
                                     </div>
                                     <div className="flex flex-col">
-                                        <span className="text-[10px] font-black text-surface-500 uppercase tracking-widest">Telegram</span>
-                                        <span className="text-lg font-black group-hover:text-brand-500 transition-colors tracking-tight">VibeZ Community</span>
+                                        <span className="text-[10px] font-black text-surface-500 uppercase tracking-widest">WhatsApp</span>
+                                        <span className="text-lg font-black group-hover:text-brand-500 transition-colors tracking-tight">VibeZ Club</span>
                                     </div>
                                 </a>
                             </div>
@@ -183,7 +187,7 @@ export default function AboutPage() {
                         initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="bg-white p-12 rounded-[3.5rem] shadow-2xl relative w-full lg:w-[450px]"
+                        className="bg-white p-5 md:p-12 rounded-3xl md:rounded-[3.5rem] shadow-2xl relative w-full lg:w-[450px]"
                     >
                         <h3 className="text-3xl font-black text-surface-950 mb-8 uppercase tracking-tighter leading-none">Drop a message</h3>
                         <form className="space-y-6">

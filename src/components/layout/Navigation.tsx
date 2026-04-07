@@ -117,7 +117,7 @@ export function Navigation() {
                                         href="/auth/login"
                                         className="px-8 py-3.5 bg-surface-950 hover:bg-black text-white font-black rounded-xl transition-all shadow-xl shadow-black/10 active:scale-95 text-[10px] uppercase tracking-[0.2em]"
                                     >
-                                        Authenticate
+                                        Login
                                     </Link>
                                 </div>
                             )}

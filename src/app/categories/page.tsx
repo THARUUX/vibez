@@ -72,7 +72,7 @@ export default function CategoriesPage() {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-5xl md:text-7xl font-black tracking-tighter mb-4 text-surface-950 uppercase"
                     >
-                        PART <span className="text-brand-600">CATEGORIES</span>
+                        CATEGORY <span className="text-brand-600">VIBEZ</span>
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
