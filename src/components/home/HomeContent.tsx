@@ -32,7 +32,7 @@ export function Hero() {
                         opacity: [0.1, 0.2, 0.1]
                     }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-brand-200/10 rounded-full blur-[120px]" 
+                    className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-brand-200/10 rounded-full blur-[60px] md:blur-[120px]" 
                 />
                 <m.div 
                     animate={{ 
@@ -41,7 +41,7 @@ export function Hero() {
                         opacity: [0.05, 0.15, 0.05]
                     }}
                     transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                    className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-500/5 rounded-full blur-[100px]" 
+                    className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-500/5 rounded-full blur-[50px] md:blur-[100px]" 
                 />
             </div>
 

@@ -29,7 +29,7 @@ export function Footer() {
                     {/* Brand Section */}
                     <div className="space-y-6">
                         <Link href="/" className="flex items-center gap-2 group">
-                            <Image src="/logo.avif" alt="Logo" className="w-50" width={500} height={500} />
+                            <Image src="/logo.svg" alt="Logo" className="w-[120px] md:w-[150px] brightness-0 invert" width={150} height={50} />
                             {/* <motion.div
                                 whileHover={{ rotate: 180, scale: 1.1 }}
                                 className="text-brand-600"

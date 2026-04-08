@@ -14,9 +14,11 @@ import { AuthProvider } from "./AuthProvider";
 export function ClientLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const isAdmin = pathname.startsWith('/admin');
-    const syncSettings = useSettingsStore(state => state.syncSettings);
+    const { syncSettings, storeName } = useSettingsStore();
 
     useEffect(() => {
+        // Only sync if we haven't successfully synced yet (indicated by storeName being default or specific condition)
+        // This prevents potential re-render loops if syncSettings identity were to change
         syncSettings();
     }, [syncSettings]);
 

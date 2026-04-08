@@ -13,18 +13,22 @@ export function LoadingScreen() {
 
     useEffect(() => {
         setMounted(true);
-        const interval = setInterval(() => {
-            setProgress(prev => {
-                if (prev >= 100) {
-                    clearInterval(interval);
-                    setTimeout(() => setIsVisible(false), 500);
-                    return 100;
-                }
-                return prev + Math.random() * 15;
-            });
+        // Add a small delay before starting progress to ensure hydration stability
+        const timeout = setTimeout(() => {
+            const interval = setInterval(() => {
+                setProgress(prev => {
+                    if (prev >= 100) {
+                        clearInterval(interval);
+                        setTimeout(() => setIsVisible(false), 500);
+                        return 100;
+                    }
+                    return prev + Math.random() * 15;
+                });
+            }, 100);
+            return () => clearInterval(interval);
         }, 100);
 
-        return () => clearInterval(interval);
+        return () => clearTimeout(timeout);
     }, []);
 
     if (!mounted) return null;
@@ -39,7 +43,7 @@ export function LoadingScreen() {
                         y: "-100%",
                         transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
                     }}
-                    className="fixed inset-0 z-9999 flex flex-col items-center justify-center bg-brand-600 font-outfit select-none pointer-events-none"
+                    className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-brand-600 font-outfit select-none pointer-events-none"
                 >
                     <div className="relative flex flex-col items-center">
                         {/* Logo Animation */}
