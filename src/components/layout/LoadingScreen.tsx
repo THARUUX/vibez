@@ -19,12 +19,12 @@ export function LoadingScreen() {
                 setProgress(prev => {
                     if (prev >= 100) {
                         clearInterval(interval);
-                        setTimeout(() => setIsVisible(false), 500);
+                        setTimeout(() => setIsVisible(false), 600);
                         return 100;
                     }
-                    return prev + Math.random() * 15;
+                    return prev + Math.random() * 8 + 2;
                 });
-            }, 100);
+            }, 150);
             return () => clearInterval(interval);
         }, 100);
 
@@ -43,7 +43,7 @@ export function LoadingScreen() {
                         y: "-100%",
                         transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
                     }}
-                    className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-brand-600 font-outfit select-none pointer-events-none"
+                    className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-brand-600 font-outfit select-none pointer-events-none transform-gpu"
                 >
                     <div className="relative flex flex-col items-center">
                         {/* Logo Animation */}

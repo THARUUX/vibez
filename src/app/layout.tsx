@@ -1,7 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { ClientLayout } from "@/components/layout/ClientLayout";
+
+export const viewport: Viewport = {
+  themeColor: '#ef4444',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: 'cover',
+};
 
 const inter = Inter({
   variable: "--font-inter",

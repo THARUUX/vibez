@@ -27,21 +27,23 @@ export function Hero() {
                 
                 <m.div 
                     animate={{ 
-                        scale: [1, 1.2, 1],
+                        scale: [1, 1.1, 1],
                         rotate: [0, 90, 0],
-                        opacity: [0.1, 0.2, 0.1]
+                        opacity: [0.1, 0.15, 0.1]
                     }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-brand-200/10 rounded-full blur-[60px] md:blur-[120px]" 
+                    className="absolute top-1/2 right-0 -translate-y-1/2 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-brand-200/10 rounded-full blur-[40px] md:blur-[120px] pointer-events-none" 
+                    style={{ transform: 'translateZ(0)', willChange: 'transform, opacity' }}
                 />
                 <m.div 
                     animate={{ 
-                        scale: [1, 1.5, 1],
-                        x: [0, 50, 0],
-                        opacity: [0.05, 0.15, 0.05]
+                        scale: [1, 1.2, 1],
+                        x: [0, 20, 0],
+                        opacity: [0.05, 0.1, 0.05]
                     }}
                     transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                    className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-500/5 rounded-full blur-[50px] md:blur-[100px]" 
+                    className="absolute bottom-0 left-0 w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-brand-500/5 rounded-full blur-[30px] md:blur-[100px] pointer-events-none" 
+                    style={{ transform: 'translateZ(0)', willChange: 'transform, opacity' }}
                 />
             </div>
 
