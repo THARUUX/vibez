@@ -28,14 +28,14 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
                 <>{children}</>
             ) : (
                 <>
-                    {/* {!isAdmin && <LoadingScreen />}
-                    <Navigation />
+                    {!isAdmin && <LoadingScreen />}
+                    {/* <Navigation /> */}
 
                     <CartDrawer />
                     <main className="pt-20 min-h-screen">
                         {children}
                     </main>
-                    <Footer /> */}
+                    {/* <Footer /> */}
                 </>
             )}
         </AuthProvider>
