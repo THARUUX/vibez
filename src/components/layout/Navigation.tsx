@@ -39,8 +39,8 @@ export function Navigation() {
 
     return (
         <>
-            {/* <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-sm glass border-b border-surface-200 shadow-sm px-4"> */}
-             <header className="fixed top-0 left-0 w-full z-50  border-b border-surface-200 shadow-sm px-4">
+            <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-sm glass border-b border-surface-200 shadow-sm px-4">
+             {/* <header className="fixed top-0 left-0 w-full z-50  border-b border-surface-200 shadow-sm px-4"> */}
                 <div className="container mx-auto h-24 flex items-center justify-between">
 
                     <Link href="/" className="flex items-center gap-3 group">
@@ -185,7 +185,7 @@ export function Navigation() {
                                     onClick={() => signOut()}
                                     className="text-left text-red-600 text-3xl font-black uppercase tracking-widest mt-12 bg-red-50 p-6 rounded-3xl"
                                 >
-                                    DISCONNECT
+                                    LOGOUT
                                 </button>
                             )}
                         </nav>
