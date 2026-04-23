@@ -29,10 +29,10 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
             ) : (
                 <>
                     {!isAdmin && <LoadingScreen />}
-                    <Navigation />
+                    {/* <Navigation /> */}
 
-                    {/* <CartDrawer />
-                    <main className="pt-20 min-h-screen">
+                    <CartDrawer />
+                    {/* <main className="pt-20 min-h-screen">
                         {children}
                     </main> */}
                     {/* <Footer /> */}
