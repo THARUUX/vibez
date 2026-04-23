@@ -13,9 +13,11 @@ export function LoadingScreen() {
 
     useEffect(() => {
         setMounted(true);
+        let interval: NodeJS.Timeout;
+        
         // Add a small delay before starting progress to ensure hydration stability
         const timeout = setTimeout(() => {
-            const interval = setInterval(() => {
+            interval = setInterval(() => {
                 setProgress(prev => {
                     if (prev >= 100) {
                         clearInterval(interval);
@@ -25,10 +27,12 @@ export function LoadingScreen() {
                     return prev + Math.random() * 8 + 2;
                 });
             }, 150);
-            return () => clearInterval(interval);
         }, 100);
 
-        return () => clearTimeout(timeout);
+        return () => {
+            clearTimeout(timeout);
+            if (interval) clearInterval(interval);
+        };
     }, []);
 
     if (!mounted) return null;
@@ -40,10 +44,10 @@ export function LoadingScreen() {
                 <m.div
                     initial={{ opacity: 1 }}
                     exit={{ 
-                        y: "-100%",
-                        transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
+                        opacity: 0,
+                        transition: { duration: 0.5, ease: "easeOut" }
                     }}
-                    className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-brand-600 font-outfit select-none pointer-events-none transform-gpu"
+                    className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-brand-600 font-outfit select-none pointer-events-none"
                 >
                     <div className="relative flex flex-col items-center">
                         {/* Logo Animation */}

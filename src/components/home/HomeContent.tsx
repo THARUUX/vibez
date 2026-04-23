@@ -10,19 +10,31 @@ import { useState, useEffect } from "react";
 
 const m = motion as any;
 export function Hero() {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     return (
         <div className="relative min-h-[90vh] flex flex-col justify-center pt-16 md:pt-32 md:pb-20 overflow-hidden bg-surface-50 font-outfit">
             {/* Background Elements */}
             <div className="absolute inset-0 z-0 overflow-hidden">
-                <video 
-                    autoPlay 
-                    muted 
-                    loop 
-                    playsInline 
-                    className="absolute inset-0 w-full h-full object-cover opacity-30"
-                >
-                    <source src="/bg-video.mp4" type="video/mp4" />
-                </video>
+                {!isMobile && (
+                    <video 
+                        autoPlay 
+                        muted 
+                        loop 
+                        playsInline 
+                        preload="metadata"
+                        className="absolute inset-0 w-full h-full object-cover opacity-30"
+                    >
+                        <source src="/bg-video.mp4" type="video/mp4" />
+                    </video>
+                )}
                 <div className="absolute inset-0 bg-linear-to-b from-surface-50 via-transparent to-surface-50" />
                 
                 <m.div 
@@ -33,7 +45,6 @@ export function Hero() {
                     }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                     className="absolute top-1/2 right-0 -translate-y-1/2 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-brand-200/10 rounded-full blur-[40px] md:blur-[120px] pointer-events-none" 
-                    style={{ transform: 'translateZ(0)', willChange: 'transform, opacity' }}
                 />
                 <m.div 
                     animate={{ 
@@ -43,7 +54,6 @@ export function Hero() {
                     }}
                     transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
                     className="absolute bottom-0 left-0 w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-brand-500/5 rounded-full blur-[30px] md:blur-[100px] pointer-events-none" 
-                    style={{ transform: 'translateZ(0)', willChange: 'transform, opacity' }}
                 />
             </div>
 
