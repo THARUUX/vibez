@@ -35,7 +35,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
                     {/* <main className="pt-20 min-h-screen">
                         {children}
                     </main> */}
-                    {/* <Footer /> */}
+                    <Footer />
                 </>
             )}
         </AuthProvider>
