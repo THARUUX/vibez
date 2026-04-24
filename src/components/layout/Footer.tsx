@@ -21,7 +21,7 @@ export function Footer() {
     const storeName = useSettingsStore(state => state.storeName);
 
     return (
-        <footer className="relative overflow-hidden pt-24 pb-12 bg-white border-t border-surface-200">
+        <footer className="relative overflow-hidden pt-24 pb-12 bg-white border-t border-surface-200 safe-bottom">
             {/* Background Accents */}
             <div className="absolute top-0 right-0 w-[600px] h-[600px] pointer-events-none opacity-10"
                 style={{

@@ -8,6 +8,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
+  userScalable: false,
   viewportFit: 'cover',
 };
 
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
     return (
       <html lang="en">
         <body
-          className={`${inter.variable} ${googleSans.variable} font-sans antialiased bg-surface-100 text-surface-950 min-h-screen selection:bg-brand-500 selection:text-white`}
+          className={`${inter.variable} ${googleSans.variable} font-sans antialiased bg-surface-100 text-surface-950 min-h-[100dvh] selection:bg-brand-500 selection:text-white`}
           suppressHydrationWarning
         >
           <ClientLayout>

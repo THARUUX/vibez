@@ -54,7 +54,7 @@ export function Navigation() {
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+                className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 safe-top ${
                     scrolled
                         ? "bg-white/90 backdrop-blur-xl border-b border-surface-200 shadow-sm"
                         : "bg-transparent"
