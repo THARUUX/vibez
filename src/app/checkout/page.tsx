@@ -3,7 +3,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { alerts } from "@/lib/alerts";
-import { Truck, CreditCard, ShieldCheck, ChevronRight, Lock, ArrowLeft, CheckCircle2, Package, Landmark, Smartphone, Loader2 } from "lucide-react";
+import { RiTruckLine, RiBankCardLine, RiShieldCheckLine, RiArrowRightSLine, RiLock2Line, RiArrowLeftLine, RiCheckboxCircleFill, RiBox3Line, RiBankLine, RiSmartphoneLine, RiLoader4Line } from "react-icons/ri";
 import { useCartStore } from "@/store/cartStore";
 import Image from "next/image";
 import Link from "next/link";
@@ -149,12 +149,12 @@ export default function CheckoutPage() {
     if (items.length === 0 && !["success", "bank_details"].includes(step)) {
         return (
             <div className="min-h-screen bg-surface-50 pt-32 pb-12 flex flex-col items-center justify-center container mx-auto px-4 text-center">
-                <div className="w-32 h-32 bg-white rounded-3xl flex items-center justify-center text-surface-200 mb-10 border border-surface-200 shadow-sm">
-                    <Package size={56} />
+                <div className="w-32 h-32 bg-white rounded-3xl flex items-center justify-center text-surface-300 mb-10 shadow-sm border border-surface-200">
+                    <RiBox3Line size={56} />
                 </div>
-                <h1 className="text-5xl font-outfit font-black text-surface-950 uppercase mb-4 tracking-tighter">Your cart is empty</h1>
+                <h1 className="text-4xl md:text-5xl font-black text-surface-950 uppercase mb-4 tracking-tighter">Your cart is empty</h1>
                 <p className="text-surface-500 font-medium mb-12 max-w-sm italic text-lg leading-relaxed">Boost your vehicle's performance with our precision components before checking out.</p>
-                <Link href="/products" className="apex-button">
+                <Link href="/products" className="apex-button max-w-xs mx-auto">
                     Browse Catalog
                 </Link>
             </div>
@@ -173,28 +173,28 @@ export default function CheckoutPage() {
                                     animate={{ opacity: 1, x: 0 }}
                                     className="flex items-center gap-2 text-brand-600 font-black uppercase tracking-[0.3em] text-[10px] mb-4"
                                 >
-                                    <Lock size={12} />
+                                    <RiLock2Line size={14} />
                                     <span>256-bit Secure Session</span>
                                 </motion.div>
-                                <h1 className="text-5xl md:text-7xl font-outfit font-black text-surface-950 uppercase tracking-tighter leading-none">SECURE <span className="text-brand-600">CHECKOUT</span></h1>
+                                <h1 className="text-5xl md:text-7xl font-black text-surface-950 uppercase tracking-tighter leading-none">SECURE <span className="text-brand-600">CHECKOUT</span></h1>
                             </div>
 
                             {/* Progress Stepper */}
                             <div className="flex items-center gap-6 bg-white p-3 rounded-2xl border border-surface-200 shadow-sm">
                                 <div className={`flex items-center gap-3 px-6 py-3 rounded-xl transition-all duration-500 ${step === "shipping" ? "bg-brand-600 text-white shadow-lg shadow-brand-600/20" : "text-surface-400 font-bold"}`}>
-                                    <Truck size={20} />
+                                    <RiTruckLine size={20} />
                                     <span className="font-black text-xs uppercase tracking-widest hidden sm:inline">Shipping</span>
                                 </div>
-                                <ChevronRight size={18} className="text-surface-200" />
+                                <RiArrowRightSLine size={24} className="text-surface-300" />
                                 <div className={`flex items-center gap-3 px-6 py-3 rounded-xl transition-all duration-500 ${step === "payment" ? "bg-brand-600 text-white shadow-lg shadow-brand-600/20" : "text-surface-400 font-bold"}`}>
-                                    <CreditCard size={20} />
+                                    <RiBankCardLine size={20} />
                                     <span className="font-black text-xs uppercase tracking-widest hidden sm:inline">Payment</span>
                                 </div>
                             </div>
                         </div>
                     )}
 
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
                         {/* Main Interaction Area */}
                         <div className="lg:col-span-8">
                             <AnimatePresence mode="wait">
@@ -204,31 +204,31 @@ export default function CheckoutPage() {
                                         initial={{ opacity: 0, scale: 0.98 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.98 }}
-                                        className="bg-white rounded-3xl p-10 md:p-16 border border-surface-200 shadow-sm"
+                                        className="bg-white rounded-3xl p-8 md:p-16 border border-surface-200 shadow-sm"
                                     >
-                                        <h2 className="text-3xl font-black text-surface-950 mb-12 uppercase tracking-tighter flex items-center gap-4">
-                                            <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 shadow-inner">
-                                                <Truck size={24} />
+                                        <h2 className="text-2xl md:text-3xl font-black text-surface-950 mb-12 uppercase tracking-tighter flex items-center gap-4">
+                                            <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 border border-brand-100">
+                                                <RiTruckLine size={24} />
                                             </div>
                                             Logistics Destination
                                         </h2>
 
-                                        <div className="grid grid-cols-2 gap-8 mb-8">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
                                             <div className="space-y-3">
-                                                <label className="text-[10px] font-black text-surface-400 uppercase tracking-widest ml-1">First Name</label>
+                                                <label className="text-[10px] font-black text-surface-500 uppercase tracking-[0.2em] ml-2">First Name</label>
                                                 <input
                                                     type="text"
-                                                    className="w-full bg-surface-50 border-2 border-surface-100 rounded-xl px-8 py-5 focus:outline-none focus:border-brand-600 font-bold text-surface-950 transition-all font-outfit"
+                                                    className="vibez-input bg-surface-50"
                                                     placeholder="e.g. Lewis"
                                                     value={shippingData.firstName}
                                                     onChange={e => setShippingData({ ...shippingData, firstName: e.target.value })}
                                                 />
                                             </div>
                                             <div className="space-y-3">
-                                                <label className="text-[10px] font-black text-surface-400 uppercase tracking-widest ml-1">Last Name</label>
+                                                <label className="text-[10px] font-black text-surface-500 uppercase tracking-[0.2em] ml-2">Last Name</label>
                                                 <input
                                                     type="text"
-                                                    className="w-full bg-surface-50 border-2 border-surface-100 rounded-xl px-8 py-5 focus:outline-none focus:border-brand-600 font-bold text-surface-950 transition-all font-outfit"
+                                                    className="vibez-input bg-surface-50"
                                                     placeholder="e.g. Hamilton"
                                                     value={shippingData.lastName}
                                                     onChange={e => setShippingData({ ...shippingData, lastName: e.target.value })}
@@ -238,31 +238,31 @@ export default function CheckoutPage() {
 
                                         <div className="space-y-8 mb-12">
                                             <div className="space-y-3">
-                                                <label className="text-[10px] font-black text-surface-400 uppercase tracking-widest ml-1">Fleet Delivery Address</label>
+                                                <label className="text-[10px] font-black text-surface-500 uppercase tracking-[0.2em] ml-2">Fleet Delivery Address</label>
                                                 <input
                                                     type="text"
-                                                    className="w-full bg-surface-50 border-2 border-surface-100 rounded-xl px-8 py-5 focus:outline-none focus:border-brand-600 font-bold text-surface-950 transition-all font-outfit"
+                                                    className="vibez-input bg-surface-50"
                                                     placeholder="123 Performance Way"
                                                     value={shippingData.address}
                                                     onChange={e => setShippingData({ ...shippingData, address: e.target.value })}
                                                 />
                                             </div>
-                                            <div className="grid grid-cols-2 gap-8">
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                                                 <div className="space-y-3">
-                                                    <label className="text-[10px] font-black text-surface-400 uppercase tracking-widest ml-1">City</label>
+                                                    <label className="text-[10px] font-black text-surface-500 uppercase tracking-[0.2em] ml-2">City</label>
                                                     <input
                                                         type="text"
-                                                        className="w-full bg-surface-50 border-2 border-surface-100 rounded-xl px-8 py-5 focus:outline-none focus:border-brand-600 font-bold text-surface-950 transition-all font-outfit"
+                                                        className="vibez-input bg-surface-50"
                                                         placeholder="Detroit"
                                                         value={shippingData.city}
                                                         onChange={e => setShippingData({ ...shippingData, city: e.target.value })}
                                                     />
                                                 </div>
                                                 <div className="space-y-3">
-                                                    <label className="text-[10px] font-black text-surface-400 uppercase tracking-widest ml-1">Zip / Postal</label>
+                                                    <label className="text-[10px] font-black text-surface-500 uppercase tracking-[0.2em] ml-2">Zip / Postal</label>
                                                     <input
                                                         type="text"
-                                                        className="w-full bg-surface-50 border-2 border-surface-100 rounded-xl px-8 py-5 focus:outline-none focus:border-brand-600 font-bold text-surface-950 transition-all font-outfit"
+                                                        className="vibez-input bg-surface-50"
                                                         placeholder="48201"
                                                         value={shippingData.zip}
                                                         onChange={e => setShippingData({ ...shippingData, zip: e.target.value })}
@@ -272,11 +272,11 @@ export default function CheckoutPage() {
                                         </div>
 
                                         {deliveryTerms && (
-                                            <div className="mb-12 p-6 bg-surface-50 rounded-2xl border border-surface-100 flex items-start gap-4">
-                                                <Truck className="text-surface-400 shrink-0 mt-0.5" size={20} />
+                                            <div className="mb-12 p-6 bg-surface-50 rounded-2xl border border-surface-100 flex items-start gap-4 shadow-inner">
+                                                <RiTruckLine className="text-brand-500 shrink-0 mt-0.5" size={24} />
                                                 <div>
-                                                    <p className="text-sm font-black text-surface-900 uppercase tracking-tight mb-1">Delivery Information</p>
-                                                    <p className="text-sm text-surface-500 font-medium italic whitespace-pre-line">{deliveryTerms}</p>
+                                                    <p className="text-sm font-black text-surface-950 uppercase tracking-tight mb-1">Delivery Information</p>
+                                                    <p className="text-sm text-surface-500 font-medium italic whitespace-pre-line leading-relaxed">{deliveryTerms}</p>
                                                 </div>
                                             </div>
                                         )}
@@ -289,9 +289,9 @@ export default function CheckoutPage() {
                                                 }
                                                 setStep("payment");
                                             }}
-                                            className="apex-button w-full py-6 text-base"
+                                            className="apex-button w-full"
                                         >
-                                            Continue to Payment Selection <ChevronRight size={20} />
+                                            Continue to Payment <RiArrowRightSLine size={20} className="group-hover:translate-x-1 transition-transform" />
                                         </button>
                                     </motion.div>
                                 )}
@@ -302,68 +302,68 @@ export default function CheckoutPage() {
                                         initial={{ opacity: 0, scale: 0.98 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.98 }}
-                                        className="bg-white rounded-3xl p-10 md:p-16 border border-surface-200 shadow-sm"
+                                        className="bg-white rounded-3xl p-8 md:p-16 border border-surface-200 shadow-sm"
                                     >
                                         <button
                                             onClick={() => setStep("shipping")}
                                             className="flex items-center gap-2 text-surface-400 hover:text-brand-600 font-black uppercase tracking-[0.2em] text-[10px] mb-10 transition-all group"
                                         >
-                                            <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> Modify Shipping
+                                            <RiArrowLeftLine size={14} className="group-hover:-translate-x-1 transition-transform" /> Modify Shipping
                                         </button>
 
-                                        <h2 className="text-3xl font-black text-surface-950 mb-12 uppercase tracking-tighter flex items-center gap-4">
-                                            <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 shadow-inner">
-                                                <CreditCard size={24} />
+                                        <h2 className="text-2xl md:text-3xl font-black text-surface-950 mb-12 uppercase tracking-tighter flex items-center gap-4">
+                                            <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 border border-brand-100">
+                                                <RiBankCardLine size={24} />
                                             </div>
                                             Payment Methods
                                         </h2>
 
-                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                                             {payhereEnabled && (
                                                 <button
                                                     onClick={() => setPaymentMethod("PAYHERE")}
-                                                    className={`p-10 rounded-2xl border-2 transition-all text-left flex flex-col gap-6 relative overflow-hidden group ${paymentMethod === "PAYHERE" ? "border-brand-600 bg-brand-50/30 shadow-lg" : "border-surface-100 hover:border-surface-200"}`}
+                                                    className={`p-6 md:p-8 rounded-2xl border-2 transition-all text-left flex flex-col gap-6 relative overflow-hidden group ${paymentMethod === "PAYHERE" ? "border-brand-600 bg-brand-50 shadow-md" : "border-surface-200 hover:border-brand-300 bg-surface-50"}`}
                                                 >
-                                                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${paymentMethod === "PAYHERE" ? "bg-brand-600 text-white" : "bg-surface-100 text-surface-400"}`}>
-                                                        <Smartphone size={24} />
+                                                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${paymentMethod === "PAYHERE" ? "bg-brand-600 text-white" : "bg-white text-surface-400 border border-surface-200"}`}>
+                                                        <RiSmartphoneLine size={24} />
                                                     </div>
                                                     <div>
-                                                        <h3 className="font-black text-surface-950 uppercase tracking-tight text-xl mb-2 font-outfit">PayHere Online</h3>
-                                                        <p className="text-xs font-medium text-surface-500 italic">Credit Cards, Mobile Wallets, Net Banking</p>
+                                                        <h3 className="font-black text-surface-950 uppercase tracking-tight text-lg md:text-xl mb-1">PayHere</h3>
+                                                        <p className="text-[10px] font-bold uppercase tracking-widest text-surface-400 leading-relaxed">Credit Cards, Wallets, Net Banking</p>
                                                     </div>
-                                                    {paymentMethod === "PAYHERE" && <div className="absolute top-6 right-6 text-brand-600"><CheckCircle2 size={24} /></div>}
+                                                    {paymentMethod === "PAYHERE" && <div className="absolute top-6 right-6 text-brand-600"><RiCheckboxCircleFill size={24} /></div>}
                                                 </button>
                                             )}
 
                                             {bankEnabled && (
                                                 <button
                                                     onClick={() => setPaymentMethod("BANK_TRANSFER")}
-                                                    className={`p-10 rounded-2xl border-2 transition-all text-left flex flex-col gap-6 relative overflow-hidden group ${paymentMethod === "BANK_TRANSFER" ? "border-brand-600 bg-brand-50/30 shadow-lg" : "border-surface-100 hover:border-surface-200"}`}
+                                                    className={`p-6 md:p-8 rounded-2xl border-2 transition-all text-left flex flex-col gap-6 relative overflow-hidden group ${paymentMethod === "BANK_TRANSFER" ? "border-brand-600 bg-brand-50 shadow-md" : "border-surface-200 hover:border-brand-300 bg-surface-50"}`}
                                                 >
-                                                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${paymentMethod === "BANK_TRANSFER" ? "bg-brand-600 text-white" : "bg-surface-100 text-surface-400"}`}>
-                                                        <Landmark size={24} />
+                                                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${paymentMethod === "BANK_TRANSFER" ? "bg-brand-600 text-white" : "bg-white text-surface-400 border border-surface-200"}`}>
+                                                        <RiBankLine size={24} />
                                                     </div>
                                                     <div>
-                                                        <h3 className="font-black text-surface-950 uppercase tracking-tight text-xl mb-2 font-outfit">Bank Transfer</h3>
-                                                        <p className="text-xs font-medium text-surface-500 italic">Manual bank deposit or online transfer</p>
+                                                        <h3 className="font-black text-surface-950 uppercase tracking-tight text-lg md:text-xl mb-1">Transfer</h3>
+                                                        <p className="text-[10px] font-bold uppercase tracking-widest text-surface-400 leading-relaxed">Manual bank deposit / transfer</p>
                                                     </div>
-                                                    {paymentMethod === "BANK_TRANSFER" && <div className="absolute top-6 right-6 text-brand-600"><CheckCircle2 size={24} /></div>}
+                                                    {paymentMethod === "BANK_TRANSFER" && <div className="absolute top-6 right-6 text-brand-600"><RiCheckboxCircleFill size={24} /></div>}
                                                 </button>
                                             )}
 
                                             {codEnabled && (
                                                 <button
                                                     onClick={() => setPaymentMethod("COD")}
-                                                    className={`p-10 rounded-2xl border-2 transition-all text-left flex flex-col gap-6 relative overflow-hidden group ${paymentMethod === "COD" ? "border-brand-600 bg-brand-50/30 shadow-lg" : "border-surface-100 hover:border-surface-200"}`}
+                                                    className={`p-6 md:p-8 rounded-2xl border-2 transition-all text-left flex flex-col gap-6 relative overflow-hidden group ${paymentMethod === "COD" ? "border-brand-600 bg-brand-50 shadow-md" : "border-surface-200 hover:border-brand-300 bg-surface-50"}`}
                                                 >
-                                                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${paymentMethod === "COD" ? "bg-brand-600 text-white" : "bg-surface-100 text-surface-400"}`}>
-                                                        <Truck size={24} />
+                                                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${paymentMethod === "COD" ? "bg-brand-600 text-white" : "bg-white text-surface-400 border border-surface-200"}`}>
+                                                        <RiTruckLine size={24} />
                                                     </div>
                                                     <div>
-                                                        <h3 className="font-black text-surface-950 uppercase tracking-tight text-xl mb-2 font-outfit">Cash on Delivery</h3>
-                                                        <p className="text-xs font-medium text-surface-500 italic">Pay upon logistics acquisition at your location</p>
+                                                        <h3 className="font-black text-surface-950 uppercase tracking-tight text-lg md:text-xl mb-1">C.O.D.</h3>
+                                                        <p className="text-[10px] font-bold uppercase tracking-widest text-surface-400 leading-relaxed">Pay upon logistics acquisition</p>
                                                     </div>
-                                                    {paymentMethod === "COD" && <div className="absolute top-6 right-6 text-brand-600"><CheckCircle2 size={24} /></div>}
+                                                    {paymentMethod === "COD" && <div className="absolute top-6 right-6 text-brand-600"><RiCheckboxCircleFill size={24} /></div>}
                                                 </button>
                                             )}
                                         </div>
@@ -371,14 +371,14 @@ export default function CheckoutPage() {
                                         <button
                                             onClick={handleOrderSubmission}
                                             disabled={isProcessing || (paymentMethod === "PAYHERE" && !payhereReady)}
-                                            className="w-full py-6 bg-brand-600 hover:bg-brand-700 disabled:bg-surface-300 text-white font-black rounded-xl transition-all shadow-xl shadow-brand-600/20 uppercase tracking-[0.2em] flex items-center justify-center gap-3 active:scale-95 text-base"
+                                            className="apex-button w-full group"
                                         >
                                             {isProcessing ? (
-                                                <>INITIALIZING GATEWAY <Loader2 className="animate-spin" size={22} /></>
+                                                <>INITIALIZING GATEWAY <RiLoader4Line className="animate-spin" size={20} /></>
                                             ) : paymentMethod === "PAYHERE" && !payhereReady ? (
-                                                <>SYNCHRONIZING SECURE GATEWAY <Loader2 className="animate-spin" size={22} /></>
+                                                <>SYNCHRONIZING GATEWAY <RiLoader4Line className="animate-spin" size={20} /></>
                                             ) : (
-                                                <>PLACE THE ORDER <ShieldCheck size={22} /></>
+                                                <>PLACE THE ORDER <RiShieldCheckLine size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /></>
                                             )}
                                         </button>
                                     </motion.div>
@@ -389,39 +389,39 @@ export default function CheckoutPage() {
                                         key="bank_details"
                                         initial={{ opacity: 0, scale: 0.98 }}
                                         animate={{ opacity: 1, scale: 1 }}
-                                        className="bg-white rounded-3xl p-16 md:p-24 border border-surface-200 shadow-2xl text-center"
+                                        className="bg-white rounded-3xl p-10 md:p-20 border border-surface-200 shadow-xl text-center"
                                     >
-                                        <div className="w-32 h-32 bg-brand-50 rounded-2xl flex items-center justify-center text-brand-600 mx-auto mb-12 border border-brand-100 shadow-inner">
-                                            <Landmark size={64} />
+                                        <div className="w-24 h-24 md:w-32 md:h-32 bg-brand-50 rounded-2xl flex items-center justify-center text-brand-600 mx-auto mb-10 border border-brand-100 shadow-inner">
+                                            <RiBankLine size={48} className="md:w-16 md:h-16" />
                                         </div>
-                                        <h2 className="text-4xl md:text-5xl font-outfit font-black text-surface-950 uppercase tracking-tighter mb-6 leading-none">ORDER <span className="text-brand-600">PENDING</span></h2>
+                                        <h2 className="text-4xl md:text-5xl font-black text-surface-950 uppercase tracking-tighter mb-6 leading-none">ORDER <span className="text-brand-600">PENDING</span></h2>
                                         <p className="text-surface-500 font-medium text-lg mb-12 max-w-sm mx-auto italic">To finalize your acquisition, please execute a bank transfer using the details below.</p>
                                         
-                                        <div className="bg-surface-50 p-10 rounded-3xl border-2 border-dashed border-surface-200 text-left space-y-8 mb-12">
+                                        <div className="bg-surface-50 p-8 md:p-10 rounded-3xl border-2 border-dashed border-surface-200 text-left space-y-8 mb-12">
                                             <div className="flex justify-between items-center pb-6 border-b border-surface-200">
                                                 <span className="text-[10px] font-black text-surface-400 uppercase tracking-widest">Bank Entity</span>
-                                                <span className="font-black text-surface-950 font-outfit uppercase tracking-tight">{bankName || "N/A"}</span>
+                                                <span className="font-black text-surface-950 uppercase tracking-tight">{bankName || "N/A"}</span>
                                             </div>
-                                            <div className="flex justify-between items-center pb-6 border-b border-surface-200">
+                                            <div className="flex flex-col sm:flex-row justify-between sm:items-center pb-6 border-b border-surface-200 gap-2">
                                                 <span className="text-[10px] font-black text-surface-400 uppercase tracking-widest">Account Number</span>
-                                                <span className="font-black text-surface-950 font-outfit text-xl tracking-widest">{bankAccount || "N/A"}</span>
+                                                <span className="font-black text-surface-950 text-xl tracking-widest">{bankAccount || "N/A"}</span>
                                             </div>
                                             <div className="flex justify-between items-center pb-6 border-b border-surface-200">
                                                 <span className="text-[10px] font-black text-surface-400 uppercase tracking-widest">Swift / Branch</span>
-                                                <span className="font-black text-surface-950 font-outfit uppercase tracking-tight">{bankBranch || "N/A"}</span>
+                                                <span className="font-black text-surface-950 uppercase tracking-tight">{bankBranch || "N/A"}</span>
                                             </div>
                                             <div className="flex justify-between items-center">
                                                 <span className="text-[10px] font-black text-surface-400 uppercase tracking-widest">Transfer Amount</span>
-                                                <PriceDisplay amount={finalTotal} className="text-2xl font-black text-brand-600 font-outfit tracking-tighter" />
+                                                <PriceDisplay amount={finalTotal} className="text-2xl font-black text-brand-600 tracking-tighter" />
                                             </div>
                                         </div>
 
-                                        <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                                            <Link href="/products" className="apex-button px-12">
+                                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                            <Link href="/products" className="vibez-button-outline">
                                                 Return to Catalog
                                             </Link>
-                                            <Link href="/profile" className="px-12 py-5 bg-surface-950 hover:bg-black text-white font-black rounded-xl transition-all uppercase tracking-widest text-sm shadow-xl flex items-center justify-center gap-3">
-                                                Order Status <Truck size={20} />
+                                            <Link href="/profile" className="vibez-button shadow-md">
+                                                <span>Order Status</span> <RiTruckLine size={18} />
                                             </Link>
                                         </div>
                                     </motion.div>
@@ -432,28 +432,31 @@ export default function CheckoutPage() {
                                         key="success"
                                         initial={{ opacity: 0, y: 40 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="bg-white rounded-3xl p-16 md:p-32 border border-surface-200 shadow-2xl text-center relative overflow-hidden"
+                                        className="bg-white rounded-3xl p-10 md:p-24 border border-surface-200 shadow-2xl text-center relative overflow-hidden"
                                     >
                                         <div className="absolute top-0 inset-x-0 h-2 bg-emerald-500" />
-                                        <div className="w-32 h-32 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 mx-auto mb-12 border border-emerald-100 shadow-inner">
-                                            <CheckCircle2 size={64} className="animate-bounce" />
+                                        <div className="w-24 h-24 md:w-32 md:h-32 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 mx-auto mb-10 border border-emerald-100 shadow-inner">
+                                            <RiCheckboxCircleFill size={64} className="animate-bounce" />
                                         </div>
-                                        <h2 className="text-5xl md:text-7xl font-outfit font-black text-surface-950 uppercase tracking-tighter mb-6 leading-none">
+                                        <h2 className="text-4xl md:text-6xl font-black text-surface-950 uppercase tracking-tighter mb-6 leading-none">
                                             {paymentMethod === "COD" ? "ORDER" : "TRANSACTION"} <span className={paymentMethod === "COD" ? "text-brand-600" : "text-emerald-600"}>{paymentMethod === "COD" ? "CONFIRMED" : "SECURED"}</span>
                                         </h2>
-                                        <p className="text-surface-500 font-medium text-xl mb-16 max-w-sm mx-auto italic">
+                                        <p className="text-surface-500 font-medium text-lg md:text-xl mb-16 max-w-md mx-auto italic leading-relaxed">
                                             {paymentMethod === "COD" 
                                                 ? (codTerms || "Your request has been received. Our logistics team will collect payment upon delivery.")
-                                                : "Payment authorized successfully. Your order is now prioritized in the engineering queue."}
-                                            <br />Amount: <PriceDisplay amount={finalTotal} />
+                                                : "Payment authorized successfully. Your order is now prioritized in the processing queue."}
+                                            <br className="mb-4 block" />
+                                            <span className="bg-surface-50 px-4 py-2 rounded-xl border border-surface-200 inline-block mt-4">
+                                                Amount: <PriceDisplay amount={finalTotal} className="font-black text-surface-950" />
+                                            </span>
                                         </p>
 
-                                        <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                                            <Link href="/products" className="apex-button px-12">
+                                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                            <Link href="/products" className="vibez-button-outline">
                                                 Return to Shop
                                             </Link>
-                                            <Link href="/profile" className="px-12 py-5 bg-surface-950 hover:bg-black text-white font-black rounded-xl transition-all uppercase tracking-widest text-sm shadow-xl flex items-center justify-center gap-3">
-                                                Track Delivery <Truck size={20} />
+                                            <Link href="/profile" className="vibez-button shadow-md">
+                                                <span>Track Delivery</span> <RiTruckLine size={18} />
                                             </Link>
                                         </div>
                                     </motion.div>
@@ -463,58 +466,59 @@ export default function CheckoutPage() {
 
                         {/* Order Summary Sidebar */}
                         {!["success", "bank_details"].includes(step) && (
-                            <aside className="lg:col-span-4 sticky top-40">
-                                <div className="bg-white rounded-3xl p-10 border border-surface-200 shadow-xl">
-                                    <h3 className="text-2xl font-black text-surface-950 mb-10 uppercase tracking-tighter font-outfit">Manifest Summary</h3>
+                            <aside className="lg:col-span-4 sticky top-32">
+                                <div className="bg-white rounded-3xl p-8 border border-surface-200 shadow-md">
+                                    <h3 className="text-xl font-black text-surface-950 mb-8 uppercase tracking-tighter flex items-center gap-3">
+                                        Manifest Summary
+                                    </h3>
 
-                                    <div className="space-y-8 mb-10 max-h-[500px] overflow-y-auto pr-4 custom-scrollbar">
+                                    <div className="space-y-6 mb-8 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                                         {items.map((item) => (
-                                            <div key={item.id} className="flex gap-6 group">
-                                                <div className="w-20 h-20 bg-surface-50 rounded-2xl overflow-hidden border border-surface-100 shrink-0 group-hover:border-brand-500 transition-colors">
-                                                    <Image src={item.image} alt={item.name} width={80} height={80} className="w-full h-full object-cover" />
+                                            <div key={item.id} className="flex gap-4 group">
+                                                <div className="w-16 h-16 bg-surface-50 rounded-xl overflow-hidden border border-surface-100 shrink-0 group-hover:border-brand-300 transition-colors">
+                                                    <Image src={item.image} alt={item.name} width={64} height={64} className="w-full h-full object-cover" />
                                                 </div>
-                                                <div className="flex-1 py-1">
-                                                    <p className="font-black text-surface-950 text-sm uppercase tracking-tight font-outfit line-clamp-1">{item.name}</p>
-                                                    <p className="text-[10px] text-surface-400 font-black uppercase tracking-[0.2em] mt-1">Batch Qty: {item.quantity}</p>
-                                                    <PriceDisplay amount={item.price * item.quantity} className="text-lg font-black text-brand-600 font-outfit mt-2 block" />
+                                                <div className="flex-1 py-0.5">
+                                                    <p className="font-black text-surface-950 text-sm uppercase tracking-tight line-clamp-1 group-hover:text-brand-600 transition-colors">{item.name}</p>
+                                                    <p className="text-[9px] text-surface-400 font-black uppercase tracking-[0.2em] mt-1">Qty: {item.quantity}</p>
+                                                    <PriceDisplay amount={item.price * item.quantity} className="text-base font-black text-brand-600 mt-1 block" />
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
 
-                                    <div className="space-y-5 pt-10 border-t-2 border-dashed border-surface-100">
-                                        <div className="flex justify-between text-[10px] font-black text-surface-400 uppercase tracking-[0.3em]">
+                                    <div className="space-y-4 pt-6 border-t-2 border-dashed border-surface-200">
+                                        <div className="flex justify-between text-[10px] font-black text-surface-500 uppercase tracking-[0.2em]">
                                             <span>Subtotal</span>
-                                            <PriceDisplay amount={subtotal} />
+                                            <PriceDisplay amount={subtotal} className="text-surface-950" />
                                         </div>
-                                        <div className="flex justify-between text-[10px] font-black text-surface-400 uppercase tracking-[0.3em] items-center">
+                                        <div className="flex justify-between text-[10px] font-black text-surface-500 uppercase tracking-[0.2em] items-center">
                                             <span>
                                                 Logistic Fee ({totalWeight.toFixed(2)}kg)
                                             </span>
                                             <PriceDisplay amount={shippingFee} className={shippingFee === 0 ? "text-emerald-600" : "text-surface-950"} />
                                         </div>
-                                        <div className="flex justify-between items-center pt-6 border-t border-surface-950">
-                                            <span className="text-2xl font-black text-surface-950 uppercase tracking-tighter font-outfit">Total AMT</span>
-                                            <PriceDisplay amount={total} className="text-4xl font-black text-surface-950 tracking-tighter font-outfit" />
+                                        <div className="flex justify-between items-center pt-6 border-t border-surface-100 mt-4">
+                                            <span className="text-xl font-black text-surface-950 uppercase tracking-tight">Total AMT</span>
+                                            <PriceDisplay amount={total} className="text-3xl font-black text-surface-950 tracking-tighter" />
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="mt-8 p-6 bg-surface-50 rounded-3xl border border-surface-200 shadow-sm">
-                                    <div className="flex items-center gap-2 text-surface-900 font-black text-xs uppercase tracking-widest mb-3">
-                                        <Truck size={16} className="text-brand-600" /> Logistics Terms
+                                <div className="mt-6 p-6 bg-surface-50 rounded-2xl border border-surface-200 shadow-sm">
+                                    <div className="flex items-center gap-2 text-surface-950 font-black text-[10px] uppercase tracking-widest mb-2">
+                                        <RiTruckLine size={16} className="text-brand-600" /> Logistics Terms
                                     </div>
                                     <p className="text-xs text-surface-500 font-medium whitespace-pre-line leading-relaxed italic">
                                         {deliveryTerms || "Standard delivery terms apply. Please expect logistics contact upon dispatch."}
                                     </p>
                                 </div>
 
-                                <div className="mt-10 flex flex-col items-center gap-4 text-surface-400 font-black text-[10px] uppercase tracking-[0.3em]">
-                                    <div className="flex items-center gap-3">
-                                        <ShieldCheck size={20} className="text-emerald-500" />
-                                        {storeName} Buyer Protection Active
+                                <div className="mt-8 flex flex-col items-center gap-3 text-surface-400 font-black text-[9px] uppercase tracking-[0.3em]">
+                                    <div className="flex items-center gap-2">
+                                        <RiShieldCheckLine size={16} className="text-emerald-500" />
+                                        {storeName} Buyer Protection
                                     </div>
-                                    <div className="w-12 h-1 bg-surface-200 rounded-full" />
                                 </div>
                             </aside>
                         )}

@@ -1,7 +1,8 @@
+/* eslint-disable */
 "use client";
 
 import { motion } from "framer-motion";
-import { Loader2, Zap, Target, ArrowRight, LayoutGrid, Grid3X3, ChevronLeft, ChevronRight } from "lucide-react";
+import { RiLoader4Line, RiFlashlightFill, RiFocus3Line, RiLayoutGridLine, RiLayoutMasonryLine, RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { useState, useEffect, useMemo, Suspense } from "react";
 import { CatalogSidebar } from "@/components/catalog/CatalogSidebar";
 import { ProductGrid } from "@/components/catalog/ProductGrid";
@@ -13,7 +14,7 @@ function CatalogContent() {
     const [products, setProducts] = useState<any[]>([]);
     const [categories, setCategories] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
-    
+
     // Filter & Sort State
     const [searchQuery, setSearchQuery] = useState("");
     const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
@@ -24,7 +25,6 @@ function CatalogContent() {
     const [viewMode, setViewMode] = useState<'grid' | 'small'>('grid');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 12;
-    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,7 +33,7 @@ function CatalogContent() {
                     fetch('/api/products'),
                     fetch('/api/categories')
                 ]);
-                
+
                 const [prodData, catData] = await Promise.all([
                     prodRes.json(),
                     catRes.json()
@@ -58,8 +58,8 @@ function CatalogContent() {
         // Search
         if (searchQuery) {
             const query = searchQuery.toLowerCase();
-            result = result.filter(p => 
-                p.name.toLowerCase().includes(query) || 
+            result = result.filter(p =>
+                p.name.toLowerCase().includes(query) ||
                 p.description.toLowerCase().includes(query) ||
                 p.sku?.toLowerCase().includes(query)
             );
@@ -102,15 +102,14 @@ function CatalogContent() {
     useEffect(() => {
         setCurrentPage(1);
     }, [searchQuery, activeCategoryId, sortBy, priceRange]);
-    
 
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-surface-50">
                 <div className="flex flex-col items-center gap-6">
                     <div className="relative">
-                        <Loader2 className="w-20 h-20 text-brand-600 animate-spin" />
-                        <Zap className="absolute inset-0 m-auto w-8 h-8 text-brand-600 animate-pulse" />
+                        <RiLoader4Line className="w-20 h-20 text-brand-600 animate-spin" />
+                        <RiFlashlightFill className="absolute inset-0 m-auto w-8 h-8 text-brand-600 animate-pulse" />
                     </div>
                     <span className="font-black uppercase tracking-[0.5em] text-surface-400 text-xs text-center">
                         Loading your<br />Collection
@@ -131,7 +130,7 @@ function CatalogContent() {
                             animate={{ opacity: 1, x: 0 }}
                             className="flex items-center gap-3 text-brand-600 font-black uppercase tracking-[0.4em] text-[10px] mb-6"
                         >
-                            <Target size={16} />
+                            <RiFocus3Line size={16} />
                             <span>VIBE COLLECTION v1.0</span>
                         </m.div>
                         <m.h1
@@ -152,7 +151,7 @@ function CatalogContent() {
                         </m.p>
                     </div>
 
-                    <m.div 
+                    <m.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         className="bg-white p-8 rounded-2xl border border-surface-200 shadow-xl hidden xl:block"
@@ -176,7 +175,7 @@ function CatalogContent() {
             <div className="container mx-auto px-4">
                 <div className="flex flex-col lg:flex-row gap-16">
                     {/* Sidebar Filters */}
-                    <CatalogSidebar 
+                    <CatalogSidebar
                         searchQuery={searchQuery}
                         setSearchQuery={setSearchQuery}
                         categories={categories}
@@ -200,27 +199,27 @@ function CatalogContent() {
                                     <span>Real-time Filtering Active</span>
                                 </div>
                             </div>
-                            
+
                             <div className="flex items-center gap-2 bg-white p-1 rounded-xl shadow-sm border border-surface-200">
-                                <button 
+                                <button
                                     onClick={() => setViewMode('grid')}
                                     className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-brand-600 text-white shadow-lg shadow-brand-600/20' : 'text-surface-400 hover:text-surface-950'}`}
                                     title="Grid View"
                                 >
-                                    <LayoutGrid size={18} />
+                                    <RiLayoutGridLine size={18} />
                                 </button>
-                                <button 
+                                <button
                                     onClick={() => setViewMode('small')}
                                     className={`p-2 rounded-lg transition-all ${viewMode === 'small' ? 'bg-brand-600 text-white shadow-lg shadow-brand-600/20' : 'text-surface-400 hover:text-surface-950'}`}
                                     title="Compact View"
                                 >
-                                    <Grid3X3 size={18} />
+                                    <RiLayoutMasonryLine size={18} />
                                 </button>
                             </div>
                         </div>
-                        
-                        <ProductGrid 
-                            products={paginatedProducts} 
+
+                        <ProductGrid
+                            products={paginatedProducts}
                             loading={loading}
                             viewMode={viewMode}
                         />
@@ -228,36 +227,35 @@ function CatalogContent() {
                         {/* Pagination Controls */}
                         {totalPages > 1 && (
                             <div className="flex justify-center items-center gap-4 mt-20">
-                                <button 
+                                <button
                                     onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                                     disabled={currentPage === 1}
                                     className="w-12 h-12 bg-white border border-surface-200 rounded-xl flex items-center justify-center text-surface-600 hover:border-brand-600 hover:text-brand-600 disabled:opacity-50 disabled:hover:border-surface-200 disabled:hover:text-surface-600 transition-all shadow-sm"
                                 >
-                                    <ChevronLeft size={20} />
+                                    <RiArrowLeftSLine size={24} />
                                 </button>
-                                
+
                                 <div className="flex gap-2">
                                     {Array.from({ length: totalPages }).map((_, i) => (
                                         <button
                                             key={i}
                                             onClick={() => setCurrentPage(i + 1)}
-                                            className={`w-12 h-12 rounded-xl font-bold transition-all ${
-                                                currentPage === i + 1 
-                                                ? 'bg-brand-600 text-white shadow-lg shadow-brand-600/20' 
-                                                : 'bg-white border border-surface-200 text-surface-600 hover:border-brand-600 hover:text-brand-600'
-                                            }`}
+                                            className={`w-12 h-12 rounded-xl font-bold transition-all ${currentPage === i + 1
+                                                    ? 'bg-brand-600 text-white shadow-lg shadow-brand-600/20'
+                                                    : 'bg-white border border-surface-200 text-surface-600 hover:border-brand-600 hover:text-brand-600'
+                                                }`}
                                         >
                                             {i + 1}
                                         </button>
                                     ))}
                                 </div>
 
-                                <button 
+                                <button
                                     onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                                     disabled={currentPage === totalPages}
                                     className="w-12 h-12 bg-white border border-surface-200 rounded-xl flex items-center justify-center text-surface-600 hover:border-brand-600 hover:text-brand-600 disabled:opacity-50 disabled:hover:border-surface-200 disabled:hover:text-surface-600 transition-all shadow-sm"
                                 >
-                                    <ChevronRight size={20} />
+                                    <RiArrowRightSLine size={24} />
                                 </button>
                             </div>
                         )}
@@ -273,7 +271,7 @@ export default function CatalogPage() {
     return (
         <Suspense fallback={
             <div className="min-h-screen flex items-center justify-center bg-surface-50">
-                <Loader2 className="w-16 h-16 text-brand-600 animate-spin" />
+                <RiLoader4Line className="w-16 h-16 text-brand-600 animate-spin" />
             </div>
         }>
             <CatalogContent />

@@ -67,8 +67,8 @@ export function ProductCard({ product, index, small = false }: ProductCardProps)
             className="vibez-card group"
         >
             {/* Image Container */}
-            <Link 
-                href={`/products/${product.slug}`} 
+            <Link
+                href={`/products/${product.slug}`}
                 className="relative h-96 overflow-hidden bg-surface-50 flex items-center justify-center p-8"
             >
                 <m.div
@@ -83,11 +83,11 @@ export function ProductCard({ product, index, small = false }: ProductCardProps)
                         className="object-contain drop-shadow-2xl transition-all duration-500"
                     />
                 </m.div>
-                
+
                 {/* Overlay with Quick View hint */}
                 <div className="absolute inset-0 bg-brand-600/0 group-hover:bg-brand-600/5 transition-all duration-700 pointer-events-none" />
             </Link>
- 
+
             {/* Content */}
             <div className="p-10 flex flex-col flex-1 relative bg-white">
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -127,7 +127,7 @@ export function ProductCard({ product, index, small = false }: ProductCardProps)
                             <span className="text-[10px] font-black text-surface-300 uppercase tracking-widest mb-1">Store Price</span>
                             <PriceDisplay amount={product.price} className="text-3xl md:text-4xl font-black text-surface-950 tracking-tighter" />
                         </div>
-                        
+
                         <m.button
                             whileHover={{ scale: 1.05, y: -2 }}
                             whileTap={{ scale: 0.95 }}
@@ -144,7 +144,7 @@ export function ProductCard({ product, index, small = false }: ProductCardProps)
                     </div>
                 </div>
             </div>
-            
+
             {/* Decoration line */}
             {/* <div className="absolute bottom-0 left-0 w-full h-1 bg-surface-100 group-hover:bg-brand-600 transition-colors duration-700" /> */}
         </m.div>

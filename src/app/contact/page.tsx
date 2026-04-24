@@ -2,7 +2,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Hexagon, MessageSquare, Clock, Globe } from "lucide-react";
+import { RiMailSendLine, RiPhoneFill, RiMapPinFill, RiSendPlaneFill, RiCustomerService2Fill, RiTimeFill, RiGlobalLine } from "react-icons/ri";
 import { useState } from "react";
 import { alerts } from "@/lib/alerts";
 import { CustomSelect } from "@/components/common/CustomSelect";
@@ -24,7 +24,7 @@ export default function ContactPage() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-        
+
         // Simulate API call
         setTimeout(() => {
             setIsSubmitting(false);
@@ -34,70 +34,72 @@ export default function ContactPage() {
     };
 
     return (
-        <div className="min-h-screen bg-surface-50 font-outfit pb-24">
+        <div className="min-h-screen pb-24 bg-surface-50 text-surface-950">
             {/* Hero Section */}
-            <div className="relative h-[500px] flex items-center justify-center overflow-hidden bg-surface-950">
-                <div className="absolute inset-0 z-0 opacity-40">
-                    <video 
-                        autoPlay 
-                        muted 
-                        loop 
-                        playsInline 
-                        className="w-full h-full object-cover"
+            <div className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden bg-white">
+                <div className="absolute inset-0 z-0">
+                    <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="w-full h-full object-cover opacity-10"
                     >
                         <source src="/bg-video.mp4" type="video/mp4" />
                     </video>
-                    <div className="absolute inset-0 bg-linear-to-b from-surface-950/40 via-surface-950/80 to-surface-950" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/50 to-surface-50" />
+                    <div className="absolute inset-0 noise-overlay opacity-[0.02]" />
                 </div>
-                
+
                 <div className="container mx-auto px-4 relative z-10 text-center">
                     <m.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
+                        className="flex flex-col items-center"
                     >
-                        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-600/10 border border-brand-500/20 text-brand-500 text-[10px] font-black uppercase tracking-[0.3em] mb-8">
+                        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full mb-8 border border-brand-200 bg-white shadow-sm">
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
                             </span>
-                            Direct Uplink
+                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-surface-500">
+                                Direct Uplink
+                            </span>
                         </div>
-                        <h1 className="text-6xl md:text-8xl font-black text-white uppercase tracking-tighter leading-none mb-6">
-                            CONTACT <span className="text-brand-600">VIBEZ</span>
+                        <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-6 text-shadow-sm">
+                            CONTACT <br className="md:hidden" /><span className="text-brand-600">VIBEZ</span>
                         </h1>
-                        <p className="text-surface-400 font-medium text-xl max-w-2xl mx-auto italic">
-                            High-quality prints of your favorite Anime series and K-pop idols. Our support team is here to help.
+                        <p className="text-surface-500 font-medium text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+                            Need help with an order or have a custom request? <br className="hidden md:block" />
+                            Our support team is always here to assist you.
                         </p>
                     </m.div>
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 -mt-24 relative z-20">
+            <div className="container mx-auto px-4 sm:px-6 -mt-32 relative z-20">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Contact Info Cards */}
                     <div className="lg:col-span-1 space-y-6">
                         {[
-                            { 
-                                icon: MessageSquare, 
-                                title: "Order Support", 
-                                detail: "support@vibez.lk", 
-                                sub: "24/7 Response Time Assistance",
-                                color: "brand" 
+                            {
+                                icon: RiCustomerService2Fill,
+                                title: "Order Support",
+                                detail: "support@vibez.lk",
+                                sub: "24/7 Response Time Assistance"
                             },
-                            { 
-                                icon: Phone, 
-                                title: "Direct Contact", 
-                                detail: "+94 (76) 826 1160", 
-                                sub: "Mon-Sat: 09:00 - 18:00 IST",
-                                color: "emerald" 
+                            {
+                                icon: RiPhoneFill,
+                                title: "Direct Contact",
+                                detail: "+94 (76) 826 1160",
+                                sub: "Mon-Sat: 09:00 - 18:00 IST"
                             },
-                            { 
-                                icon: Mail, 
-                                title: "Custom Orders", 
-                                detail: "orders@vibez.lk", 
-                                sub: "Typical response time: 2 hours",
-                                color: "blue" 
+                            {
+                                icon: RiMailSendLine,
+                                title: "Custom Orders",
+                                detail: "orders@vibez.lk",
+                                sub: "Typical response time: 2 hours"
                             }
                         ].map((item, idx) => (
                             <m.div
@@ -105,41 +107,47 @@ export default function ContactPage() {
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: idx * 0.1 }}
-                                className="bg-white p-8 rounded-xl border border-surface-200 shadow-xl group hover:border-brand-500 transition-all duration-500"
+                                className="bg-white border border-surface-200 shadow-sm hover:shadow-xl hover:border-brand-300 p-8 rounded-3xl group transition-all duration-300"
                             >
-                                <div className={`w-12 h-12 bg-${item.color}-50 rounded-xl flex items-center justify-center text-${item.color}-600 mb-6 group-hover:scale-110 transition-transform`}>
-                                    <item.icon size={24} />
+                                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 bg-brand-50 border border-brand-100">
+                                    <item.icon size={24} className="text-brand-600" />
                                 </div>
-                                <h3 className="text-sm font-black text-surface-400 uppercase tracking-widest mb-1">{item.title}</h3>
+                                <h3 className="text-[10px] font-black text-surface-400 uppercase tracking-[0.2em] mb-2">{item.title}</h3>
                                 <div className="text-xl font-black text-surface-950 mb-2 truncate">{item.detail}</div>
-                                <p className="text-xs font-bold text-surface-400 uppercase tracking-tight">{item.sub}</p>
+                                <p className="text-xs font-bold text-surface-500 tracking-wide">{item.sub}</p>
                             </m.div>
                         ))}
 
                         {/* Global Presence */}
-                        <div className="bg-surface-950 p-10 rounded-2xl text-white relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-brand-600/20 blur-3xl rounded-full" />
-                            <h3 className="text-2xl font-black tracking-tighter uppercase mb-8 flex items-center gap-3">
-                                <Globe className="text-brand-500" />
+                        <m.div
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.3 }}
+                            className="bg-surface-950 p-8 md:p-10 rounded-3xl relative overflow-hidden group border border-surface-800 shadow-lg"
+                        >
+                            <div className="absolute top-0 right-0 w-32 h-32 blur-3xl rounded-full transition-opacity group-hover:opacity-100 opacity-50 bg-brand-600/30" />
+
+                            <h3 className="text-xl font-black tracking-tighter uppercase mb-8 flex items-center gap-3 text-white">
+                                <RiGlobalLine className="text-brand-500" size={24} />
                                 VibeZ HQ
                             </h3>
                             <div className="space-y-6">
                                 <div className="flex gap-4">
-                                    <MapPin className="text-brand-600 shrink-0" size={20} />
+                                    <RiMapPinFill className="text-brand-500 shrink-0 mt-1" size={20} />
                                     <div>
-                                        <p className="text-xs font-black uppercase tracking-widest text-surface-400 mb-1">Store Address</p>
-                                        <p className="font-bold">44, Udahamulla Station Road, Nugegoda, Sri Lanka</p>
+                                        <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white/50 mb-1">Store Address</p>
+                                        <p className="font-bold text-sm text-white leading-relaxed">44, Udahamulla Station Road, Nugegoda, Sri Lanka</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <Clock className="text-brand-600 shrink-0" size={20} />
+                                    <RiTimeFill className="text-brand-500 shrink-0 mt-1" size={20} />
                                     <div>
-                                        <p className="text-xs font-black uppercase tracking-widest text-surface-400 mb-1">Operating Hours</p>
-                                        <p className="font-bold">Mon - Sat: 09:00 AM - 06:00 PM</p>
+                                        <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white/50 mb-1">Operating Hours</p>
+                                        <p className="font-bold text-sm text-white">Mon - Sat: 09:00 AM - 06:00 PM</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </m.div>
                     </div>
 
                     {/* Contact Form */}
@@ -147,55 +155,59 @@ export default function ContactPage() {
                         <m.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            className="bg-white rounded-2xl border border-surface-200 shadow-2xl overflow-hidden"
+                            className="bg-white rounded-3xl overflow-hidden h-full flex flex-col border border-surface-200 shadow-sm"
                         >
-                            <div className="p-12 border-b border-surface-100 flex justify-between items-center bg-surface-50">
+                            <div className="p-8 md:p-12 border-b border-surface-100 bg-surface-50/50 flex justify-between items-start">
                                 <div>
-                                    <h2 className="text-3xl font-black text-surface-950 uppercase tracking-tight">HOW CAN <span className="text-brand-600">VIBEZ</span> HELP YOU?</h2>
-                                    <p className="text-surface-500 font-medium italic mt-1 text-lg">Send your query directly to our customer support team.</p>
+                                    <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-surface-950 mb-2">
+                                        HOW CAN <span className="text-brand-600">VIBEZ</span> HELP?
+                                    </h2>
+                                    <p className="text-surface-500 font-medium text-sm md:text-base leading-relaxed max-w-md">
+                                        Fill out the form below and our customer support team will get back to you shortly.
+                                    </p>
                                 </div>
-                                <Hexagon size={48} className="text-brand-600/20" />
+                                <RiMailSendLine size={48} className="text-surface-200 hidden sm:block" />
                             </div>
 
-                            <form onSubmit={handleSubmit} className="p-12 space-y-8">
+                            <form onSubmit={handleSubmit} className="p-8 md:p-12 space-y-8 flex-1">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    <div className="space-y-2">
-                                        <label className="text-[10px] font-black text-surface-500 uppercase tracking-widest ml-1">Full Name</label>
-                                        <input 
+                                    <div className="space-y-3">
+                                        <label className="text-[10px] font-black text-surface-500 uppercase tracking-[0.2em] ml-2">Full Name</label>
+                                        <input
                                             required
                                             type="text"
-                                            className="w-full bg-surface-50 border border-surface-200 rounded-xl px-6 py-4 focus:outline-none focus:border-brand-500 transition-all font-bold placeholder:text-surface-300"
-                                            placeholder="e.g. Kasun Perera"
+                                            className="vibez-input"
+                                            placeholder="Kasun Perera"
                                         />
                                     </div>
-                                    <div className="space-y-2">
-                                        <label className="text-[10px] font-black text-surface-500 uppercase tracking-widest ml-1">Email Address</label>
-                                        <input 
+                                    <div className="space-y-3">
+                                        <label className="text-[10px] font-black text-surface-500 uppercase tracking-[0.2em] ml-2">Email Address</label>
+                                        <input
                                             required
                                             type="email"
-                                            className="w-full bg-surface-50 border border-surface-200 rounded-xl px-6 py-4 focus:outline-none focus:border-brand-500 transition-all font-bold placeholder:text-surface-300"
+                                            className="vibez-input"
                                             placeholder="hello@vibez.lk"
                                         />
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
-                                    <label className="text-[10px] font-black text-surface-500 uppercase tracking-widest ml-1">Inquiry Type</label>
+                                <div className="space-y-3">
+                                    <label className="text-[10px] font-black text-surface-500 uppercase tracking-[0.2em] ml-2">Inquiry Type</label>
                                     <CustomSelect
                                         options={INQUIRY_OPTIONS}
                                         value={inquiryType}
                                         onChange={setInquiryType}
-                                        triggerClassName="w-full bg-surface-50 border border-surface-200 rounded-xl px-6 py-4 font-bold text-surface-900 hover:border-brand-500"
-                                        listClassName="top-full"
+                                        triggerClassName="vibez-input !text-surface-950"
+                                        listClassName="top-full mt-2"
                                     />
                                 </div>
 
-                                <div className="space-y-2">
-                                    <label className="text-[10px] font-black text-surface-500 uppercase tracking-widest ml-1">Message Detail</label>
-                                    <textarea 
+                                <div className="space-y-3">
+                                    <label className="text-[10px] font-black text-surface-500 uppercase tracking-[0.2em] ml-2">Message Detail</label>
+                                    <textarea
                                         required
                                         rows={6}
-                                        className="w-full bg-surface-50 border border-surface-200 rounded-xl px-6 py-4 focus:outline-none focus:border-brand-500 transition-all font-bold placeholder:text-surface-300 resize-none"
+                                        className="vibez-input resize-none py-5"
                                         placeholder="Describe your design requirement or order inquiry..."
                                     ></textarea>
                                 </div>
@@ -203,16 +215,16 @@ export default function ContactPage() {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="w-full py-6 bg-brand-600 hover:bg-brand-700 disabled:bg-surface-300 text-white font-black rounded-xl transition-all active:scale-[0.98] shadow-xl shadow-brand-600/30 uppercase tracking-[0.2em] flex items-center justify-center gap-3 group"
+                                    className="apex-button mt-4"
                                 >
                                     {isSubmitting ? (
-                                        <span className="flex items-center gap-2">
+                                        <span className="flex items-center gap-3">
                                             <span className="animate-spin h-5 w-5 border-2 border-white rounded-full border-t-transparent"></span>
                                             SENDING...
                                         </span>
                                     ) : (
                                         <>
-                                            SEND QUERY <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                            SEND MESSAGE <RiSendPlaneFill size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                         </>
                                     )}
                                 </button>
