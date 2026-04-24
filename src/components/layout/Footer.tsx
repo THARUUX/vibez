@@ -82,12 +82,12 @@ export function Footer() {
                                         border: "1px solid rgba(0,0,0,0.05)",
                                         color: "rgba(15,23,42,0.5)"
                                     }}
-                                    onMouseEnter={(e) => {
+                                    onMouseEnter={(e: any) => {
                                         e.currentTarget.style.color = "var(--brand-red)";
                                         e.currentTarget.style.borderColor = "rgba(220,38,38,0.2)";
                                         e.currentTarget.style.background = "rgba(220,38,38,0.05)";
                                     }}
-                                    onMouseLeave={(e) => {
+                                    onMouseLeave={(e: any) => {
                                         e.currentTarget.style.color = "rgba(15,23,42,0.5)";
                                         e.currentTarget.style.borderColor = "rgba(0,0,0,0.05)";
                                         e.currentTarget.style.background = "rgba(0,0,0,0.03)";

@@ -144,13 +144,7 @@ export function FeaturedProducts() {
     const handleAddToCart = (e: React.MouseEvent, product: any) => {
         e.preventDefault();
         e.stopPropagation();
-        addItem({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            image: product.image,
-            quantity: 1
-        });
+        addItem(product);
         alerts.success("Added to Cart", `${product.name} is ready for checkout.`);
         setCartOpen(true);
     };
