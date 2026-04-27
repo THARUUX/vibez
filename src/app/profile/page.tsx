@@ -118,7 +118,7 @@ export default function ProfilePage() {
                                 <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-brand-600 via-brand-500 to-brand-600" />
                                 
                                 <div className="flex flex-col items-center text-center mb-10">
-                                    <div className="w-32 h-32 bg-surface-950 rounded-xl flex items-center justify-center text-white font-black text-5xl mb-6 relative shadow-2xl group transition-transform hover:scale-105 duration-500">
+                                    <div className="w-32 h-32 bg-brand-600 rounded-xl flex items-center justify-center text-white font-black text-5xl mb-6 relative shadow-2xl group transition-transform hover:scale-105 duration-500">
                                         {user.name ? user.name[0].toUpperCase() : "U"}
                                         <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-emerald-500 border-[6px] border-white rounded-full shadow-lg"></div>
                                         <div className="absolute inset-0 rounded-xl bg-brand-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center text-6xl">
@@ -202,8 +202,8 @@ export default function ProfilePage() {
                                                     <div className="flex items-center gap-3 mb-2">
                                                         <span className="text-[10px] font-black text-brand-600 uppercase tracking-[0.2em] bg-brand-50 px-3 py-1 rounded-md">ID: {order.id.substring(0, 12).toUpperCase()}</span>
                                                         <span className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-sm ${order.status === 'DELIVERED' ? 'bg-emerald-500 text-white' :
-                                                                order.status === 'CANCELLED' ? 'bg-surface-950 text-white' :
-                                                                    'bg-brand-600 text-white'
+                                                                order.status === 'CANCELLED' ? 'bg-brand-600 text-white' :
+                                                                    'bg-brand-500 text-white'
                                                             }`}>
                                                             {order.status}
                                                         </span>
@@ -237,7 +237,7 @@ export default function ProfilePage() {
                                                             </m.div>
                                                         ))}
                                                         {order.orderItems.length > 5 && (
-                                                            <div className="w-14 h-14 rounded-2xl border-[3px] border-white bg-surface-950 text-white flex items-center justify-center text-[10px] font-black shadow-xl">
+                                                            <div className="w-14 h-14 rounded-2xl border-[3px] border-white bg-brand-500 text-white flex items-center justify-center text-[10px] font-black shadow-xl">
                                                                 +{order.orderItems.length - 5}
                                                             </div>
                                                         )}
@@ -255,14 +255,14 @@ export default function ProfilePage() {
                                                     {(order.status === 'PROCESSING' || order.status === 'SHIPPED') && (
                                                         <button 
                                                             onClick={() => handleOrderAction(order.id, 'CANCELLATION_REQUESTED')}
-                                                            className="flex-1 sm:flex-none px-8 py-4 bg-surface-50 hover:bg-surface-950 hover:text-white rounded-xl text-surface-950 font-black text-[10px] uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-3 border border-surface-200 active:scale-95"
+                                                            className="flex-1 sm:flex-none px-8 py-4 bg-surface-50 hover:bg-brand-600 hover:text-white rounded-xl text-surface-950 hover:text-white font-black text-[10px] uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-3 border border-surface-200 active:scale-95"
                                                         >
                                                             REQUEST CANCELLATION
                                                         </button>
                                                     )}
                                                     <button 
                                                         onClick={() => setSelectedOrder(order)}
-                                                        className="flex-1 sm:flex-none px-8 py-4 bg-surface-50 hover:bg-surface-950 hover:text-white rounded-xl text-surface-950 font-black text-[10px] uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-3 border border-surface-200 group/btn active:scale-95"
+                                                        className="flex-1 sm:flex-none px-8 py-4 bg-surface-50 hover:bg-brand-600 hover:text-white rounded-xl text-surface-950 hover:text-white font-black text-[10px] uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-3 border border-surface-200 group/btn active:scale-95"
                                                     >
                                                         MANIFEST DETAILS <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
                                                     </button>

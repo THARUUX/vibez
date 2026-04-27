@@ -123,24 +123,24 @@ export default function ContactPage() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.3 }}
-                            className="bg-surface-950 p-8 md:p-10 rounded-3xl relative overflow-hidden group border border-surface-800 shadow-lg"
+                            className="bg-brand-600 p-8 md:p-10 rounded-3xl relative overflow-hidden group border border-brand-500 shadow-lg"
                         >
-                            <div className="absolute top-0 right-0 w-32 h-32 blur-3xl rounded-full transition-opacity group-hover:opacity-100 opacity-50 bg-brand-600/30" />
+                            <div className="absolute top-0 right-0 w-32 h-32 blur-3xl rounded-full transition-opacity group-hover:opacity-100 opacity-50 bg-white/30" />
 
                             <h3 className="text-xl font-black tracking-tighter uppercase mb-8 flex items-center gap-3 text-white">
-                                <RiGlobalLine className="text-brand-500" size={24} />
+                                <RiGlobalLine className="text-white" size={24} />
                                 VibeZ HQ
                             </h3>
                             <div className="space-y-6">
                                 <div className="flex gap-4">
-                                    <RiMapPinFill className="text-brand-500 shrink-0 mt-1" size={20} />
+                                    <RiMapPinFill className="text-white shrink-0 mt-1" size={20} />
                                     <div>
                                         <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white/50 mb-1">Store Address</p>
                                         <p className="font-bold text-sm text-white leading-relaxed">44, Udahamulla Station Road, Nugegoda, Sri Lanka</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <RiTimeFill className="text-brand-500 shrink-0 mt-1" size={20} />
+                                    <RiTimeFill className="text-white shrink-0 mt-1" size={20} />
                                     <div>
                                         <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white/50 mb-1">Operating Hours</p>
                                         <p className="font-bold text-sm text-white">Mon - Sat: 09:00 AM - 06:00 PM</p>

@@ -263,7 +263,7 @@ function ProductsContent() {
                                                     addItem(product);
                                                     alerts.toast(`${product.name} added to cart!`);
                                                 }}
-                                                className="w-16 h-16 bg-surface-950 hover:bg-brand-600 text-white rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xl active:scale-90"
+                                                className="w-16 h-16 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xl active:scale-90"
                                             >
                                                 <ShoppingCart size={28} />
                                             </button>

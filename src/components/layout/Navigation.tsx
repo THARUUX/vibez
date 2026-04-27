@@ -121,7 +121,7 @@ export function Navigation() {
                                         href={user?.role === "ADMIN" ? "/admin" : "/profile"}
                                         className="flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all duration-300 hover:bg-surface-50 group"
                                     >
-                                        <div className="w-8 h-8 rounded-lg bg-surface-950 flex items-center justify-center text-white font-black text-xs shadow-md shadow-black/10 group-hover:bg-brand-600 transition-colors">
+                                        <div className="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white font-black text-xs shadow-md shadow-black/10 transition-colors">
                                             {user?.name?.[0]?.toUpperCase()}
                                         </div>
                                         <div className="flex flex-col">

@@ -127,8 +127,8 @@ export default function AboutPage() {
 
             {/* Contact & Social Section */}
             <section className="container mx-auto px-4 mb-10">
-                <div className="bg-surface-950 rounded-[3rem] md:rounded-[4rem] p-8 md:p-24 text-white relative overflow-hidden flex flex-col lg:flex-row items-center gap-12 lg:gap-20 shadow-2xl">
-                    <div className="absolute top-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-brand-600 rounded-full blur-[100px] md:blur-[150px] opacity-20 -translate-y-1/2 translate-x-1/4" />
+                <div className="bg-brand-600 rounded-[3rem] md:rounded-[4rem] p-8 md:p-24 text-white relative overflow-hidden flex flex-col lg:flex-row items-center gap-12 lg:gap-20 shadow-2xl">
+                    <div className="absolute top-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-brand-400 rounded-full blur-[100px] md:blur-[150px] opacity-20 -translate-y-1/2 translate-x-1/4" />
 
                     <div className="relative z-10 flex-1 w-full">
                         <m.div
@@ -145,8 +145,8 @@ export default function AboutPage() {
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10">
                                 <a href="mailto:hello@vibez.lk" className="flex items-center gap-5 group">
-                                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-surface-900 border border-surface-800 flex items-center justify-center group-hover:bg-brand-600 group-hover:border-brand-500 transition-all shadow-lg">
-                                        <RiMailSendLine size={24} className="text-brand-500 group-hover:text-white transition-colors" />
+                                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-brand-500 border border-brand-400 flex items-center justify-center group-hover:bg-brand-700 group-hover:border-brand-600 transition-all shadow-lg">
+                                        <RiMailSendLine size={24} className="text-white group-hover:text-white transition-colors" />
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-[10px] font-black text-surface-400 uppercase tracking-widest">Email Us</span>
@@ -154,8 +154,8 @@ export default function AboutPage() {
                                     </div>
                                 </a>
                                 <div className="flex items-center gap-5 group">
-                                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-surface-900 border border-surface-800 flex items-center justify-center transition-all shadow-lg">
-                                        <RiMapPinFill size={24} className="text-brand-500" />
+                                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-brand-500 border border-brand-400 flex items-center justify-center transition-all shadow-lg">
+                                        <RiMapPinFill size={24} className="text-white" />
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-[10px] font-black text-surface-400 uppercase tracking-widest">Base</span>
@@ -163,8 +163,8 @@ export default function AboutPage() {
                                     </div>
                                 </div>
                                 <a href="#" className="flex items-center gap-5 group">
-                                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-surface-900 border border-surface-800 flex items-center justify-center group-hover:bg-brand-600 group-hover:border-brand-500 transition-all shadow-lg">
-                                        <RiInstagramFill size={24} className="text-brand-500 group-hover:text-white transition-colors" />
+                                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-brand-500 border border-brand-400 flex items-center justify-center group-hover:bg-brand-700 group-hover:border-brand-600 transition-all shadow-lg">
+                                        <RiInstagramFill size={24} className="text-white group-hover:text-white transition-colors" />
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-[10px] font-black text-surface-400 uppercase tracking-widest">Instagram</span>
@@ -172,8 +172,8 @@ export default function AboutPage() {
                                     </div>
                                 </a>
                                 <a href="#" className="flex items-center gap-5 group">
-                                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-surface-900 border border-surface-800 flex items-center justify-center group-hover:bg-brand-600 group-hover:border-brand-500 transition-all shadow-lg">
-                                        <RiWhatsappFill size={24} className="text-brand-500 group-hover:text-white transition-colors" />
+                                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-brand-500 border border-brand-400 flex items-center justify-center group-hover:bg-brand-700 group-hover:border-brand-600 transition-all shadow-lg">
+                                        <RiWhatsappFill size={24} className="text-white group-hover:text-white transition-colors" />
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-[10px] font-black text-surface-400 uppercase tracking-widest">WhatsApp</span>
