@@ -30,6 +30,17 @@ export function Hero() {
             {/* Background Effects */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
                 <div className="absolute inset-0 bg-dark-gradient" />
+                
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover opacity-15"
+                >
+                    <source src="/bg-video.mp4" type="video/mp4" />
+                </video>
+
                 <div className="absolute inset-0 noise-overlay opacity-[0.02]" />
 
                 {/* Animated Glow Orbs */}
@@ -178,7 +189,7 @@ export function FeaturedProducts() {
                 </div>
 
                 {/* Products Header */}
-                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div className="flex flex-col md:flex-row justify-between md:items-end mb-16 gap-6">
                     <div>
                         <m.div
                             initial={{ opacity: 0, x: -20 }}
