@@ -2,7 +2,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { RiFlashlightFill, RiHeart3Fill, RiSparklingFill, RiMailSendLine, RiMapPinFill, RiInstagramFill, RiWhatsappFill, RiStarFill } from "react-icons/ri";
+import { RiFlashlightFill, RiHeart3Fill, RiSparklingFill, RiMailSendLine, RiMapPinFill, RiInstagramFill, RiWhatsappFill, RiStarFill, RiFacebookCircleFill, RiTiktokFill, RiYoutubeFill } from "react-icons/ri";
 import Image from "next/image";
 
 const m = motion as any;
@@ -162,7 +162,7 @@ export default function AboutPage() {
                                         <span className="text-base md:text-lg font-black tracking-tight text-white">Sri Lanka (Islandwide)</span>
                                     </div>
                                 </div>
-                                <a href="#" className="flex items-center gap-5 group">
+                                <a href="https://www.instagram.com/vibezsrilanka?igsh=MWpsamQzcGppc2t5MA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" className="flex items-center gap-5 group">
                                     <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-brand-500 border border-brand-400 flex items-center justify-center group-hover:bg-brand-700 group-hover:border-brand-600 transition-all shadow-lg">
                                         <RiInstagramFill size={24} className="text-white group-hover:text-white transition-colors" />
                                     </div>
@@ -171,13 +171,31 @@ export default function AboutPage() {
                                         <span className="text-base md:text-lg font-black group-hover:text-brand-400 transition-colors tracking-tight text-white">@vibezsrilanka</span>
                                     </div>
                                 </a>
-                                <a href="#" className="flex items-center gap-5 group">
+                                <a href="https://www.facebook.com/share/17aDa3gmsR/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="flex items-center gap-5 group">
                                     <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-brand-500 border border-brand-400 flex items-center justify-center group-hover:bg-brand-700 group-hover:border-brand-600 transition-all shadow-lg">
-                                        <RiWhatsappFill size={24} className="text-white group-hover:text-white transition-colors" />
+                                        <RiFacebookCircleFill size={24} className="text-white group-hover:text-white transition-colors" />
                                     </div>
                                     <div className="flex flex-col">
-                                        <span className="text-[10px] font-black text-surface-400 uppercase tracking-widest">WhatsApp</span>
-                                        <span className="text-base md:text-lg font-black group-hover:text-brand-400 transition-colors tracking-tight text-white">VibeZ Club</span>
+                                        <span className="text-[10px] font-black text-surface-400 uppercase tracking-widest">Facebook</span>
+                                        <span className="text-base md:text-lg font-black group-hover:text-brand-400 transition-colors tracking-tight text-white">VibeZ Sri Lanka</span>
+                                    </div>
+                                </a>
+                                <a href="https://www.tiktok.com/@vibez_srilanka?_r=1&_t=ZS-96BL5jLT5tc" target="_blank" rel="noopener noreferrer" className="flex items-center gap-5 group">
+                                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-brand-500 border border-brand-400 flex items-center justify-center group-hover:bg-brand-700 group-hover:border-brand-600 transition-all shadow-lg">
+                                        <RiTiktokFill size={24} className="text-white group-hover:text-white transition-colors" />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span className="text-[10px] font-black text-surface-400 uppercase tracking-widest">TikTok</span>
+                                        <span className="text-base md:text-lg font-black group-hover:text-brand-400 transition-colors tracking-tight text-white">@vibez_srilanka</span>
+                                    </div>
+                                </a>
+                                <a href="https://youtube.com/@vibez_lk?si=pp8zyfUx9rXbVl4w" target="_blank" rel="noopener noreferrer" className="flex items-center gap-5 group">
+                                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-brand-500 border border-brand-400 flex items-center justify-center group-hover:bg-brand-700 group-hover:border-brand-600 transition-all shadow-lg">
+                                        <RiYoutubeFill size={24} className="text-white group-hover:text-white transition-colors" />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span className="text-[10px] font-black text-surface-400 uppercase tracking-widest">YouTube</span>
+                                        <span className="text-base md:text-lg font-black group-hover:text-brand-400 transition-colors tracking-tight text-white">@vibez_lk</span>
                                     </div>
                                 </a>
                             </div>

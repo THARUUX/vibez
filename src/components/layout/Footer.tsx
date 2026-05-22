@@ -4,8 +4,9 @@
 import { motion } from "framer-motion";
 import {
     RiFacebookCircleFill,
-    RiTwitterXFill,
     RiInstagramFill,
+    RiTiktokFill,
+    RiYoutubeFill,
     RiMailFill,
     RiPhoneFill,
     RiMapPinFill,
@@ -67,13 +68,16 @@ export function Footer() {
                         </p>
                         <div className="flex gap-3">
                             {[
-                                { icon: RiFacebookCircleFill, href: "#" },
-                                { icon: RiTwitterXFill, href: "#" },
-                                { icon: RiInstagramFill, href: "#" }
+                                { icon: RiFacebookCircleFill, href: "https://www.facebook.com/share/17aDa3gmsR/?mibextid=wwXIfr" },
+                                { icon: RiInstagramFill, href: "https://www.instagram.com/vibezsrilanka?igsh=MWpsamQzcGppc2t5MA%3D%3D&utm_source=qr" },
+                                { icon: RiTiktokFill, href: "https://www.tiktok.com/@vibez_srilanka?_r=1&_t=ZS-96BL5jLT5tc" },
+                                { icon: RiYoutubeFill, href: "https://youtube.com/@vibez_lk?si=pp8zyfUx9rXbVl4w" }
                             ].map((social, i) => (
                                 <m.a
                                     key={i}
                                     href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     whileHover={{ y: -3, scale: 1.1 }}
                                     whileTap={{ scale: 0.9 }}
                                     className="w-10 h-10 flex items-center justify-center rounded-xl transition-all"

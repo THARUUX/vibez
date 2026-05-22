@@ -2,7 +2,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { RiArrowRightLine, RiTruckLine, RiBox3Line, RiStarLine, RiShoppingCartLine } from "react-icons/ri";
+import { RiArrowRightLine, RiTruckLine, RiBox3Line, RiStarLine, RiShoppingCartLine, RiFacebookCircleFill, RiInstagramFill, RiTiktokFill, RiYoutubeFill } from "react-icons/ri";
 import Image from "next/image";
 import Link from "next/link";
 import { PriceDisplay } from "@/components/common/PriceDisplay";
@@ -272,6 +272,127 @@ export function FeaturedProducts() {
                         ))}
                     </div>
                 )}
+            </div>
+        </section>
+    );
+}
+
+export function SocialCTASection() {
+    const socials = [
+        {
+            name: "Instagram",
+            handle: "@vibezsrilanka",
+            description: "Daily drops, behind the scenes, and aesthetic edits.",
+            href: "https://www.instagram.com/vibezsrilanka?igsh=MWpsamQzcGppc2t5MA%3D%3D&utm_source=qr",
+            icon: RiInstagramFill,
+        },
+        {
+            name: "TikTok",
+            handle: "@vibez_srilanka",
+            description: "Trending sound edits, packaging videos, and product reveals.",
+            href: "https://www.tiktok.com/@vibez_srilanka?_r=1&_t=ZS-96BL5jLT5tc",
+            icon: RiTiktokFill,
+        },
+        {
+            name: "Facebook",
+            handle: "VibeZ Sri Lanka",
+            description: "Community updates, reviews, and interactive customer service.",
+            href: "https://www.facebook.com/share/17aDa3gmsR/?mibextid=wwXIfr",
+            icon: RiFacebookCircleFill,
+        },
+        {
+            name: "YouTube",
+            handle: "@vibez_lk",
+            description: "Premium product reviews, unboxings, and high-fidelity video guides.",
+            href: "https://youtube.com/@vibez_lk?si=pp8zyfUx9rXbVl4w",
+            icon: RiYoutubeFill,
+        }
+    ];
+
+    return (
+        <section className="py-32 bg-surface-50 border-t border-surface-200 relative overflow-hidden">
+            {/* Background Gradients */}
+            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] pointer-events-none opacity-5"
+                style={{
+                    background: "radial-gradient(circle, rgba(220,38,38,0.4) 0%, transparent 60%)",
+                    transform: "translate(-30%, -30%)",
+                    filter: "blur(60px)"
+                }}
+            />
+            
+            <div className="container mx-auto px-4 sm:px-6 relative z-10">
+                {/* Header */}
+                <div className="text-center max-w-3xl mx-auto mb-20">
+                    <m.div
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 border border-brand-200 bg-white shadow-sm"
+                    >
+                        <span className="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse" />
+                        <span className="text-[9px] font-black uppercase tracking-[0.3em] text-surface-500">
+                            Join Our Community
+                        </span>
+                    </m.div>
+                    
+                    <m.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-4xl md:text-6xl font-black tracking-tighter text-surface-950 uppercase mb-6 leading-none"
+                    >
+                        HIT THAT <span className="text-brand-600">FOLLOW</span> BUTTON
+                    </m.h2>
+                    
+                    <m.p
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        className="text-surface-500 font-medium leading-relaxed text-base md:text-lg"
+                    >
+                        Stay updated with our latest releases, exclusive deals, packaging aesthetics, and daily drops on all major social media channels.
+                    </m.p>
+                </div>
+
+                {/* Social Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    {socials.map((platform, idx) => (
+                        <m.a
+                            key={idx}
+                            href={platform.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: idx * 0.1 }}
+                            whileHover={{ y: -8, scale: 1.02 }}
+                            className="block bg-white p-8 rounded-[2.5rem] border border-surface-200 transition-all duration-300 shadow-sm hover:shadow-xl group relative overflow-hidden"
+                        >
+                            {/* Accent line */}
+                            <div className="absolute top-0 inset-x-0 h-1.5 bg-surface-100 group-hover:bg-brand-600 transition-colors" />
+
+                            <div className="flex items-center justify-between mb-8">
+                                <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-brand-50 border border-brand-100 transition-transform group-hover:scale-110 group-hover:rotate-3 duration-300">
+                                    <platform.icon size={32} className="text-brand-600" />
+                                </div>
+                                <div className="text-[10px] font-black text-brand-600 bg-brand-50 border border-brand-100 px-3 py-1.5 rounded-lg tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    Follow
+                                </div>
+                            </div>
+
+                            <h3 className="text-2xl font-black text-surface-950 uppercase tracking-tight mb-1">
+                                {platform.name}
+                            </h3>
+                            <p className="text-brand-600 font-black text-xs tracking-wider mb-4">
+                                {platform.handle}
+                            </p>
+                            <p className="text-surface-500 text-sm font-medium leading-relaxed">
+                                {platform.description}
+                            </p>
+                        </m.a>
+                    ))}
+                </div>
             </div>
         </section>
     );
