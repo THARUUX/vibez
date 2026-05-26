@@ -15,6 +15,7 @@ const m = motion as any;
 const navItems = [
     { name: 'Catalog', href: '/catalog' },
     { name: 'Categories', href: '/categories' },
+    { name: 'Articles', href: '/articles' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
 ];

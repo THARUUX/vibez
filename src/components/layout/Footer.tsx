@@ -122,11 +122,17 @@ export function Footer() {
                     <div>
                         <h4 className="text-[10px] font-black uppercase tracking-[0.2em] mb-6 text-brand-600">Company</h4>
                         <ul className="space-y-3">
-                            {['About VibeZ', 'Quality Standards', 'Store Locations', 'Shipping Policy', 'Terms of Service'].map((link) => (
-                                <li key={link}>
-                                    <Link href="/about" className="text-surface-500 hover:text-surface-950 text-sm transition-all flex items-center gap-2 group font-medium">
+                            {[
+                                { name: 'About VibeZ', href: '/about' },
+                                { name: 'Articles', href: '/articles' },
+                                { name: 'Quality Standards', href: '/about' },
+                                { name: 'Store Locations', href: '/about' },
+                                { name: 'Shipping Policy', href: '/about' }
+                            ].map((link) => (
+                                <li key={link.name}>
+                                    <Link href={link.href} className="text-surface-500 hover:text-surface-950 text-sm transition-all flex items-center gap-2 group font-medium">
                                         <RiArrowRightLine size={14} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-600" />
-                                        {link}
+                                        {link.name}
                                     </Link>
                                 </li>
                             ))}

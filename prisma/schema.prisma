@@ -106,3 +106,20 @@ model Settings {
   deliveryExtraFee Float   @default(100)
   updatedAt       DateTime @updatedAt
 }
+
+model Article {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  content         String   @db.Text
+  excerpt         String   @db.Text
+  image           String   @db.Text
+  published       Boolean  @default(false)
+  readingTime     Int      @default(5)
+  authorName      String   @default("VibeZ Team")
+  metaTitle       String?  @db.Text
+  metaDescription String?  @db.Text
+  tags            String?  @db.Text
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

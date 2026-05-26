@@ -19,6 +19,8 @@ export default function AdminProducts() {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
     
+    const [selectedProductIds, setSelectedProductIds] = useState<string[]>([]);
+    
     const [isIdling, setIsIdling] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     
@@ -74,6 +76,7 @@ export default function AdminProducts() {
 
     useEffect(() => {
         setCurrentPage(1);
+        setSelectedProductIds([]);
     }, [searchTerm, filterCategory]);
 
     const handleOpenModal = (product: any = null) => {
@@ -494,6 +497,44 @@ export default function AdminProducts() {
         }
     };
 
+    const handleBulkDelete = async () => {
+        if (selectedProductIds.length === 0) return;
+
+        const confirmed = await alerts.confirm(
+            `Decommission ${selectedProductIds.length} Parts?`,
+            `This will permanently erase all engineering data and stock records for the ${selectedProductIds.length} selected components.`
+        );
+        
+        if (!confirmed) return;
+
+        setIsIdling(true);
+        try {
+            const res = await fetch('/api/products/bulk', {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ids: selectedProductIds }),
+            });
+            
+            if (res.ok) {
+                const data = await res.json();
+                alerts.success(
+                    "Bulk Decommission Complete",
+                    `Successfully purged ${data.count || selectedProductIds.length} records from the global inventory.`
+                );
+                setSelectedProductIds([]);
+                fetchData();
+            } else {
+                const data = await res.json();
+                alerts.error("Purge Failed", data.error || "Could not execute the bulk decommissioning sequence.");
+            }
+        } catch (error) {
+            console.error("Failed to delete products in bulk:", error);
+            alerts.error("System Failure", "The bulk deletion sequence was interrupted.");
+        } finally {
+            setIsIdling(false);
+        }
+    };
+
     const filteredProducts = (Array.isArray(products) ? products : []).filter(p => {
         const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             p.category?.name?.toLowerCase().includes(searchTerm.toLowerCase());
@@ -528,6 +569,17 @@ export default function AdminProducts() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                    {selectedProductIds.length > 0 && (
+                        <m.button
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            onClick={handleBulkDelete}
+                            className="flex items-center justify-center gap-2 px-6 py-4 bg-red-600 hover:bg-red-700 text-white font-black rounded-2xl transition-all shadow-xl shadow-red-600/20 active:scale-95 uppercase tracking-widest text-sm cursor-pointer"
+                        >
+                            <Trash2 size={20} />
+                            <span>DELETE SELECTED ({selectedProductIds.length})</span>
+                        </m.button>
+                    )}
                     <button
                         onClick={() => setIsImportModalOpen(true)}
                         className="flex items-center justify-center gap-2 px-6 py-4 bg-white border border-surface-200 text-surface-700 hover:text-brand-600 hover:border-brand-500 font-black rounded-2xl transition-all shadow-sm active:scale-95 uppercase tracking-widest text-sm cursor-pointer"
@@ -580,6 +632,20 @@ export default function AdminProducts() {
                         <table className="w-full text-left border-collapse">
                             <thead>
                                 <tr className="bg-surface-50/50 border-b border-surface-200 text-surface-500 font-black text-[10px] uppercase tracking-[0.2em]">
+                                    <th className="py-6 px-8 w-12">
+                                        <input
+                                            type="checkbox"
+                                            checked={filteredProducts.length > 0 && filteredProducts.every(p => selectedProductIds.includes(p.id))}
+                                            onChange={(e) => {
+                                                if (e.target.checked) {
+                                                    setSelectedProductIds(filteredProducts.map(p => p.id));
+                                                } else {
+                                                    setSelectedProductIds([]);
+                                                }
+                                            }}
+                                            className="w-4 h-4 rounded border-surface-300 text-brand-600 focus:ring-brand-500 cursor-pointer accent-brand-600"
+                                        />
+                                    </th>
                                     <th className="py-6 px-8">Product / Model</th>
                                     <th className="py-6 px-8">Category</th>
                                     <th className="py-6 px-8">Base Price</th>
@@ -596,6 +662,20 @@ export default function AdminProducts() {
                                         transition={{ delay: i * 0.05 }}
                                         className="hover:bg-surface-50/50 transition-colors group"
                                     >
+                                        <td className="py-5 px-8 w-12">
+                                            <input
+                                                type="checkbox"
+                                                checked={selectedProductIds.includes(product.id)}
+                                                onChange={(e) => {
+                                                    if (e.target.checked) {
+                                                        setSelectedProductIds([...selectedProductIds, product.id]);
+                                                    } else {
+                                                        setSelectedProductIds(selectedProductIds.filter(id => id !== product.id));
+                                                    }
+                                                }}
+                                                className="w-4 h-4 rounded border-surface-300 text-brand-600 focus:ring-brand-500 cursor-pointer accent-brand-600"
+                                            />
+                                        </td>
                                         <td className="py-5 px-8">
                                             <div className="flex items-center gap-4">
                                                 <div className="relative w-14 h-14 rounded-2xl overflow-hidden border border-surface-200 bg-surface-50">

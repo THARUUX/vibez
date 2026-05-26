@@ -9,7 +9,8 @@ import {
     Settings,
     LogOut,
     Hexagon,
-    Grid
+    Grid,
+    FileText
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -22,6 +23,7 @@ const navItems = [
     { icon: LayoutDashboard, label: "Dashboard", href: "/admin" },
     { icon: Package, label: "Products", href: "/admin/products" },
     { icon: Grid, label: "Categories", href: "/admin/categories" },
+    { icon: FileText, label: "Articles", href: "/admin/articles" },
     { icon: ShoppingCart, label: "Orders", href: "/admin/orders" },
     { icon: Settings, label: "Settings", href: "/admin/settings" },
 ];

@@ -153,3 +153,32 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: 'Internal Server Error during import.', details: error.message }, { status: 500 });
     }
 }
+
+export async function DELETE(request: Request) {
+    try {
+        const body = await request.json();
+        const { ids } = body;
+
+        if (!Array.isArray(ids) || ids.length === 0) {
+            return NextResponse.json({ error: 'No product IDs provided for deletion.' }, { status: 400 });
+        }
+
+        const deleteResult = await prisma.product.deleteMany({
+            where: {
+                id: {
+                    in: ids
+                }
+            }
+        });
+
+        return NextResponse.json({
+            message: `Successfully deleted ${deleteResult.count} products.`,
+            count: deleteResult.count
+        }, { status: 200 });
+
+    } catch (error: any) {
+        console.error('Bulk Delete API Error:', error);
+        return NextResponse.json({ error: 'Internal Server Error during deletion.', details: error.message }, { status: 500 });
+    }
+}
+
