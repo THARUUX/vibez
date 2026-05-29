@@ -77,7 +77,7 @@ export default function ProductClientContent({ product }: ProductClientContentPr
                             <PriceDisplay amount={product.price} className="text-4xl md:text-5xl font-black text-surface-950 tracking-tighter" />
                             <span className="text-surface-400 font-bold text-sm md:text-base uppercase">Inc. VAT</span>
                         </div>
-                        <p className="text-surface-600 font-medium text-lg leading-relaxed max-w-xl">
+                        <p className="text-surface-600 font-medium text-lg leading-relaxed max-w-xl whitespace-pre-line">
                             {product.description}
                         </p>
                     </div>

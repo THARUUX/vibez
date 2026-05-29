@@ -6,12 +6,16 @@ export default auth((req) => {
   const { nextUrl } = req
   
   const isApiAuthRoute = nextUrl.pathname.startsWith("/api/auth")
-  const isPublicRoute = ["/", "/catalog", "/categories", "/about", "/products", "/contact"].some(path => 
+  const isPublicRoute = ["/", "/catalog", "/categories", "/about", "/products", "/contact", "/articles"].some(path => 
     nextUrl.pathname === path || nextUrl.pathname.startsWith(path + "/")
   )
   const isAuthRoute = nextUrl.pathname.startsWith("/auth")
   const isAdminRoute = nextUrl.pathname.startsWith("/admin")
-  const isPublicApi = (nextUrl.pathname.startsWith("/api/products") || nextUrl.pathname.startsWith("/api/categories")) && req.method === "GET"
+  const isPublicApi = (
+    nextUrl.pathname.startsWith("/api/products") || 
+    nextUrl.pathname.startsWith("/api/categories") ||
+    nextUrl.pathname.startsWith("/api/articles")
+  ) && req.method === "GET"
 
   if (isApiAuthRoute) return undefined
 
